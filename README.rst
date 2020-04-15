@@ -3,10 +3,10 @@ QUBE
 ====
 
 
-.. image:: https://github.com/homersimpson/qube/workflows/Build%20SEIR%20Package/badge.svg
+.. image:: https://github.com/qbicsoftware/qube/workflows/Build%20SEIR%20Package/badge.svg
         :alt: Github Workflow Build QUBE Status
 
-.. image:: https://github.com/homersimpson/qube/workflows/Run%20SEIR%20Tox%20Test%20Suite/badge.svg
+.. image:: https://github.com/qbicsoftware/qube/workflows/Run%20SEIR%20Tox%20Test%20Suite/badge.svg
         :alt: Github Workflow Tests Status
 
 .. image:: https://img.shields.io/pypi/v/qube.svg
