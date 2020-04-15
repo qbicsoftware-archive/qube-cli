@@ -1,0 +1,13 @@
+domain: cli
+language: Python
+project_slug: qube
+template_version: '0.0.1 # <<COOKIETEMPLE_NO_BUMP>>'
+template_handle: cli-python
+full_name: Lukas Heumos
+email: lukas.heumos@posteo.net
+project_name: qube
+project_short_description: QBiC's internal project template collection.
+version: 0.1.0
+license: MIT
+command_line_interface: Click
+use_pytest: y
