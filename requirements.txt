@@ -1,2 +1,6 @@
-
+ruamel.yaml
 click
+tabulate
+pygithub
+GitPython
+cookiecutter
