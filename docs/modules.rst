@@ -2,5 +2,5 @@
 Modules
 =======
 
-.. automodapi:: qube.qube
+.. automodapi:: qube.qube_cli
 
