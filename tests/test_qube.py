@@ -41,6 +41,7 @@ def test_unix_fs(mocker):
 
 def test_command_line_interface():
     """Test the CLI."""
+    pass
     # runner = CliRunner()
     # result = runner.invoke(qube_cli.main)
     # assert result.exit_code == 0
