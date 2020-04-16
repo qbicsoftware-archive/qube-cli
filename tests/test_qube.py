@@ -5,10 +5,6 @@ import os
 
 import pytest
 
-from click.testing import CliRunner
-
-from qube import qube_cli
-
 
 @pytest.fixture
 def response():

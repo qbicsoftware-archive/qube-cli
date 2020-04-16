@@ -2,3 +2,7 @@ Sphinx==2.4.4
 sphinx-automodapi==0.12
 click==7.1.1
 ruamel.yaml==0.16.10
+tabulate
+pygithub
+GitPython
+cookiecutter
