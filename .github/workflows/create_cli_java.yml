@@ -25,13 +25,13 @@ jobs:
 
       - name: Create cli-java Template
         run: |
-          echo -e "cli\njava\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\ndescription\nClassPrefix\nn" | cookietemple create
+          echo -e "cli\njava\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\ndescription\nClassPrefix\nn" | qube create
 
       - name: Build Package
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-          name: Build with Maven 
+          name: Build with Maven
           run: |
             cd ExplodingSpringfield
             mvn -B package --file pom.xml
