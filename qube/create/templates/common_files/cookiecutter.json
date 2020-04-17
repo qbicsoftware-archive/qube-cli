@@ -1,11 +1,7 @@
 {
     "commonName": "common_files_util",
-    "author": "Winnie Pooh",
+    "full_name": "Winnie Pooh",
     "email": "winnie.the.pooh@qbic.uni-tuebingen.de",
-    "artifact_id": "sample-cli",
-    "display_name": "Sample command-line Tool",
-    "main_class_prefix": "Sample",
-    "version": "1.0.0-SNAPSHOT",
-    "short_description": "Command-line utility to...",
-    "copyright_holder": "QBiC"
+    "copyright_holder": "QBiC",
+    "project_name": "Sample command-line Tool"
 }

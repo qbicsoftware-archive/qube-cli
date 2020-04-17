@@ -10,10 +10,10 @@ class CliJavaLint(TemplateLinter):
         super().__init__(path)
 
     def lint(self, label):
-        methods = ['python_files_exist']
+        methods = ['java_files_exist']
         super().lint_project(self, methods, label=label)
 
-    def python_files_exist(self) -> None:
+    def java_files_exist(self) -> None:
         """
         Checks a given pipeline directory for required files.
         Iterates through the templates's directory content and checkmarks files for presence.

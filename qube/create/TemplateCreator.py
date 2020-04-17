@@ -54,7 +54,7 @@ class TemplateCreator:
             fix_short_title_underline(f'{project_path}/docs/index.rst')
 
         # Lint the project to verify that the new template adheres to all standards
-        lint_project(project_path, run_coala=False)
+        lint_project(project_path)
 
         # ask user whether he wants to create a Github repository and do so if specified
         create_github_repository = click.prompt(
@@ -74,8 +74,6 @@ class TemplateCreator:
         Calls cookiecutter on the main chosen template.
 
         :param domain_path: Path to the template, which is still in cookiecutter format
-        :param domain: Chosen domain
-        :param language: Primary chosen language
         """
         # Target directory is already occupied -> overwrite?
         occupied = os.path.isdir(f"{os.getcwd()}/{self.creator_ctx.project_slug}")
@@ -103,7 +101,6 @@ class TemplateCreator:
 
         :param domain_path: Path to the template, which is still in cookiecutter format
         :param subdomain: Subdomain of the chosen template
-        :param language: Primary chosen language
         """
         occupied = os.path.isdir(f"{os.getcwd()}/{self.creator_ctx.project_slug}")
         if occupied:
@@ -131,7 +128,6 @@ class TemplateCreator:
 
         :param domain_path: Path to the template, which is still in cookiecutter format
         :param subdomain: Subdomain of the chosen template
-        :param language: Primary chosen language
         :param framework: Chosen framework
         """
         occupied = os.path.isdir(f"{os.getcwd()}/{self.creator_ctx.project_slug}")
@@ -171,7 +167,7 @@ class TemplateCreator:
         self.creator_ctx.project_slug = self.creator_ctx.project_name.replace(' ', '_')
         self.creator_ctx.project_short_description = click.prompt('Please enter a short description of your project.',
                                                                   type=str,
-                                                                  default=f'{self.creator_ctx.project_name}. A best practice .')
+                                                                  default=f'{self.creator_ctx.project_name}. Nuclear physics simulation software.')
 
     def create_common_files(self) -> None:
         """

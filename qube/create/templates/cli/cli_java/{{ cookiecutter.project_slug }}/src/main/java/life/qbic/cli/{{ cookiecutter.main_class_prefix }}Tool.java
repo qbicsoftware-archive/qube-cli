@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Implementation of {{ cookiecutter.display_name }}. Its command-line arguments are contained in instances of {@link {{ cookiecutter.main_class_prefix }}Command}.
+ * Implementation of {{ cookiecutter.project_name }}. Its command-line arguments are contained in instances of {@link {{ cookiecutter.main_class_prefix }}Command}.
  */
 public class {{ cookiecutter.main_class_prefix }}Tool extends QBiCTool<{{ cookiecutter.main_class_prefix }}Command> {
 
@@ -12,7 +12,7 @@ public class {{ cookiecutter.main_class_prefix }}Tool extends QBiCTool<{{ cookie
 
     /**
      * Constructor.
-     * 
+     *
      * @param command an object that represents the parsed command-line arguments.
      */
     public {{ cookiecutter.main_class_prefix }}Tool(final {{ cookiecutter.main_class_prefix }}Command command) {
@@ -26,7 +26,7 @@ public class {{ cookiecutter.main_class_prefix }}Tool extends QBiCTool<{{ cookie
 
         // TODO: do something useful with the obtained command.
         //
-        
+
     }
 
     // TODO: override the shutdown() method if you are implementing a daemon and want to take advantage of a shutdown hook for clean-up tasks

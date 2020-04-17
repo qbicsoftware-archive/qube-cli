@@ -8,10 +8,9 @@ from qube.lint.TemplateLinter import TemplateLinter
 from qube.lint.domains.cli import CliJavaLint
 
 
-def lint_project(project_dir: str, run_coala: bool = False, coala_interactive: bool = False) -> TemplateLinter:
+def lint_project(project_dir: str) -> TemplateLinter:
     """
-    Verifies the integrity of a project to best coding and practices.
-    Runs coala (https://github.com/coala/coala) as a subprocess.
+    Verifies the integrity of a project to best coding standards and practices.
     """
     # Detect which template the project is based on
     template_handle = get_template_handle(project_dir)
@@ -53,7 +52,7 @@ def lint_project(project_dir: str, run_coala: bool = False, coala_interactive: b
 def get_template_handle(dot_qube_path: str = '.qube.yml') -> str:
     """
     Reads the .cookietemple file and extracts the template handle
-    :param dot_qube_path: path to the .cookietemple file
+    :param dot_qube_path: path to the .qube.yml file
     :return: found template handle
     """
     path = Path(f'{dot_qube_path}/.qube.yml')

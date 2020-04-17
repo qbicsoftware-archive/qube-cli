@@ -95,9 +95,11 @@ class TemplateLinter(object):
         # NB: Should all be files, not directories
         # List of lists. Passes if any of the files in the sublist are found.
         files_fail = [
-            ['Dockerfile'],
-            ['cookietemple.cfg'],
-            ['Makefile'],
+            ['.travis.yml'],
+            ['.travis.settings.xml'],
+            ['qube.cfg'],
+            ['.qube.yml'],
+            ['CODEOFCONDUCT.rst'],
             ['README.rst'],
             ['CHANGELOG.rst'],
             ['LICENSE', 'LICENSE.md', 'LICENCE', 'LICENCE.md'],  # NB: British / American spelling
@@ -109,7 +111,6 @@ class TemplateLinter(object):
         ]
 
         files_warn = [
-            ['.coafile'],
             ['.gitignore'],
             ['.dependabot/config.yml'],
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'bug_report.md')],
@@ -124,12 +125,8 @@ class TemplateLinter(object):
         ]
 
         files_warn_ifexists = [
-            '.travis.yml'
-        ]
 
-        # First - critical files. Check that this is actually a COOKIETEMPLE based project
-        if not os.path.exists(pf(self, '.qube.yml')):
-            raise AssertionError('.qube.yml not found!! Is this a QUBE project?')
+        ]
 
         files_exist_linting(self, files_fail, files_fail_ifexists, files_warn, files_warn_ifexists)
 
@@ -151,7 +148,7 @@ class TemplateLinter(object):
 
     def check_cookietemple_todos(self) -> None:
         """
-        Go through all template files looking for the string 'TODO COOKIETEMPLE:'
+        Go through all template files looking for the string 'TODO QUBE:'
         """
         ignore = ['.git']
         if os.path.isfile(os.path.join(self.path, '.gitignore')):
@@ -168,12 +165,12 @@ class TemplateLinter(object):
             for fname in files:
                 with io.open(os.path.join(root, fname), 'rt', encoding='latin1') as file:
                     for line in file:
-                        if 'TODO COOKIETEMPLE:' in line:
+                        if 'TODO QUBE:' in line:
                             line = line.replace('<!--', '') \
                                 .replace('-->', '') \
-                                .replace('# TODO COOKIETEMPLE: ', '') \
-                                .replace('// TODO COOKIETEMPLE: ', '') \
-                                .replace('TODO COOKIETEMPLE: ', '').strip()
+                                .replace('# TODO QUBE: ', '') \
+                                .replace('// TODO QUBE: ', '') \
+                                .replace('TODO QUBE: ', '').strip()
                             if len(fname) + len(line) > 70:
                                 line = f'{line[:70 - len(fname)]}..'
                             self.warned.append((3, f'TODO string found in \'{fname}\': {line}'))
@@ -199,7 +196,7 @@ class TemplateLinter(object):
         This method should check that the version is consistent across all files.
         """
         parser = configparser.ConfigParser()
-        parser.read(f'{self.path}/cookietemple.cfg')
+        parser.read(f'{self.path}/qube.cfg')
 
         current_version = parser.get('bumpversion', 'current_version')
 
@@ -214,13 +211,13 @@ class TemplateLinter(object):
 
     def check_version_match(self, path: str, version: str) -> None:
         """
-        Check if the versions in a file are consistent with the current version in the cookietemple.cfg
+        Check if the versions in a file are consistent with the current version in the qube.cfg
         :param path: The current file-path to check
-        :param version: The current version of the project specified in the cookietemple.cfg file
+        :param version: The current version of the project specified in the qube.cfg file
         """
         with open(path) as file:
             for line in file:
-                if '<<COOKIETEMPLE_NO_BUMP>>' not in line:
+                if '<<QUBE_NO_BUMP>>' not in line:
                     line_version = re.search(r'[0-9]+\.[0-9]+\.[0-9]+', line)
                     if line_version:
                         line_version = line_version.group(0)

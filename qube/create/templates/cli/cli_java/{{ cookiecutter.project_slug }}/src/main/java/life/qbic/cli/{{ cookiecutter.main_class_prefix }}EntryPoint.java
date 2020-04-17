@@ -4,8 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Entry point for the {{ cookiecutter.display_name }} application.
- * 
+ * Entry point for the {{ cookiecutter.project_name }} application.
+ *
  * The purpose of this class is to act as a bridge between the command line and the <i>real</i> implementation of a tool by using a {@link ToolExecutor}.
  */
 public class {{ cookiecutter.main_class_prefix }}EntryPoint {
@@ -14,7 +14,7 @@ public class {{ cookiecutter.main_class_prefix }}EntryPoint {
 
     /**
      * Main method.
-     * 
+     *
      * @param args the command-line arguments.
      */
     public static void main(final String[] args) {

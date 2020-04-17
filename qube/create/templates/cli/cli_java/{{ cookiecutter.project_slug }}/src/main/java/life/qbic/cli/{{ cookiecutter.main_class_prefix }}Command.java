@@ -8,7 +8,7 @@ import picocli.CommandLine.Option;
  */
 @Command(
    name="{{ cookiecutter.main_class_prefix }}",
-   description="{{ cookiecutter.short_description }}")
+   description="{{ cookiecutter.project_short_description }}")
 public class {{ cookiecutter.main_class_prefix }}Command extends AbstractCommand {
     // TODO: add your command-line options as members of this class using picocli's annotations, for instance:
     //
