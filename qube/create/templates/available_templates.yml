@@ -1,0 +1,8 @@
+cli:
+    java:
+        name: Java Commandline Tool
+        handle: cli-java
+        version: 1.0.0
+        available libraries: picocli
+        short description: someShortDescription
+        long description: someLongDescription
