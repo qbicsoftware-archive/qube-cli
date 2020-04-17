@@ -80,6 +80,7 @@ class TemplateLinter(object):
             '.travis.settings.xml'
             '.gitignore',
             '.dependabot/config.yml',
+            '.github/workflows/build_docs.yml',
             '.github/ISSUE_TEMPLATE/bug_report.md',
             '.github/ISSUE_TEMPLATE/general_question.md',
             '.github/ISSUE_TEMPLATE/feature_request.md',
@@ -111,6 +112,7 @@ class TemplateLinter(object):
             ['.travis.settings.xml'],
             ['.gitignore'],
             ['.dependabot/config.yml'],
+            [os.path.join('.github', 'workflows', 'build_docs.yml')],
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'bug_report.md')],
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'feature_request.md')],
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'general_question.md')],

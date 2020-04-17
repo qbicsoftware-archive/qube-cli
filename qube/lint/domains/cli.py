@@ -36,10 +36,8 @@ class CliJavaLint(TemplateLinter):
             ['pom.xml'],
         ]
         files_warn = [
+            [os.path.join('.github', 'workflows', 'build_docs.yml')],
             [os.path.join('.github', 'workflows', 'build_package.yml')],
-            [os.path.join('.github', 'workflows', 'publish_package.yml')],
-            [os.path.join('.github', 'workflows', 'tox_testsuite.yml')],
-            [os.path.join('.github', 'workflows', 'flake8_linting.yml')],
         ]
 
         # List of strings. Fails / warns if any of the strings exist.
