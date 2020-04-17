@@ -37,7 +37,7 @@ class TemplateCreator:
 
     def process_common_operations(self, skip_common_files=False, skip_fix_underline=False) -> None:
         """
-        Create all stuff that is common for cookietemples template creation process; in detail those things are:
+        Create all stuff that is common for QUBE's template creation process; in detail those things are:
         create and copy common files, fix docs style, lint the project and ask whether the user wants to create a github repo.
         """
         # create the common files and copy them into the templates directory
@@ -63,7 +63,7 @@ class TemplateCreator:
             default='Yes')
         if create_github_repository:
             # rename the currently created template to a temporary name, create Github repo, push, remove temporary template
-            tmp_project_path = f'{project_path}_cookietemple_tmp'
+            tmp_project_path = f'{project_path}_qube_tmp'
             os.rename(project_path, tmp_project_path)
             create_push_github_repository(project_name, 'some description', tmp_project_path)
             shutil.rmtree(tmp_project_path, ignore_errors=True)
@@ -232,7 +232,6 @@ class TemplateCreator:
         """
         Prints warning that a directory already exists and any further action on the directory will overwrite its contents.
         """
-
         click.echo(click.style('WARNING: ', fg='red')
                    + click.style(f"A directory named {self.creator_ctx.project_slug} already exists at", fg='red')
                    + click.style(f'{os.getcwd()}', fg='green'))
@@ -263,7 +262,7 @@ class TemplateCreator:
     def load_version(self, handle: str) -> str:
         """
         Load the version of the template specified by the handler
-        TODO: Maybe recursive one for arbitray length (tough I Dont think we will need it)
+        TODO: Maybe recursive one for arbitrary length (tough I Dont think we will need it)
         :param handle: The template handle
         :return: The version number
         """

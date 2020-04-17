@@ -46,7 +46,7 @@ class TemplateLinter(object):
         """
         # Called on its own, so not from a subclass
         if check_functions is None:
-            check_functions = ['check_files_exist', 'check_docker', 'check_cookietemple_todos',
+            check_functions = ['check_files_exist', 'check_qube_todos',
                                'check_no_cookiecutter_strings', 'check_version_consistent']
         # Some templates (e.g. latex based) do not adhere to the common programming based templates and therefore do not need to check for e.g. docs
         if custom_check_files:
@@ -65,9 +65,8 @@ class TemplateLinter(object):
         Iterates through the pipeline's directory content and checkmarks files
         for presence.
         Files that **must** be present::
-            'Dockerfile',
-            'cookietemple.cfg'
-            'Makefile'
+            '.qube.yml'
+            'qube.cfg'
             'README.rst'
             'CHANGELOG.rst'
             '[LICENSE, LICENSE.md, LICENCE, LICENCE.md]'
@@ -77,7 +76,8 @@ class TemplateLinter(object):
             'docs/installation.rst'
             'docs/usage.rst'
         Files that *should* be present::
-            '.coafile',
+            '.travis.yml'
+            '.travis.settings.xml'
             '.gitignore',
             '.dependabot/config.yml',
             '.github/ISSUE_TEMPLATE/bug_report.md',
@@ -87,16 +87,12 @@ class TemplateLinter(object):
         Files that *must not* be present::
             none
         Files that *should not* be present::
-            '.travis.yml'
-        Raises:
-            An AssertionError if .cookietemple.yml is not found found.
+            none
         """
 
         # NB: Should all be files, not directories
         # List of lists. Passes if any of the files in the sublist are found.
         files_fail = [
-            ['.travis.yml'],
-            ['.travis.settings.xml'],
             ['qube.cfg'],
             ['.qube.yml'],
             ['CODEOFCONDUCT.rst'],
@@ -111,6 +107,8 @@ class TemplateLinter(object):
         ]
 
         files_warn = [
+            ['.travis.yml'],
+            ['.travis.settings.xml'],
             ['.gitignore'],
             ['.dependabot/config.yml'],
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'bug_report.md')],
@@ -132,6 +130,9 @@ class TemplateLinter(object):
 
     def check_docker(self):
         """
+        ________________
+        DISABLED FOR NOW
+        ________________
         Checks that Dockerfile contains the string ``FROM``
         """
         fn = os.path.join(self.path, 'Dockerfile')
@@ -146,7 +147,7 @@ class TemplateLinter(object):
 
         self.failed.append((2, 'Dockerfile check failed'))
 
-    def check_cookietemple_todos(self) -> None:
+    def check_qube_todos(self) -> None:
         """
         Go through all template files looking for the string 'TODO QUBE:'
         """

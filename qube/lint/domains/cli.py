@@ -18,10 +18,7 @@ class CliJavaLint(TemplateLinter):
         Checks a given pipeline directory for required files.
         Iterates through the templates's directory content and checkmarks files for presence.
         Files that **must** be present::
-            'setup.py',
-            'setup.cfg',
-            'MANIFEST.in',
-            'tox.ini',
+            'pom.xml',
         Files that *should* be present::
             '.github/workflows/build_package.yml',
             '.github/workflows/publish_package.yml',
@@ -36,10 +33,7 @@ class CliJavaLint(TemplateLinter):
         # NB: Should all be files, not directories
         # List of lists. Passes if any of the files in the sublist are found.
         files_fail = [
-            ['setup.py'],
-            ['setup.cfg'],
-            ['MANIFEST.in'],
-            ['tox.ini'],
+            ['pom.xml'],
         ]
         files_warn = [
             [os.path.join('.github', 'workflows', 'build_package.yml')],
@@ -50,7 +44,7 @@ class CliJavaLint(TemplateLinter):
 
         # List of strings. Fails / warns if any of the strings exist.
         files_fail_ifexists = [
-            '__pycache__'
+
         ]
         files_warn_ifexists = [
 

@@ -10,15 +10,12 @@ from qube.create.domains.QubeTemplateStruct import QubeTemplateStruct
 @dataclass
 class TemplateStructCli(QubeTemplateStruct):
     """
-    We dont have any attributes here right now (WIP)
     Intended Use: This class holds all attributes specific for CLI projects
     """
-    artifact_id: str = ''
-    display_name: str = ''
+
+    """______JAVA______"""
     main_class_prefix: str = ''
     version: str = '1.0.0-SNAPSHOT'
-    short_description: str = ''
-    copyright_holder: str = ''
 
 
 class CliCreator(TemplateCreator):
@@ -64,9 +61,6 @@ class CliCreator(TemplateCreator):
         super().process_common_operations()
 
     def cli_java_options(self):
-        self.cli_struct.artifact_id = click.prompt('artifact_id:',
-                                                   type=str,
-                                                   default='sample-cli')
         self.cli_struct.main_class_prefix = click.prompt('Main class prefix:',
                                                          type=str,
                                                          default='Sample')
