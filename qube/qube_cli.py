@@ -39,7 +39,7 @@ def main():
 
 @click.group(cls=CustomHelpOrder)
 @click.version_option(qube.__version__,
-                      message=click.style(f'Cookietemple Version: {qube.__version__}', fg='blue'))
+                      message=click.style(f'QUBE Version: {qube.__version__}', fg='blue'))
 @click.option(
     '-v', '--verbose',
     is_flag=True,
@@ -67,7 +67,7 @@ def create(domain: str) -> None:
                 default=Path(f'{Path.cwd()}'))
 def lint(project_dir) -> None:
     """
-    Lint your existing COOKIETEMPLE project
+    Lint your existing QUBE project
     """
 
     lint_project(project_dir)
@@ -76,7 +76,7 @@ def lint(project_dir) -> None:
 @qube_cli.command(help_priority=3)
 def list() -> None:
     """
-    List all available COOKIETEMPLE templates
+    List all available QUBE templates
     """
 
     list_available_templates()
@@ -86,7 +86,7 @@ def list() -> None:
 @click.option('--handle', type=str)
 def info(handle: str) -> None:
     """
-    Get detailed info on a COOKIETEMPLE template
+    Get detailed info on a QUBE template
     """
 
     show_info(handle)
@@ -107,12 +107,12 @@ def sync() -> None:
                 default=Path(f'{Path.cwd()}'))
 def bump_version(new_version, project_dir) -> None:
     """
-    Bump the version of an existing COOKIETEMPLE project
+    Bump the version of an existing QUBE project
     """
 
     if not new_version:
         click.echo(click.style('No new version specified.\nPlease specify a new version using '
-                               '\'cookietemple bump_version my.new.version\'', fg='red'))
+                               '\'qube bump_version my.new.version\'', fg='red'))
         sys.exit(0)
 
     elif not re.match(r"[0-9]+.[0-9]+.[0-9]+", new_version):
@@ -120,8 +120,8 @@ def bump_version(new_version, project_dir) -> None:
                                'like 0.0.0 or 15.100.239', fg='red'))
         sys.exit(0)
 
-    elif not Path(f'{project_dir}/cookietemple.cfg').is_file():
-        click.echo(click.style('Did not found a cookietemple.cfg file. Make sure you are in the right directory '
+    elif not Path(f'{project_dir}/qube.cfg').is_file():
+        click.echo(click.style('Did not found a qube.cfg file. Make sure you are in the right directory '
                                'or specify the path to your projects bump_version.cfg file', fg='red'))
         sys.exit(0)
 
