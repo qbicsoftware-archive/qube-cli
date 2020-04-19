@@ -106,6 +106,7 @@ def handle_pat_authentification() -> str:
         click.echo(click.style('Please only tick \'repo\'. Note that the token is a hidden input to QUBE.', fg='blue'))
         click.echo(click.style('For more information please read'
                                ' https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line', fg='blue'))
+        click.echo(click.style('QUBE saves your personal access token encrypted on your disk', fg='blue'))
         access_token = click.prompt('Please enter your GitHub access token: ',
                                     type=str,
                                     hide_input=True)
@@ -124,6 +125,7 @@ def handle_pat_authentification() -> str:
             f.write(key)
 
         pat = decrypt_pat()
+
         return pat
 
 

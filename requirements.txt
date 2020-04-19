@@ -1,8 +1,8 @@
-ruamel.yaml
-click
-tabulate
-pygithub
-GitPython
-cookiecutter
-cffi
-cryptography
+ruamel.yaml==0.16.10
+click==7.1.1
+tabulate==0.8.7
+pygithub==1.47
+GitPython==3.1.1
+cookiecutter==1.7.0
+cffi==1.14.0
+cryptography==2.9
