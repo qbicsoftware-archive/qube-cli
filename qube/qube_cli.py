@@ -54,7 +54,7 @@ def qube_cli(verbose):
 
 
 @qube_cli.command(help_priority=1)
-@click.option('--domain', type=click.Choice(['CLI', 'GUI']))
+@click.option('--domain', type=click.Choice(['cli', 'lib', 'gui', 'portlet', 'service']))
 def create(domain: str) -> None:
     """
     Create a new project using one of our templates
@@ -83,7 +83,7 @@ def list() -> None:
 
 
 @qube_cli.command(help_priority=4)
-@click.option('--handle', type=str)
+@click.argument('handle', type=str)
 def info(handle: str) -> None:
     """
     Get detailed info on a QUBE template

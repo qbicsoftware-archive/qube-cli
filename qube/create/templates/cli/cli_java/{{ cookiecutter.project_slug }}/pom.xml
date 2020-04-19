@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"> <!-- <<QUBE_NO_BUMP>> -->
-	<modelVersion>4.0.0</modelVersion> <!-- <<QUBE_NO_BUMP>> -->
+	xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>life.qbic</groupId>
 		<artifactId>cli-parent-pom</artifactId>
-		<version>1.4.0</version> <!-- <<QUBE_NO_BUMP>>-->
+		<version>1.4.0</version>
 	</parent>
 	<groupId>life.qbic</groupId>
 	<artifactId>{{ cookiecutter.project_slug }}</artifactId>
-	<version>{{ cookiecutter.version }}</version> <!-- Handled by QUBE -->
+	<version>{{ cookiecutter.version }}</version> <!-- <<QUBE_FORCE_BUMP>> -->
 	<name>{{ cookiecutter.project_name }}</name>
 	<url>http://github.com/qbicsoftware/{{ cookiecutter.project_slug }}</url>
 	<description>{{ cookiecutter.project_short_description }}</description>
@@ -48,7 +50,7 @@
 		<dependency>
 			<groupId>life.qbic</groupId>
 			<artifactId>core-utils-lib</artifactId>
-			<version>1.0.0</version> <!-- <<QUBE_NO_BUMP>>-->
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 

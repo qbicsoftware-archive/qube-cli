@@ -65,7 +65,7 @@ class TemplateCreator:
             # rename the currently created template to a temporary name, create Github repo, push, remove temporary template
             tmp_project_path = f'{project_path}_qube_tmp'
             os.rename(project_path, tmp_project_path)
-            create_push_github_repository(project_name, 'some description', tmp_project_path)
+            create_push_github_repository(project_name, self.creator_ctx.project_short_description, tmp_project_path)
             shutil.rmtree(tmp_project_path, ignore_errors=True)
 
     def create_template_without_subdomain(self, domain_path: str) -> None:
