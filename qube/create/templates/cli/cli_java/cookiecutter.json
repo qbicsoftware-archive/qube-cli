@@ -5,5 +5,5 @@
     "project_slug": "sample-cli",
     "main_class_prefix": "Sample",
     "version": "1.0.0-SNAPSHOT",
-    "project_short_description": "Command-line utility to...",
+    "project_short_description": "Command-line utility to..."
 }

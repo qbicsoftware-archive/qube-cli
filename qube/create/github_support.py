@@ -95,13 +95,13 @@ def handle_pat_authentification() -> str:
     """
 
     # check if the key and encrypted PAT already exist
-    if os.path.exists(f'{Path.home()}/.ct_keys') and os.path.exists(f'{Path.home()}/qube_conf'):
+    if os.path.exists(f'{Path.home()}/.qb_keys') and os.path.exists(f'{Path.home()}/qube_conf.cfg'):
         pat = decrypt_pat()
 
         return pat
 
     else:
-        click.echo(click.style('Could not read key from ~/qube_conf!\n', fg='red'))
+        click.echo(click.style('Could not find personal access token!\n', fg='red'))
         click.echo(click.style('Please navigate to Github -> Your profile -> Developer Settings -> Personal access token -> Generate a new Token', fg='blue'))
         click.echo(click.style('Please only tick \'repo\'. Note that the token is a hidden input to QUBE.', fg='blue'))
         click.echo(click.style('For more information please read'
@@ -118,10 +118,10 @@ def handle_pat_authentification() -> str:
         fer = Fernet(key)
         encrypted_pat = fer.encrypt(access_token_b)
 
-        with open(f'{Path.home()}/qube_conf', 'ab') as f:
+        with open(f'{Path.home()}/qube_conf.cfg', 'ab') as f:
             f.write(encrypted_pat)
 
-        with open(f'{Path.home()}/.ct_keys', 'wb') as f:
+        with open(f'{Path.home()}/.qb_keys', 'wb') as f:
             f.write(key)
 
         pat = decrypt_pat()
@@ -136,10 +136,10 @@ def decrypt_pat() -> str:
     """
 
     # read key and encrypted PAT from files
-    with open(f'{Path.home()}/.ct_keys', 'rb') as f:
+    with open(f'{Path.home()}/.qb_keys', 'rb') as f:
         key = f.readline()
 
-    with open(f'{Path.home()}/qube_conf', 'rb') as f:
+    with open(f'{Path.home()}/qube_conf.cfg', 'rb') as f:
         f.readline()  # skip Github username
         encrypted_pat = f.readline()
 
