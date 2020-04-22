@@ -13,7 +13,7 @@ from cookiecutter.main import cookiecutter
 
 from qube.create.domains.QubeTemplateStruct import QubeTemplateStruct
 from qube.util.dir_util import delete_dir_tree
-from qube.create.github_support import create_push_github_repository
+from qube.create.github_support import create_push_github_repository, load_github_username
 from qube.lint.lint import lint_project
 from qube.util.docs_util import fix_short_title_underline
 from qube.list.list import load_available_templates
@@ -65,7 +65,10 @@ class TemplateCreator:
             # rename the currently created template to a temporary name, create Github repo, push, remove temporary template
             tmp_project_path = f'{project_path}_qube_tmp'
             os.rename(project_path, tmp_project_path)
-            create_push_github_repository(project_name, self.creator_ctx.project_short_description, tmp_project_path)
+            create_push_github_repository(project_name,
+                                          self.creator_ctx.project_short_description,
+                                          tmp_project_path,
+                                          self.creator_ctx.github_username)
             shutil.rmtree(tmp_project_path, ignore_errors=True)
 
     def create_template_without_subdomain(self, domain_path: str) -> None:
@@ -168,6 +171,7 @@ class TemplateCreator:
         self.creator_ctx.project_short_description = click.prompt('Please enter a short description of your project.',
                                                                   type=str,
                                                                   default=f'{self.creator_ctx.project_name}. Nuclear physics simulation software.')
+        self.creator_ctx.github_username = load_github_username()
 
     def create_common_files(self) -> None:
         """

@@ -16,3 +16,4 @@ class QubeTemplateStruct:
     full_name: str = ''  # Main author's name
     email: str = ''  # Main author's email
     copyright_holder: str = 'QBiC'  # Default QBiC
+    github_username: str = ''  # The users Github username, therefore not qbicsoftware!
