@@ -9,7 +9,7 @@ from git import Repo
 from pathlib import Path
 
 
-def create_push_github_repository(project_name: str, project_description: str, template_creation_path: str) -> None:
+def create_push_github_repository(project_name: str, project_description: str, template_creation_path: str, github_username: str) -> None:
     """
     Creates a Github repository for the created template and pushes the template to it.
     Prompts the user for the required specifications.
@@ -17,13 +17,13 @@ def create_push_github_repository(project_name: str, project_description: str, t
     :param project_name: Name of the created project
     :param project_description: Description of the created project
     :param template_creation_path: Path to the already created template
+    :param github_username: The users Github username
     """
     if not is_git_accessible():
         return
 
-    # Prompt for Github username, organization name if wished and whether private repository
-    github_username: str = click.prompt('Please enter your Github account username: ',
-                                        type=str)
+    # load username from template creator
+    github_username = github_username
     # the personal access token for GitHub
     access_token = handle_pat_authentification()
 
@@ -118,7 +118,7 @@ def handle_pat_authentification() -> str:
         fer = Fernet(key)
         encrypted_pat = fer.encrypt(access_token_b)
 
-        with open(f'{Path.home()}/qube_conf', 'wb') as f:
+        with open(f'{Path.home()}/qube_conf', 'ab') as f:
             f.write(encrypted_pat)
 
         with open(f'{Path.home()}/.ct_keys', 'wb') as f:
@@ -140,6 +140,7 @@ def decrypt_pat() -> str:
         key = f.readline()
 
     with open(f'{Path.home()}/qube_conf', 'rb') as f:
+        f.readline()  # skip Github username
         encrypted_pat = f.readline()
 
     # decrypt the PAT and decode it to string
@@ -148,6 +149,33 @@ def decrypt_pat() -> str:
     decrypted_pat = fer.decrypt(encrypted_pat).decode('utf-8')
 
     return decrypted_pat
+
+
+def load_github_username() -> str:
+    """
+    Load the Github username from the local cfg file stored locally in the users home.
+    If not found, prompt for it and save it in the cfg file. The username is the first entry in the cfg file.
+
+    :return: The users Github username
+    """
+
+    if not os.path.exists(f'{Path.home()}/qube_conf.cfg'):
+        click.echo(click.style('Could not load Github username. Creating a new config file!', fg='red'))
+        github_username = click.prompt('Please enter your Github account username: ',
+                                       type=str)
+        github_username_b = github_username.encode('utf-8')
+
+        # write the username to the cfg file
+        with open(f'{Path.home()}/qube_conf.cfg', 'wb') as f:
+            f.write(github_username_b)
+            f.write(b'\n')
+        return github_username
+
+    # load Github username from the cfg if it exists
+    with open(f'{Path.home()}/qube_conf.cfg', 'rb') as f:
+        github_username = f.readline().decode('utf-8')
+
+        return github_username.replace('\n', '')
 
 
 def is_git_accessible() -> bool:
