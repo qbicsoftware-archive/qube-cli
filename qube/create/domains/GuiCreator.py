@@ -10,7 +10,7 @@ from qube.create.domains.QubeTemplateStruct import QubeTemplateStruct
 @dataclass
 class TemplateStructGui(QubeTemplateStruct):
     """
-    Intended Use: This class holds all attributes specific for CLI projects
+    Intended Use: This class holds all attributes specific for GUI projects
     """
 
     """______JAVA______"""
@@ -21,8 +21,8 @@ class TemplateStructGui(QubeTemplateStruct):
 class GuiCreator(TemplateCreator):
 
     def __init__(self):
-        self.cli_struct = TemplateStructGui(domain='gui')
-        super().__init__(self.cli_struct)
+        self.gui_struct = TemplateStructGui(domain='gui')
+        super().__init__(self.gui_struct)
         self.WD = os.path.dirname(__file__)
         self.WD_Path = Path(self.WD)
         self.TEMPLATES_GUI_PATH = f'{self.WD_Path.parent}/templates/gui'
@@ -32,10 +32,10 @@ class GuiCreator(TemplateCreator):
 
     def create_template(self):
         """
-        Handles the CLI domain. Prompts the user for the language, general and domain specific options.
+        Handles the GUI domain. Prompts the user for the language, general and domain specific options.
         """
 
-        self.cli_struct.language = click.prompt('Choose between the following languages',
+        self.gui_struct.language = click.prompt('Choose between the following languages',
                                                 type=click.Choice(['java']),
                                                 show_choices=True)
 
@@ -46,7 +46,7 @@ class GuiCreator(TemplateCreator):
         switcher = {
             'java': self.gui_java_options,
         }
-        switcher.get(self.cli_struct.language.lower(), lambda: 'Invalid language!')()
+        switcher.get(self.gui_struct.language.lower(), lambda: 'Invalid language!')()
 
         # create the chosen and configured template
         super().create_template_without_subdomain(f'{self.TEMPLATES_GUI_PATH}')
@@ -55,12 +55,12 @@ class GuiCreator(TemplateCreator):
         switcher_version = {
             'java': self.GUI_JAVA_TEMPLATE_VERSION,
         }
-        self.cli_struct.template_version, self.cli_struct.template_handle = switcher_version.get(
-            self.cli_struct.language.lower(), lambda: 'Invalid language!'), f'gui-{self.cli_struct.language.lower()}'
+        self.gui_struct.template_version, self.gui_struct.template_handle = switcher_version.get(
+            self.gui_struct.language.lower(), lambda: 'Invalid language!'), f'gui-{self.gui_struct.language.lower()}'
 
         super().process_common_operations()
 
     def gui_java_options(self):
-        self.cli_struct.main_class_prefix = click.prompt('Main class prefix:',
+        self.gui_struct.main_class_prefix = click.prompt('Main class prefix:',
                                                          type=str,
                                                          default='Sample')

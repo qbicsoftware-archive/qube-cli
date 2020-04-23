@@ -8,6 +8,7 @@ from qube.lint.TemplateLinter import TemplateLinter
 from qube.lint.domains.cli import CliJavaLint
 from qube.lint.domains.gui import GuiJavaLint
 from qube.lint.domains.lib import LibJavaLint
+from qube.lint.domains.service import ServiceJavaLint
 
 
 def lint_project(project_dir: str) -> TemplateLinter:
@@ -20,7 +21,8 @@ def lint_project(project_dir: str) -> TemplateLinter:
     switcher = {
         'cli-java': CliJavaLint,
         'lib-java': LibJavaLint,
-        'gui-java': GuiJavaLint
+        'gui-java': GuiJavaLint,
+        'service-java': ServiceJavaLint
     }
 
     lint_obj = switcher.get(template_handle, lambda: 'Invalid')(project_dir)
