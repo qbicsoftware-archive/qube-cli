@@ -1,7 +1,7 @@
-=====
-Usage
-=====
+=============
+General usage
+=============
 
-To use qube in a project::
+To use cookietemple in a project::
 
-    import qube
+    import cookietemple
