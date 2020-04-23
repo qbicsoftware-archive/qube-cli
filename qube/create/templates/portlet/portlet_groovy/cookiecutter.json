@@ -1,0 +1,13 @@
+{
+    "full_name": "Homer Simpson",
+    "email": "homer.simpson@qbic.uni-tuebingen.de",
+    "project_name": "sample-cli",
+    "project_slug": "sample-cli",
+    "main_class_prefix": "Sample",
+    "version": "1.0.0-SNAPSHOT",
+    "project_short_description": "Fancy portlet, which...",
+     "use_openbis_client": ["no", "yes"],
+    "use_openbis_raw_api": ["no", "yes"],
+    "use_qbic_databases": ["no", "yes"],
+    "use_vaadin_charts": ["no", "yes"]
+}
