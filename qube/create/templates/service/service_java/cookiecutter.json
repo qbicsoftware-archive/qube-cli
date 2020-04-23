@@ -1,0 +1,9 @@
+{
+    "full_name": "Homer Simpson",
+    "email": "homer.simpson@qbic.uni-tuebingen.de",
+    "project_name": "sample-cli",
+    "project_slug": "sample-cli",
+    "main_class_prefix": "Sample",
+    "version": "1.0.0-SNAPSHOT",
+    "project_short_description": "Service to..."
+}

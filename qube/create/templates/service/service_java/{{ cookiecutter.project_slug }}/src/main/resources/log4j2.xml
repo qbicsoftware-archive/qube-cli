@@ -1,0 +1,22 @@
+<Configuration status="INFO">
+    <Appenders>
+        <!-- this is a CLI tool, so we should log to console as-is -->
+        <Console name="SysOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="%msg%n"/>
+        </Console>
+        <!-- show context information in the application log -->
+        <RollingFile name="AppLog" fileName="logs/app.log" filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">
+            <PatternLayout pattern="%d{dd.MM.yyyy HH:mm:ss} [%level] [%logger{1}] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="SysOut" level="INFO"/>
+            <AppenderRef ref="AppLog" level="ALL"/>
+        </Root>
+    </Loggers>
+</Configuration>

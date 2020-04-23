@@ -259,6 +259,7 @@ class TemplateCreator:
     def creator_ctx_to_dict(self) -> dict:
         """
         Create a dict from the our Template Structure dataclass
+
         :return: The dict containing all key-value pairs with non empty values
         """
         return {key: val for key, val in asdict(self.creator_ctx).items() if val != ''}
@@ -267,6 +268,7 @@ class TemplateCreator:
         """
         Load the version of the template specified by the handler
         TODO: Maybe recursive one for arbitrary length (tough I Dont think we will need it)
+
         :param handle: The template handle
         :return: The version number
         """
