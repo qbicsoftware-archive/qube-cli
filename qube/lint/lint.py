@@ -6,6 +6,7 @@ from ruamel.yaml import YAML
 
 from qube.lint.TemplateLinter import TemplateLinter
 from qube.lint.domains.cli import CliJavaLint
+from qube.lint.domains.gui import GuiJavaLint
 from qube.lint.domains.lib import LibJavaLint
 
 
@@ -18,7 +19,8 @@ def lint_project(project_dir: str) -> TemplateLinter:
 
     switcher = {
         'cli-java': CliJavaLint,
-        'lib-java': LibJavaLint
+        'lib-java': LibJavaLint,
+        'gui-java': GuiJavaLint
     }
 
     lint_obj = switcher.get(template_handle, lambda: 'Invalid')(project_dir)

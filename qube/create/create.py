@@ -1,5 +1,6 @@
 import click
 
+from qube.create.domains.GuiCreator import GuiCreator
 from qube.create.domains.LibCreator import LibCreator
 from qube.create.domains.CliCreator import CliCreator
 
@@ -14,12 +15,13 @@ def choose_domain(domain: str):
 
     if not domain:
         domain = click.prompt('Choose between the following domains ',
-                              type=click.Choice(['cli', 'lib']),
+                              type=click.Choice(['cli', 'lib', 'gui']),
                               show_choices=True)
 
     switcher = {
         'cli': CliCreator,
-        'lib': LibCreator
+        'lib': LibCreator,
+        'gui': GuiCreator
     }
 
     creator_obj = switcher.get(domain.lower(), lambda: 'Invalid domain!')()
