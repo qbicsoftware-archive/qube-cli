@@ -62,5 +62,5 @@ class ServiceCreator(TemplateCreator):
 
     def service_java_options(self):
         self.service_struct.main_class_prefix = click.prompt('Main class prefix:',
-                                                         type=str,
-                                                         default='Sample')
+                                                             type=str,
+                                                             default='Sample')
