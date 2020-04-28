@@ -1,5 +1,7 @@
 import click
 
+from qube.util.suggest_similar_commands import MAIN_COMMANDS
+from qube.info.levensthein_dist import most_similar_command
 
 class CustomHelpOrder(click.Group):
     """
@@ -32,3 +34,26 @@ class CustomHelpOrder(click.Group):
             help_priorities[cmd.name] = help_priority
             return cmd
         return decorator
+
+    def get_command(self, ctx, cmd_name):
+        """
+        Override the get_command of Click.
+        If an unknown command is given, try to determine a similar command.
+        If no similar command could´ve been found, exit with an error message.
+        Else use the most similar command while printing a status message for the user.
+
+        :param ctx: The given Click context for the group
+        :param cmd_name: The command invoked with Click
+        """
+        rv = click.Group.get_command(self, ctx, cmd_name)
+        if rv is not None:
+            return rv
+        sim_commands = most_similar_command(cmd_name, MAIN_COMMANDS)
+
+        matches = [cmd for cmd in self.list_commands(ctx) if cmd in sim_commands]
+        if not matches:
+            ctx.fail(click.style('Unknown command and no similar command was found!', fg='red'))
+        elif len(matches) == 1:
+            click.echo(click.style('Unknown command! Will use best match ', fg='red') + click.style(f'{matches[0]}.', fg='green'))
+            return click.Group.get_command(self, ctx, matches[0])
+        ctx.fail(click.style(f'Unknown command. Most similar commands were {", ".join(sorted(matches))}', fg='red'))

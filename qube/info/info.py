@@ -4,9 +4,10 @@ import click
 
 from tabulate import tabulate
 
-from qube.info.levensthein_dist import (most_similar_command, AVAILABLE_HANDLES)
+from qube.info.levensthein_dist import most_similar_command
 from qube.list.list import load_available_templates
 from qube.util.dict_util import is_nested_dictionary
+from qube.util.suggest_similar_commands import load_available_handles
 
 WD = os.path.dirname(__file__)
 TEMPLATES_PATH = f'{WD}/../create/templates'
@@ -120,20 +121,19 @@ def non_existing_handle():
 
 
 def handle_non_existing_command(handle: str):
-    most_sim = most_similar_command(handle, AVAILABLE_HANDLES)
+    available_handles = load_available_handles()
+    most_sim = most_similar_command(handle, available_handles)
+
     if most_sim:
         # set a line break at the last space encountered to avoid separating words
         if len(most_sim) == 1:
-            click.echo(click.style(f'qube info: ', fg='white')
-                       + click.style(f'unknown handle \'{handle}\'. See qube list for all valid handles.\n\nDid you mean\n    \'{most_sim[0]}\'?',
-                                     fg='red'))
+            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style(f'cookietemple list ', fg='green') +
+                       click.style(f'for all valid handles.\nDid you mean \'{most_sim[0]}\'?', fg='red'))
         else:
             # found multiple similar commands
-            click.echo(click.style(f'qube info: ', fg='white')
-                       + click.style(f'unknown handle \'{handle}\'. See qube list for all valid handles.\n\nMost similar commands are:',
-                                     fg='red'))
-            for command in most_sim:
-                click.echo(click.style(f'     {command}', fg='red'))
+            nl = '\n'
+            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style(f'cookietemple list ', fg='green') +
+                       click.style(f'for all valid handles.\nMost similar commands are:{nl}{nl.join(most_sim)}', fg='red'))
         sys.exit(0)
 
     else:

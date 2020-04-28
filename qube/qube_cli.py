@@ -8,7 +8,7 @@ from pathlib import Path
 import click
 
 import qube
-from qube.bump_version.bump_version import bump_template_version
+from qube.bump_version.bump_version import bump_template_version, can_do_bump_version
 from qube.create.create import choose_domain
 from qube.info.info import show_info
 from qube.lint.lint import lint_project
@@ -69,7 +69,6 @@ def lint(project_dir) -> None:
     """
     Lint your existing QUBE project
     """
-
     lint_project(project_dir)
 
 
@@ -78,7 +77,6 @@ def list() -> None:
     """
     List all available QUBE templates
     """
-
     list_available_templates()
 
 
@@ -88,7 +86,6 @@ def info(handle: str) -> None:
     """
     Get detailed info on a QUBE template
     """
-
     show_info(handle)
 
 
@@ -100,23 +97,15 @@ def bump_version(new_version, project_dir) -> None:
     """
     Bump the version of an existing QUBE project
     """
+    # if the path entered ends with a trailing slash remove it for consistent output
+    if str(project_dir).endswith('/'):
+        project_dir = Path(str(project_dir).replace(str(project_dir)[len(str(project_dir)) - 1:], ''))
 
-    if not new_version:
-        click.echo(click.style('No new version specified.\nPlease specify a new version using '
-                               '\'qube bump_version my.new.version\'', fg='red'))
+    # check if the command met all requirements for successful bump
+    if can_do_bump_version(new_version, project_dir):
+        bump_template_version(new_version, project_dir)
+    else:
         sys.exit(0)
-
-    elif not re.match(r"[0-9]+.[0-9]+.[0-9]+", new_version):
-        click.echo(click.style('Invalid version specified!\nEnsure your version number has the form '
-                               'like 0.0.0 or 15.100.239', fg='red'))
-        sys.exit(0)
-
-    elif not Path(f'{project_dir}/qube.cfg').is_file():
-        click.echo(click.style('Did not found a qube.cfg file. Make sure you are in the right directory '
-                               'or specify the path to your projects bump_version.cfg file', fg='red'))
-        sys.exit(0)
-
-    bump_template_version(new_version, project_dir)
 
 
 @qube_cli.command(help_priority=6, short_help='Sync your existing QUBE project with the most recent template')
@@ -124,7 +113,6 @@ def sync() -> None:
     """
     Sync your project with the latest template release
     """
-
     snyc_template()
 
 
