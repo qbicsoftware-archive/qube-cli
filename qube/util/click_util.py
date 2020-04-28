@@ -3,6 +3,7 @@ import click
 from qube.util.suggest_similar_commands import MAIN_COMMANDS
 from qube.info.levensthein_dist import most_similar_command
 
+
 class CustomHelpOrder(click.Group):
     """
     Customise the order of subcommands for --help
@@ -15,11 +16,13 @@ class CustomHelpOrder(click.Group):
 
     def get_help(self, ctx):
         self.list_commands = self.list_commands_for_help
+
         return super(CustomHelpOrder, self).get_help(ctx)
 
     def list_commands_for_help(self, ctx):
         '""reorder the list of commands when listing the help""'
         commands = super(CustomHelpOrder, self).list_commands(ctx)
+
         return (c[1] for c in sorted((self.help_priorities.get(command, 1000), command) for command in commands))
 
     def command(self, *args, **kwargs):
@@ -33,6 +36,7 @@ class CustomHelpOrder(click.Group):
             cmd = super(CustomHelpOrder, self).command(*args, **kwargs)(f)
             help_priorities[cmd.name] = help_priority
             return cmd
+
         return decorator
 
     def get_command(self, ctx, cmd_name):

@@ -62,7 +62,7 @@ def replace(file_path: str, subst: str, section: str) -> None:
                     if tmp != line:
                         if file_is_unchanged:
                             click.echo(click.style(f'Updating version number in {file_path}', fg='blue'))
-                            change_flag = False
+                            file_is_unchanged = False
                         click.echo(click.style(
                             f'- {line.strip().replace("<!-- <<QUBE_FORCE_BUMP>> -->","")}\n', fg='red') + click.style(
                             f'+ {tmp.strip().replace("<!-- <<QUBE_FORCE_BUMP>> -->","")}', fg='green'))

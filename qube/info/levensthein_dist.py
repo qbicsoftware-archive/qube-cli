@@ -1,5 +1,6 @@
 from qube.util.suggest_similar_commands import SIMILARITY_FACTOR
 
+
 def levensthein_dist(input_command: str, candidate: str) -> int:
     """
     This function implements the Levenshtein algorithm to determine, in case of a non-existing handle,
