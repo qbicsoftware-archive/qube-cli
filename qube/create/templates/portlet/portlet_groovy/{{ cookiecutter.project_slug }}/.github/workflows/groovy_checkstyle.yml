@@ -1,0 +1,20 @@
+name: Groovy Checkstyle
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup Node 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Install npm-groovy-lint
+        run: npm install -g npm-groovy-lint
+
+      - name: Run npm-groovy-lint
+        run: npm-groovy-lint
