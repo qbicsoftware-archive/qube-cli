@@ -37,8 +37,7 @@ def bump_template_version(new_version: str, pipeline_dir: Path) -> None:
 
 def replace(file_path: str, subst: str, section: str) -> None:
     """
-    Replace a version with the new version unless the line is explicitly excluded (marked with
-    <<QUBE_NO_BUMP>>).
+    Replace a version with the new version unless the line is explicitly excluded (marked with <<QUBE_NO_BUMP>>).
     Or, in case of blacklisted files, it ignores all lines with version numbers unless they´re explicitly marked
     for bump with tag <<QUBE_FORCE_BUMP>>.
 
@@ -53,7 +52,6 @@ def replace(file_path: str, subst: str, section: str) -> None:
     fh, abs_path = mkstemp()
     with fdopen(fh, 'w') as new_file:
         with open(file_path) as old_file:
-            click.echo(click.style(f'Updating version number in {file_path}', fg='blue'))
             for line in old_file:
                 # update version if tags were found (and were in the right section)
                 if ('<<QUBE_NO_BUMP>>' not in line and not section == 'bumpversion_files_blacklisted') or '<<QUBE_FORCE_BUMP>>' in line:
@@ -69,6 +67,7 @@ def replace(file_path: str, subst: str, section: str) -> None:
                         click.echo()
                 else:
                     new_file.write(line)
+
     # Copy the file permissions from the old file to the new file
     copymode(file_path, abs_path)
     # Remove original file
@@ -111,8 +110,8 @@ def can_do_bump_version(new_version: str, project_dir: str) -> bool:
     else:
         parser = ConfigParser()
         parser.read(f'{project_dir}/qube.cfg')
-        current_version = parser.get('bumpversion', 'current_version').split('.')
-        new_version = new_version.split('.')
+        current_version = [int(digit) for digit in parser.get('bumpversion', 'current_version').split('.')]
+        new_version = [int(digit) for digit in new_version.split('.')]
         is_greater = False
 
         if new_version[0] > current_version[0] or new_version[0] == current_version[0] and new_version[1] > current_version[1]:
@@ -123,7 +122,7 @@ def can_do_bump_version(new_version: str, project_dir: str) -> bool:
         # the new version is not greater than the current one
         if not is_greater:
             click.echo(click.style(
-                f'The new version {".".join(n for n in new_version)} is not greater than the current version {".".join(n for n in current_version)}.'
+                f'The new version {".".join(str(n) for n in new_version)} is not greater than the current version {".".join(str(n) for n in current_version)}.\n'
                 f'\nThe new version must be greater than the old one.', fg='red'))
 
         return is_greater
