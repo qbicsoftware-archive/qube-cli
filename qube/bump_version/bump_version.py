@@ -122,7 +122,7 @@ def can_do_bump_version(new_version: str, project_dir: str) -> bool:
         # the new version is not greater than the current one
         if not is_greater:
             click.echo(click.style(
-                f'The new version {".".join(str(n) for n in new_version)} is not greater than the current version {".".join(str(n) for n in current_version)}.\n'
-                f'\nThe new version must be greater than the old one.', fg='red'))
+                f'New version {".".join(str(n) for n in new_version)} is not greater than the current version {".".join(str(n) for n in current_version)}.\n'
+                f'\nNew version must be greater than the old one.', fg='red'))
 
         return is_greater
