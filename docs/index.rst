@@ -12,6 +12,7 @@ Welcome to qube's documentation!
    lint
    bump_version
    sync
+   newbie_guide
    available_templates
    adding_new_templates
    troubleshooting
