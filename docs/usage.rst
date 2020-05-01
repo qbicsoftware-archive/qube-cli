@@ -81,7 +81,7 @@ For more details please visit :ref:`sync`.
 External Python based projects
 ------------------------------
 
-To use QUBE in an exeternal Python based project::
+To use QUBE in an external Python based project::
 
     import qube
 

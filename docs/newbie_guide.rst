@@ -51,7 +51,7 @@ Writing code that tests your code is an important part of the development lifecy
 As a general guideline, try to code the *logic* of your portlet independent of the user interface so you can easily write code that tests your portlet.
 
 `Maven <https://maven.apache.org/>`_ has been configured to execute unit tests under the
-:code:`src/test` folder that match the \_*Test\_ name (e.g., DonutPortletTest). To run all unit tests, you use the following command:
+:code:`src/test` folder that match the ``*Test`` name (e.g., DonutPortletTest). To run all unit tests, you use the following command:
 
 .. code:: bash
 
@@ -65,7 +65,7 @@ tests and generate a code coverage report, simply run:
    mvn cobertura:cobertura
 
 Similarly, we have configured the `Maven <https://maven.apache.org/>`_ plug-ins to run integration tests.
-These tests are also under the ``src/test`` folder, but their names must end with \_*IntegrationTest_, such as
+These tests are also under the ``src/test`` folder, but their names must end with ``*IntegrationTest``, such as
 ``DonutPortletIntegrationTest``. Running integration tests can be a time-consuming task, so these are,
 usually, not executed alongside the unit tests. To execute the integration tests, invoke the following command:
 
@@ -138,8 +138,8 @@ Create a new GitHub repository for your new project
 
 You now have a new QBiC project with all the required dependencies and configuration files.
 You still need to create a remote repository for it, though, so it’s available for everyone.
-QUBE should have prompted you for your Github username and personal access token do conduct this process automatically.
-If you declined the automatic creation of the repository, then please follow `create_repo`_ to
+QUBE should have prompted you for your Github username and personal access token to conduct this process automatically.
+If you declined the automatic creation of the repository, then please follow `Create Github Repository`_ to
 create a repository on GitHub. For this example, we will still use ``donut-portlet`` as the
 name of our repository. You need to create your GitHub repository under the `QBiC GitHub organization`_,
 so you need writing access. Ask your favorite QBiC admin if you do not yet have writing rights.
@@ -147,7 +147,7 @@ so you need writing access. Ask your favorite QBiC admin if you do not yet have 
 Secure your configuration files before pushing to Git
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It might happen that you accidentally pushed a file containing sensitive data. Well, :poop: happens.
+It might happen that you accidentally pushed a file containing sensitive data. Well - happens.
 
 The good part is that this is reversible. The bad part is that, due to compliance with EU law, whenever
 one of these incidents occurs, the only way to do this right is to not only to `delete all compromised files from the repository`_,
@@ -197,7 +197,7 @@ paths start with ``/``\ ) in your browser’s address bar.
 Provide encrypted information to Travis CI
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Any person on the internet can download [Maven][maven] artifacts from
+Any person on the internet can download `Maven`_ artifacts from
 our `public Maven repository`_. But in order to upload artifacts to our
 repository, you will need proper authentication.
 
@@ -311,7 +311,7 @@ You usually should not need to touch them, but feel free to add additional workf
 .. _Travis CI: https://travis-ci.org/
 .. _delete all compromised files from the repository: https://help.github.com/en/articles/removing-sensitive-data-from-a-repository
 .. _the Maven site plugin: https://maven.apache.org/plugins/maven-site-plugin/
-.. _create_repo: https://help.github.com/articles/create-a-repo/
+.. _Create Github Repository: https://help.github.com/articles/create-a-repo/
 .. _QBiC GitHub organization: https://github.com/qbicsoftware
 .. _simple name: https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html#getSimpleName--
 .. _Required tools for Java development: #required-tools-for-java-development
