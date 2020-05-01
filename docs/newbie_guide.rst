@@ -267,15 +267,30 @@ the following commands:
    git push origin development
 
 Of course, you must replace ``donut-portlet`` with the real name of your
-repository. You can now start using your repository containing your
-brand new portlet.
+repository. You can now start using your repository containing your brand new portlet.
 
 Change default branch
 ~~~~~~~~~~~~~~~~~~~~~
 
 We strongly recommend you to set the ``development`` branch as your default branch by following `setting the default branch`_.
 
+Dependabot
+~~~~~~~~~~~~~~~
 
+Almost all of QUBE's template use `Dependabot <https://dependabot.com/>`_ to automatically submit pull requests to the project's
+repository whenever an update for a dependency was released. If you pushed your project to Github using QUBE's Github support
+everything is already setup for you. If not, you may need to create a ``development`` branch and a ``dependabot`` issue label.
+
+Read the docs
+~~~~~~~~~~~~~~~~~~
+
+| All of QUBE's templates come with `Read the Docs`_ preconfigured.
+| The only thing left for you to do is to enable your repository for `Read the Docs`_.
+  Please follow the `importing your documentation guide <https://docs.readthedocs.io/en/stable/intro/import-guide.html>`_.
+  You should not need to manually import your project if you are a member of QBiC software (which you should be!). 
+
+
+.. _Read the Docs: https://readthedocs.org/
 .. _Maven in 5 minutes: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 .. _Maven getting started guide: https://maven.apache.org/guides/getting-started/index.html
 .. _install it manually: https://maven.apache.org/install.html
