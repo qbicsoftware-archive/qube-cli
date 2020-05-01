@@ -113,7 +113,7 @@ def bump_version(ctx, new_version, project_dir) -> None:
             bump_template_version(new_version, project_dir)
         else:
             sys.exit(0)
-            
+
 
 @qube_cli.command(help_priority=6, short_help='Sync your existing QUBE project with the most recent template')
 def sync() -> None:
