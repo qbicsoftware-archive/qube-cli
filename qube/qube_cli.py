@@ -92,6 +92,7 @@ def info(ctx, handle: str) -> None:
     else:
         show_info(handle)
 
+
 @qube_cli.command('bump-version', help_priority=5, short_help='Bump the version of your QUBE project')
 @click.argument('new_version', type=str, required=False)
 @click.argument('project_dir', type=click.Path(), default=Path(f'{Path.cwd()}'))
