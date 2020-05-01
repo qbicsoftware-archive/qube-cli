@@ -26,7 +26,7 @@ def bump_template_version(new_version: str, pipeline_dir: Path) -> None:
 
     # if pipeline_dir was given as handle use cwd since we need it for git add
     qube_cfg_path = f'{str(pipeline_dir)}/qube.cfg' if str(pipeline_dir).startswith(str(Path.cwd())) else \
-                  f'{str(Path.cwd())}/{pipeline_dir}/qube.cfg'
+                    f'{str(Path.cwd())}/{pipeline_dir}/qube.cfg'
 
     # keep path of all files that were changed during bump version
     changed_files = [qube_cfg_path]
@@ -42,7 +42,6 @@ def bump_template_version(new_version: str, pipeline_dir: Path) -> None:
             if not not_changed:
                 path_changed = file_path if file_path.startswith(str(Path.cwd())) else f'{str(Path.cwd())}/{file_path}'
                 changed_files.append(path_changed)
-
 
     # update new version in qube.cfg file
     parser.set('bumpversion', 'current_version', new_version)
