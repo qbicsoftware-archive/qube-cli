@@ -38,8 +38,8 @@ To examine the reason for a failed linting test please follow the URL. All reaso
 
 .. _linting_codes:
 
-Linting codes
------------------
+Linting Error Codes
+--------------------------
 
 The following error numbers correspond to errors found during linting.
 If you are not sure why a specific linting error has occured you may find more information using the respective error code.

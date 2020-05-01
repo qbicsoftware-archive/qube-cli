@@ -22,19 +22,19 @@ Template requirements
 To keep the standard of our templates high we enforce several standards, to which all templates **must** adhere.
 Exceptions, where applicable, but they would have to be discussed beforehand. Hence, the term *should*.
 
-1. | New templates should be novel.
-   | We do not want a second cli-java template, but you are of course always invited to improve it. A new commandline library does not warrant an additional template, but rather modifications of the existing template with cookiecutter if statements.
-   | However, distinct modifications of already existing templates may be eligible. An example would be to add a GUI template for a language, which does not yet have a GUI template.
-   | Templates for domains, which we do not yet cover or additional languages to already existing domains are of course more than welcome.
+1. New templates should be novel.
+   We do not want a second cli-java template, but you are of course always invited to improve it. A new commandline library does not warrant an additional template, but rather modifications of the existing template with cookiecutter if statements.
+   However, distinct modifications of already existing templates may be eligible. An example would be to add a GUI template for a language, which does not yet have a GUI template.
+   Templates for domains, which we do not yet cover or additional languages to already existing domains are of course more than welcome.
 
-2. | All templates must adhere to QBiC's version standards. For example all JVM based templates must use the QBiC's Java version (which is currently 8).
+2. All templates must adhere to QBiC's version standards. For example all JVM based templates must use the QBiC's Java version (which is currently 8).
 
 3. All templates should build as automatically as possible and download all dependencies without manual intervention.
 
 4. All templates should have a testing and possibly mocking framework included.
 
-5. | All templates should provide a readthedocs setup (include changelog and a codeofconduct), a README.rst file, a LICENSE, Github issue and pull request templates and a .gitignore file. Moreover, a .dependabot configuration should be present if applicable.
-   | Note that most of these are already included in our common_files and do not need to be rewritten. More on that below.
+5. All templates should provide a readthedocs setup (include changelog and a codeofconduct), a README.rst file, a LICENSE, Github issue and pull request templates and a .gitignore file. Moreover, a .dependabot configuration should be present if applicable.
+   Note that most of these are already included in our common_files and do not need to be rewritten. More on that below.
 
 6. All templates must implement all required functionality to allow the application of all commands mentioned above to them, which includes a qube.cfg file, the template being in the available_templates.yml and more.
 
@@ -59,7 +59,7 @@ Hence, at this level we see :code:`qube_cli.py` and a folder per CLI command.
 
 2. | Next, we add our brainfuck template to :code:`/create/templates`
    | Note that it should adhere to the standards mentioned above and include all required files. Don't forget to edit the qube.cfg file to facilitate bump-version. See :ref:`bump-version-configuration` for details.
-    It is **mandatory** to name the top level folder {{ cookiecutter.project_slug }}, which ensures that the project after creation will have a proper name.
+    It is **mandatory** to name the top level folder ``{{ cookiecutter.project_slug }}``, which ensures that the project after creation will have a proper name.
     Furthermore, the cookiecutter.json file should have at least the following variables:
 
 .. figure:: images/adding_templates_step_2_1.png

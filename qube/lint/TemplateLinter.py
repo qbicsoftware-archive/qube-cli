@@ -253,7 +253,7 @@ class TemplateLinter(object):
             """
             print_results = []
             for eid, msg in test_results:
-                url = click.style(f'https://cookietemple/linting/errors#{eid}', fg='blue')
+                url = click.style(f'https://qube.readthedocs.io/en/latest/lint.html#error-{eid}', fg='blue')
                 print_results.append(f'{url} : {msg}')
             return '\n  '.join(print_results)
 
