@@ -1,4 +1,4 @@
-name: Publish qube to PyPI
+name: Publish QUBE to PyPI
 
 on:
   release:
