@@ -7,7 +7,7 @@ from tabulate import tabulate
 from qube.info.levensthein_dist import most_similar_command
 from qube.list.list import load_available_templates
 from qube.util.dict_util import is_nested_dictionary
-from qube.util.suggest_similar_commands import load_available_handles
+from qube.custom_qube_cli.suggest_similar_commands import load_available_handles
 
 WD = os.path.dirname(__file__)
 TEMPLATES_PATH = f'{WD}/../create/templates'
@@ -21,12 +21,6 @@ def show_info(handle: str):
     """
     # list of all templates that should be printed according to the passed handle
     templates_to_print = []
-    if not handle:
-        handle = click.prompt('Please enter the possibly incomplete template handle as <<domain-(subdomain)-('
-                              'language)>>.\nExamples: \'cli-java\' or \'cli\'',
-                              type=str)
-    click.echo()
-    click.echo()
     available_templates = load_available_templates(f'{TEMPLATES_PATH}/available_templates.yml')
 
     specifiers = handle.split('-')
@@ -55,6 +49,7 @@ def show_info(handle: str):
         except KeyError:
             handle_non_existing_command(handle)
 
+    # Add all templates under template_info to list
     flatten_nested_dict(template_info, templates_to_print)
 
     for template in templates_to_print:
@@ -66,7 +61,7 @@ def show_info(handle: str):
 
 def flatten_nested_dict(template_info_, templates_to_print) -> None:
     """
-    This function flattens an arbitrarily deep nested dict and creates a list of list containing all available
+    Flatten an arbitrarily deep nested dict and creates a list of list containing all available
     templates for the specified doamin/subdomain and/or language
     :param template_info_: The dict containing the yaml parsed info for all available templates the user wants to
                            gather some information
@@ -79,24 +74,26 @@ def flatten_nested_dict(template_info_, templates_to_print) -> None:
             else:
                 flatten_nested_dict(templ, templates_to_print)
     else:
+        # a single template to append was reached
         templates_to_print.append([template_info_['name'], template_info_['handle'], template_info_['long description'],
                                    template_info_['available libraries'], template_info_['version']])
 
 
 def set_linebreaks(desc: str) -> str:
     """
-    Sets newlines after max 50 characters (or the latest space to avoid non-sense separation)
+    Sets newlines after max 45 characters (or the latest space to avoid non-sense separation)
     :param desc: The parsed long description for the sepcific template
     :return: The formatted string with inserted newlines
     """
 
-    character_limit = 50
+    linebreak_limit = 50
     last_space = -1
     cnt = 0
     idx = 0
 
     while idx < len(desc):
-        if cnt == character_limit:
+        if cnt == linebreak_limit:
+            # set a line break at the last space encountered to avoid separating words
             desc = desc[:last_space] + '\n' + desc[last_space + 1:]
             cnt = 0
         elif desc[idx] == ' ':
@@ -110,31 +107,31 @@ def set_linebreaks(desc: str) -> str:
 def non_existing_handle():
     """
     Handling key not found access error for non existing template handles.
-    Displays an error message and terminates cookietemple.
+    Displays an error message and terminates QUBE.
 
     """
 
     click.echo(click.style('Handle does not exist. Please enter a valid handle. Use ', fg='red')
-               + click.style('qube list', fg='blue')
+               + click.style('qube list', fg='green')
                + click.style(' to display all template handles.', fg='red'))
-    sys.exit(0)
+    sys.exit(1)
 
 
 def handle_non_existing_command(handle: str):
     available_handles = load_available_handles()
     most_sim = most_similar_command(handle, available_handles)
-
     if most_sim:
-        # set a line break at the last space encountered to avoid separating words
+        # found exactly one similar command
         if len(most_sim) == 1:
-            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style(f'cookietemple list ', fg='green') +
+            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style(f'qube list ', fg='green') +
                        click.style(f'for all valid handles.\nDid you mean \'{most_sim[0]}\'?', fg='red'))
         else:
             # found multiple similar commands
             nl = '\n'
-            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style(f'cookietemple list ', fg='green') +
+            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style(f'qube list ', fg='green') +
                        click.style(f'for all valid handles.\nMost similar commands are:{nl}{nl.join(most_sim)}', fg='red'))
-        sys.exit(0)
+        sys.exit(1)
 
     else:
+        # found no similar commands
         non_existing_handle()

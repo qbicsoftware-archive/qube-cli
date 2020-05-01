@@ -13,7 +13,7 @@ from qube.info.info import show_info
 from qube.lint.lint import lint_project
 from qube.list.list import list_available_templates
 from qube.sync.sync import snyc_template
-from qube.util.click_util import CustomHelpOrder
+from qube.custom_qube_cli.custom_click import HelpErrorHandling
 
 WD = os.path.dirname(__file__)
 
@@ -36,7 +36,7 @@ def main():
     qube_cli()
 
 
-@click.group(cls=CustomHelpOrder)
+@click.group(cls=HelpErrorHandling)
 @click.version_option(qube.__version__,
                       message=click.style(f'QUBE Version: {qube.__version__}', fg='blue'))
 @click.option(
@@ -45,7 +45,8 @@ def main():
     default=False,
     help='Verbose output (print debug statements)'
 )
-def qube_cli(verbose):
+@click.pass_context
+def qube_cli(ctx, verbose):
     if verbose:
         logging.basicConfig(level=logging.DEBUG, format='\n%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     else:
@@ -80,32 +81,37 @@ def list() -> None:
 
 
 @qube_cli.command(help_priority=4, short_help='Show detailed information on a specific template or set of templates')
-@click.argument('handle', type=str)
-def info(handle: str) -> None:
+@click.argument('handle', type=str, required=False)
+@click.pass_context
+def info(ctx, handle: str) -> None:
     """
     Get detailed info on a QUBE template
     """
-    show_info(handle)
-
+    if not handle:
+        HelpErrorHandling.args_not_provided(ctx, 'info')
+    else:
+        show_info(handle)
 
 @qube_cli.command('bump-version', help_priority=5, short_help='Bump the version of your QUBE project')
-@click.argument('new_version', type=str)
-@click.argument('project_dir', type=click.Path(),
-                default=Path(f'{Path.cwd()}'))
-def bump_version(new_version, project_dir) -> None:
+@click.argument('new_version', type=str, required=False)
+@click.argument('project_dir', type=click.Path(), default=Path(f'{Path.cwd()}'))
+@click.pass_context
+def bump_version(ctx, new_version, project_dir) -> None:
     """
     Bump the version of an existing QUBE project
     """
-    # if the path entered ends with a trailing slash remove it for consistent output
-    if str(project_dir).endswith('/'):
-        project_dir = Path(str(project_dir).replace(str(project_dir)[len(str(project_dir)) - 1:], ''))
-
-    # check if the command met all requirements for successful bump
-    if can_do_bump_version(new_version, project_dir):
-        bump_template_version(new_version, project_dir)
+    if not new_version:
+        HelpErrorHandling.args_not_provided(ctx, 'bump-version')
     else:
-        sys.exit(0)
+        # if the path entered ends with a trailing slash remove it for consistent output
+        if str(project_dir).endswith('/'):
+            project_dir = Path(str(project_dir).replace(str(project_dir)[len(str(project_dir)) - 1:], ''))
 
+        # check if the command met all requirements for successful bump
+        if can_run_bump_version(new_version, project_dir):
+            bump_template_version(new_version, project_dir)
+        else:
+            sys.exit(0)
 
 @qube_cli.command(help_priority=6, short_help='Sync your existing QUBE project with the most recent template')
 def sync() -> None:

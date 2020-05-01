@@ -1,4 +1,4 @@
-from qube.util.suggest_similar_commands import SIMILARITY_FACTOR
+from qube.custom_qube_cli.suggest_similar_commands import SIMILARITY_FACTOR
 
 
 def levensthein_dist(input_command: str, candidate: str) -> int:
