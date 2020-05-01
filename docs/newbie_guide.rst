@@ -287,8 +287,14 @@ Read the docs
 | All of QUBE's templates come with `Read the Docs`_ preconfigured.
 | The only thing left for you to do is to enable your repository for `Read the Docs`_.
   Please follow the `importing your documentation guide <https://docs.readthedocs.io/en/stable/intro/import-guide.html>`_.
-  You should not need to manually import your project if you are a member of QBiC software (which you should be!). 
+  You should not need to manually import your project if you are a member of QBiC software (which you should be!).
 
+Github Actions
+~~~~~~~~~~~~~~~~~~
+
+All of QUBE's templates feature `Github Actions <https://github.com/features/actions>`_ support. Github Actions is part of our continuous integration setup
+and various template specific workflows are active (on push). Examples are the automatial runs of test suites, package building, linting and more.
+You usually should not need to touch them, but feel free to add additional workflows. They are located in ``.github/workflows/``.
 
 .. _Read the Docs: https://readthedocs.org/
 .. _Maven in 5 minutes: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
