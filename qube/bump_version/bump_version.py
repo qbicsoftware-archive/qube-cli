@@ -107,7 +107,7 @@ def replace(file_path: str, subst: str, section: str) -> None:
     return file_is_unchanged, path_changed
 
 
-def can_do_bump_version(new_version: str, project_dir: str) -> bool:
+def can_run_bump_version(new_version: str, project_dir: str) -> bool:
     """
     Ensure that all requirements are met, so that the bump version command can be run successfully.
     This included the following requirements:
