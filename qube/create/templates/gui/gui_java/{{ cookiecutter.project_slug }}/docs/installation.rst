@@ -12,16 +12,14 @@ To install {{ cookiecutter.project_slug }}, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install {{ cookiecutter.project_slug }}
+    $ mvn install
 
 This is the preferred method to install {{ cookiecutter.project_slug }}, as it will always install the most recent stable release.
 
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
-you through the process.
+If you don't have `maven`_ installed you can get it from `here`_
 
-.. _pip: https://pip.pypa.io
-.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
-
+.. _maven: https://maven.apache.org/
+.. _here: https://maven.apache.org/
 
 From sources
 ------------
@@ -44,7 +42,7 @@ Once you have a copy of the source, you can install it with:
 
 .. code-block:: console
 
-    $ python setup.py install
+    $ mvn install
 
 
 .. _Github repo: https://github.com/qbicsoftware/{{ cookiecutter.project_slug }}
