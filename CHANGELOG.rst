@@ -5,8 +5,21 @@ Changelog
 This document records all notable changes to `HTTPie <https://httpie.org>`_.
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+1.1.0 (2020-05-03)
 
-0.1.0 (2020-04-15)
+**Added**
+
+* The correct version tag :)
+
+**Fixed**
+
+* Readthedocs width 
+
+**Dependencies**
+
+**Deprecated**
+
+1.0.0 (2020-05-03)
 ------------------
 
 **Added**
