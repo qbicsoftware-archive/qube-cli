@@ -32,7 +32,7 @@ info
 
 Invoke :code:`qube info` *via*:
 
-    cookietemple info <HANDLE>
+    qube info <HANDLE>
 
 .. figure:: images/info_example.png
    :scale: 100 %
