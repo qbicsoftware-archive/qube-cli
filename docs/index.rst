@@ -5,12 +5,20 @@ Welcome to qube's documentation!
    :caption: Contents:
 
    readme
+   newbie_guide
    installation
    usage
-   modules
-   authors
+   create
+   list_info
+   lint
+   bump_version
+   sync
+   available_templates
+   adding_new_templates
+   troubleshooting
    changelog
-   codeofconduct
+   authors
+   code_of_conduct
 
 Indices and tables
 ==================

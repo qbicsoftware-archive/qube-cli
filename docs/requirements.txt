@@ -1,2 +1,4 @@
-Sphinx==2.4.4
+Sphinx==3.0.3
 sphinx-automodapi==0.12
+sphinx_rtd_theme==0.4.3
+-r ../requirements.txt

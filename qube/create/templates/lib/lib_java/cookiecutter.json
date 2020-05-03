@@ -1,0 +1,9 @@
+{
+    "full_name": "Homer Simpson",
+    "email": "homer.simpson@qbic.uni-tuebingen.de",
+    "project_name": "sample-lib",
+    "project_slug": "sample-lib",
+    "version": "1.0.0-SNAPSHOT",
+    "project_short_description": "Java based library "
+}
+

@@ -12,6 +12,9 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Added**
 
 * Created the project using COOKIETEMPLE
+* Added create, list, info, bump-version, lint based on COOKIETEPLE
+* Added cli-java template
+* Added lib-java template
 
 **Fixed**
 

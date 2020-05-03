@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>life.qbic</groupId>
+		<artifactId>portlet-parent-pom</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>{{ cookiecutter.project_slug }}</artifactId>
+	<version>{{ cookiecutter.version }}</version> <!-- <<QUBE_FORCE_BUMP>> -->
+	<name>{{ cookiecutter.project_name }}</name>
+	<url>http://github.com/qbicsoftware/{{ cookiecutter.project_slug }}</url>
+	<description>{{ cookiecutter.project_short_description }}</description>
+	<packaging>war</packaging>
+	<!-- we only need to tell maven where to find our parent pom and other QBiC dependencies -->
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<id>nexus-snapshots</id>
+			<name>QBiC Snapshots</name>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>nexus-releases</id>
+			<name>QBiC Releases</name>
+			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-sql</artifactId>
+			<version>2.5.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>2.5.7</version>
+		</dependency>
+		<dependency>
+			<groupId>life.qbic</groupId>
+			<artifactId>portal-utils-lib</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>life.qbic</groupId>
+			<artifactId>core-utils-lib</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		{% if cookiecutter.use_openbis_client == "yes" %}
+		<!-- openBIS client -->
+		<dependency>
+			<groupId>life.qbic</groupId>
+			<artifactId>openbis-client-lib</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+		{% endif %}
+		{% if cookiecutter.use_openbis_raw_api == "yes" %}
+		<!-- openBIS API -->
+		<dependency>
+        	<groupId>life.qbic.openbis</groupId>
+            <artifactId>openbis-api</artifactId>
+			<version>18.06.1</version>
+        </dependency>
+		{% endif %}
+		{% if cookiecutter.use_qbic_databases == "yes" %}
+		<!-- Access to our custom databases (portlets use direct JDBC to access data for now),
+			 but we will create a client library that portlets will use
+			 (version  is defined in the parent POM hierarchy (/portal/pom.xml)) -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+		</dependency>
+		{% endif %}
+		{% if cookiecutter.use_vaadin_charts == "yes" %}
+		<!-- Vaadin charts (version defined in parent pom) -->
+		<dependency>
+  			<groupId>com.vaadin.addon</groupId>
+  			<artifactId>vaadin-charts</artifactId>
+		</dependency>
+		{% endif %}
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>1.6.3</version>
+				<dependencies>
+					<!-- https://mvnrepository.com/artifact/org.codehaus.gmavenplus/gmavenplus-plugin -->
+					<dependency>
+						<groupId>org.codehaus.gmavenplus</groupId>
+						<artifactId>gmavenplus-plugin</artifactId>
+						<version>1.6.3</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>addSources</goal>
+							<goal>addTestSources</goal>
+							<goal>generateStubs</goal>
+							<goal>compile</goal>
+							<goal>generateTestStubs</goal>
+							<goal>compileTests</goal>
+							<goal>removeStubs</goal>
+							<goal>removeTestStubs</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

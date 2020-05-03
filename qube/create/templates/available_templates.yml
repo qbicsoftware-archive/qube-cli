@@ -1,0 +1,46 @@
+cli:
+    java:
+        name: Java Commandline Tool
+        handle: cli-java
+        version: 1.0.0
+        available libraries: picocli
+        short description: Tools to be used using a console (e.g., postman-cli)
+        long description: A template for Java based tools, which provide a command line user interface to the user.
+            QBiC's command line library of choice is picocli (https://picocli.info/).
+lib:
+    java:
+        name: Generic Java Library
+        handle: lib-java
+        version: 1.0.0
+        available libraries: none
+        short description: Generic library for Java based projects
+        long description: A template for Java based libraries, which provide functionalities to other projects.
+            Projects created with this template should not be run as a standalone,
+            but rather be included in other projects and ease the developer's experience.
+gui:
+    java:
+        name: JavaFX based GUI
+        handle: gui-java
+        version: 1.0.0
+        available libraries: JavaFX
+        short description: JavaFX based graphical user interfaces for Java based projects
+        long description: A template for Java based tools, which require a graphical user interface for the user to interact with.
+            This template is based on JavaFX 8.
+service:
+    java:
+        name: Service
+        handle: service-java
+        version: 1.0.0
+        available libraries: core-utils-lib
+        short description: Service, which once started stays 'active' until shutdown
+        long description: Services are similar to command-line tools in their structure, but once a service has been started, it stays 'active' until shutdown.
+            An example is QBiC's portlet deployer service.
+portlet:
+    groovy:
+        name: Portlet
+        handle: portlet-groovy
+        version: 1.0.0
+        available libraries: Vaadin
+        short description: Vaadin based portlet, which build the foundation of QBiC's web presence
+        long description: Portlets are web-based components, which process requests and create dynamic content.
+            The backend and frontend of this template is based on Vaadin 8 (https://vaadin.com/vaadin-8).
