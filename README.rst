@@ -11,7 +11,7 @@ QUBE
         :target: https://github.com/qbicsoftware/qube/workflows/Run%20qube%20Tox%20Test%20Suite/badge.svg
         :alt: Github Workflow Tests Status
 
-.. image:: https://img.shields.io/pypi/v/qube.svg
+.. image:: https://img.shields.io/pypi/v/qube.svg?color=passing
         :target: https://pypi.python.org/pypi/qube
         :alt: PyPi Status
 

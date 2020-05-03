@@ -13,6 +13,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 * setup.py development status
 * max width for docs for all templates
+* PyPi badge is now green
 
 **Dependencies**
 
