@@ -1,7 +1,6 @@
-====
-QUBE
-====
-
+.. image:: https://user-images.githubusercontent.com/21954664/81098605-e3f23380-8f09-11ea-81e1-a9eeb8545127.png
+        :target: https://user-images.githubusercontent.com/21954664/81098605-e3f23380-8f09-11ea-81e1-a9eeb8545127.png
+        :alt: QUBE Logo
 
 .. image:: https://github.com/qbicsoftware/qube/workflows/Build%20qube%20Package/badge.svg
         :target: https://github.com/qbicsoftware/qube/workflows/Build%20qube%20Package/badge.svg
