@@ -6,6 +6,7 @@ This document records all notable changes to `HTTPie <https://httpie.org>`_.
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 1.1.1 (2020-05-03)
+----------------------
 
 **Added**
 
@@ -21,6 +22,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
 1.1.0 (2020-05-03)
+---------------------
 
 **Added**
 
