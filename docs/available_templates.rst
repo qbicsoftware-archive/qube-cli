@@ -110,6 +110,7 @@ Included frameworks/libraries
     2. :code:`build_package.yml`, which builds the `Maven <https://maven.apache.org/>`_ based project.
     3. :code:`java_checkstyle.yml`, which runs `Checkstyle <https://checkstyle.sourceforge.io/>`_ using `Google's Styleguides <https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml>`_.
     4. :code:`run_test.yml`, which runs all `junit4 <https://junit.org/junit4/>`_ tests.
+    5. :code:`qube_lint.yml`, which runs QUBE's linting on the project.
 
 Usage
 ^^^^^^^^
@@ -201,6 +202,7 @@ Included frameworks/libraries
     2. :code:`build_package.yml`, which builds the `Maven <https://maven.apache.org/>`_ based project.
     3. :code:`java_checkstyle.yml`, which runs `Checkstyle <https://checkstyle.sourceforge.io/>`_ using `Google's Styleguides <https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml>`_.
     4. :code:`run_test.yml`, which runs all `junit4 <https://junit.org/junit4/>`_ tests.
+    5. :code:`qube_lint.yml`, which runs QUBE's linting on the project.
 
 Usage
 ^^^^^^^^
@@ -299,6 +301,7 @@ Included frameworks/libraries
     2. :code:`build_package.yml`, which builds the `Maven <https://maven.apache.org/>`_ based project.
     3. :code:`java_checkstyle.yml`, which runs `Checkstyle <https://checkstyle.sourceforge.io/>`_ using `Google's Styleguides <https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml>`_.
     4. :code:`run_test.yml`, which runs all `junit4 <https://junit.org/junit4/>`_ tests.
+    5. :code:`qube_lint.yml`, which runs QUBE's linting on the project.
 
 Usage
 ^^^^^^^^
@@ -395,6 +398,7 @@ Included frameworks/libraries
     2. :code:`build_package.yml`, which builds the `Maven <https://maven.apache.org/>`_ based project.
     3. :code:`java_checkstyle.yml`, which runs `Checkstyle <https://checkstyle.sourceforge.io/>`_ using `Google's Styleguides <https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml>`_.
     4. :code:`run_test.yml`, which runs all `junit4 <https://junit.org/junit4/>`_ tests.
+    5. :code:`qube_lint.yml`, which runs QUBE's linting on the project.
 
 Usage
 ^^^^^^^^
@@ -509,6 +513,7 @@ Included frameworks/libraries
     1. :code:`build_docs.yml`, which builds the `ReadTheDocs <https://readthedocs.org/>`_ documentation.
     2. :code:`groovy_checkstyle.yml`, which runs `npm-groovy-lint <https://github.com/nvuillam/npm-groovy-lint>`_, which can be seen as a wrapper around `CodeNarc <https://codenarc.github.io/CodeNarc/>`_.
     3. :code:`run_test.yml`, which runs all `junit4 <https://junit.org/junit4/>`_ tests.
+    4. :code:`qube_lint.yml`, which runs QUBE's linting on the project.
 
 Usage
 ^^^^^^^^
