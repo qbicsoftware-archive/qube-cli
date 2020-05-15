@@ -1,7 +1,8 @@
-====
-QUBE
-====
-
+.. image:: https://user-images.githubusercontent.com/21954664/81098605-e3f23380-8f09-11ea-81e1-a9eeb8545127.png
+        :target: https://user-images.githubusercontent.com/21954664/81098605-e3f23380-8f09-11ea-81e1-a9eeb8545127.png
+        :alt: QUBE Logo
+        
+|
 
 .. image:: https://github.com/qbicsoftware/qube/workflows/Build%20qube%20Package/badge.svg
         :target: https://github.com/qbicsoftware/qube/workflows/Build%20qube%20Package/badge.svg
@@ -41,7 +42,8 @@ Features
 Credits
 -------
 
-This package was created with COOKIETEMPLE based on a modified `audreyr/cookiecutter-pypackage`_ project template using Cookiecutter_.
+This package was created with `COOKIETEMPLE`_ based on a modified `audreyr/cookiecutter-pypackage`_ project template using Cookiecutter_.
 
+.. _COOKIETEMPLE: https://cookietemple.com
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
