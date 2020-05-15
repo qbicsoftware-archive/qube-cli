@@ -3,5 +3,6 @@
     "full_name": "Homer Simpson",
     "email": "homer.simpson@qbic.uni-tuebingen.de",
     "copyright_holder": "QBiC",
-    "project_name": "Sample command-line Tool"
+    "project_name": "Sample command-line Tool",
+    "project_slug": "The project slug"
 }

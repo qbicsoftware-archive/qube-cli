@@ -1,0 +1,17 @@
+name: PR to master only from development
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if PR branch to master is development
+        run: |
+            echo "Pull request's branch to be merged is: {% raw %}${{ github.event.pull_request.head.ref }}{% endraw %}"
+            if [ "{% raw %}${{ github.event.pull_request.head.ref }}{% endraw %}" != "development" ]; then echo "Pull requests to master must come from the development branch!"; exit 1; fi
+

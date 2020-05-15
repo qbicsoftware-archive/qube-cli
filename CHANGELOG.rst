@@ -5,9 +5,13 @@ Changelog
 This document records all notable changes to `HTTPie <https://httpie.org>`_.
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
-1.1.1 (2020-05-03)
+1.2.0 (2020-05-03)
 
 **Added**
+
+* QUBE linting workflow for all templates
+* PR to master from development only WF
+* custom COOKIETEMPLE css
 
 **Fixed**
 
@@ -17,10 +21,13 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Dependencies**
 
+* flake 3.7.9 -> 3.8.1
+
 **Deprecated**
 
 
 1.1.0 (2020-05-03)
+---------------------
 
 **Added**
 
