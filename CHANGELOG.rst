@@ -10,6 +10,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Added**
 
 * QUBE linting workflow for all templates
+* PR to master from development only WF
 
 **Fixed**
 
@@ -18,6 +19,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 * PyPi badge is now green
 
 **Dependencies**
+
+* flake 3.7.9 -> 3.8.1
 
 **Deprecated**
 
