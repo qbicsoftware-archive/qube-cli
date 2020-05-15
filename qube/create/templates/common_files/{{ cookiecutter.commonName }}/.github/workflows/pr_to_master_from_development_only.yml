@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Check if PR branch to master is development
         run: |
-            echo "Pull request's branch to be merged is: ${{ github.event.pull_request.head.ref }}"
-            if [ "${{ github.event.pull_request.head.ref }}" != "development" ]; then echo "PRs to master must come from the development branch"; exit 1; fi
+            echo "Pull request's branch to be merged is: {% raw %}${{ github.event.pull_request.head.ref }}{% endraw %}"
+            if [ "{% raw %}${{ github.event.pull_request.head.ref }}{% endraw %}" != "development" ]; then echo "Pull requests to master must come from the development branch!"; exit 1; fi
 
