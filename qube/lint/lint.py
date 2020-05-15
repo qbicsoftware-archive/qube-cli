@@ -46,7 +46,7 @@ def lint_project(project_dir: str) -> TemplateLinter:
         lint_obj.lint(f'{template_handle} Linting')
     except AssertionError as e:
         click.echo(click.style(f'Critical error: {e}', fg='red'))
-        click.echo(click.style(f'Stopping tests...', fg='red'))
+        click.echo(click.style('Stopping tests...', fg='red'))
         return lint_obj
 
     # Print the results
