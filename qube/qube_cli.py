@@ -19,7 +19,7 @@ WD = os.path.dirname(__file__)
 
 
 def main():
-    click.echo(click.style(fr"""
+    click.echo(click.style(r"""
  _______           ______   _______
 (  ___  )|\     /|(  ___ \ (  ____ \
 | (   ) || )   ( || (   ) )| (    \/
