@@ -11,6 +11,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 * QUBE linting workflow for all templates
 * PR to master from development only WF
+* custom COOKIETEMPLE css
 
 **Fixed**
 
