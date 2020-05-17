@@ -16,7 +16,7 @@
         :target: https://pypi.python.org/pypi/qube
         :alt: PyPi Status
         
-.. image:: https://pepy.tech/badge/qube
+.. image:: https://img.shields.io/badge/dynamic/json?color=passing&maxAge=86400&label=downloads&query=%24.total_downloads&url=https%3A%2F%2Fapi.pepy.tech%2Fapi%2Fprojects%2Fqube
         :target: https://pepy.tech/project/qube
         :alt: Downloads
 
