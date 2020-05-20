@@ -11,8 +11,11 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 * bump-version now supports SNAPSHOTS
 * documentation about 4 portlet prompts
+* new COOKIETEMPLE docs css
 
 **Fixed**
+
+* Tests GHW names
 
 **Dependencies**
 
