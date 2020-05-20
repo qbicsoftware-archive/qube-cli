@@ -13,7 +13,15 @@ from qube.create.github_support import is_git_repo
 
 def bump_template_version(new_version: str, pipeline_dir: Path) -> None:
     """
-    Update the version number for all files that are whitelisted in the config file
+    Update the version number for all files that are whitelisted or forced in blacklisted files.
+    This is specified in the config file.
+
+    INFO on valid versions: All versions must match the format like 1.0.0 or 1.1.0-SNAPSHOT; these are the only valid
+    version formats QUBE allows. A valid version therefore contains a three digits (in the range from 0 to however large it will grow)
+    separated by two dots.
+    Optional is the -SNAPSHOT at the end (for JVM templates especially). NOTE that versions like 1.2.3.4 or 1.2 WILL NOT be recognized as valid versions as
+    well as no substring of them will be recognized.
+
     :param new_version: The new version number that should replace the old one in a qube project
     :param pipeline_dir: The default value is the current working directory, so we´re initially assuming the user
                          bumps the version from the projects top level directory. If this is not the case this parameter
@@ -61,7 +69,7 @@ def bump_template_version(new_version: str, pipeline_dir: Path) -> None:
         repo.index.commit(f'Bump version from {current_version} to {new_version}')
 
 
-def replace(file_path: str, subst: str, section: str) -> None:
+def replace(file_path: str, subst: str, section: str) -> (bool, str):
     """
     Replace a version with the new version unless the line is explicitly excluded (marked with <<QUBE_NO_BUMP>>).
     Or, in case of blacklisted files, it ignores all lines with version numbers unless they´re explicitly marked
@@ -83,7 +91,7 @@ def replace(file_path: str, subst: str, section: str) -> None:
             for line in old_file:
                 # update version if tags were found (and were in the right section)
                 if ('<<QUBE_NO_BUMP>>' not in line and not section == 'bumpversion_files_blacklisted') or '<<QUBE_FORCE_BUMP>>' in line:
-                    tmp = re.sub(r'[0-9]+\.[0-9]+\.[0-9]+', subst, line)
+                    tmp = re.sub(r'(?<!\.)\d+(?:\.\d+){2}(?:-SNAPSHOT)?(?!\.)', subst, line)
                     new_file.write(tmp)
                     if tmp != line:
                         if file_is_unchanged:
@@ -120,9 +128,9 @@ def can_run_bump_version(new_version: str, project_dir: str) -> bool:
     :return: True if bump version can be run, false otherwise.
     """
     # ensure that the entered version number matches correct format
-    if not re.match(r"[0-9]+\.[0-9]+\.[0-9]+", new_version):
+    if not re.match(r'(?<!\.)\d+(?:\.\d+){2}(?:-SNAPSHOT)?(?!\.)', new_version):
         click.echo(click.style('Invalid version specified!\nEnsure your version number has the form '
-                               'like 0.0.0 or 15.100.239', fg='red'))
+                               'like 0.0.0 or 15.100.239-SNAPSHOT', fg='red'))
         return False
 
     # ensure the version is bumped within a project created by QUBE
@@ -135,8 +143,8 @@ def can_run_bump_version(new_version: str, project_dir: str) -> bool:
     else:
         parser = ConfigParser()
         parser.read(f'{project_dir}/qube.cfg')
-        current_version = [int(digit) for digit in parser.get('bumpversion', 'current_version').split('.')]
-        new_version = [int(digit) for digit in new_version.split('.')]
+        current_version = [int(digit) for digit in parser.get('bumpversion', 'current_version').replace('-SNAPSHOT', '').split('.')]
+        new_version = [int(digit) for digit in new_version.replace('-SNAPSHOT', '').split('.')]
         is_greater = False
 
         if new_version[0] > current_version[0] or new_version[0] == current_version[0] and new_version[1] > current_version[1]:
