@@ -508,6 +508,13 @@ If you are unfamiliar with specific files/file types, you may find them in our :
 Included frameworks/libraries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+During the creation you will be asked whether or not you want to use the
+
+1. openbis client. This will include the openbis-client-lib in your project.
+2. openbis raw api. This will include the openbis-api in your project.
+3. qbic databases. This will include the mariadb-java-client in your project.
+4. vaadin charts. This will include the vaadin-charts in your project.
+
 1. Like all of QBiC's JVM based projects, lib-java uses QBiC's `parent-pom <https://github.com/qbicsoftware/parent-poms>`_.
 2. `junit4 <https://junit.org/junit4/>`_ is currently QBiC's testing framework of choice.
    If you require mocking for any integration tests or advanced command line tests, `Mockito <https://site.mockito.org/>`_ may be useful.

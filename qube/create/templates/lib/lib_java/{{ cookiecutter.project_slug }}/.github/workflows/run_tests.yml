@@ -1,4 +1,4 @@
-name: Build Maven Package
+name: Run Maven Tests
 
 on: [push]
 

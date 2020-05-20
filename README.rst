@@ -15,6 +15,10 @@
 .. image:: https://img.shields.io/pypi/v/qube.svg?color=passing
         :target: https://pypi.python.org/pypi/qube
         :alt: PyPi Status
+        
+.. image:: https://img.shields.io/badge/dynamic/json?color=passing&maxAge=86400&label=downloads&query=%24.total_downloads&url=https%3A%2F%2Fapi.pepy.tech%2Fapi%2Fprojects%2Fqube
+        :target: https://pepy.tech/project/qube
+        :alt: Downloads
 
 .. image:: https://readthedocs.org/projects/qube/badge/?version=latest
         :target: https://qube.readthedocs.io/en/latest/?badge=latest
