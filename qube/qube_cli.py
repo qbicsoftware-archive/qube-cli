@@ -96,10 +96,13 @@ def info(ctx, handle: str) -> None:
 @qube_cli.command('bump-version', help_priority=5, short_help='Bump the version of your QUBE project')
 @click.argument('new_version', type=str, required=False)
 @click.argument('project_dir', type=click.Path(), default=Path(f'{Path.cwd()}'))
+@click.option('--downgrade', '-d', is_flag=True)
 @click.pass_context
-def bump_version(ctx, new_version, project_dir) -> None:
+def bump_version(ctx, new_version, project_dir, downgrade) -> None:
     """
     Bump the version of an existing QUBE project
+    Unless the user indicates downgrade via he -d flag, a downgrade of a version is never allowed. Note that bump-version with the new version
+    equals the current version is never allowed, either with or without -d.
     """
     if not new_version:
         HelpErrorHandling.args_not_provided(ctx, 'bump-version')
@@ -109,10 +112,10 @@ def bump_version(ctx, new_version, project_dir) -> None:
             project_dir = Path(str(project_dir).replace(str(project_dir)[len(str(project_dir)) - 1:], ''))
 
         # check if the command met all requirements for successful bump
-        if can_run_bump_version(new_version, project_dir):
+        if can_run_bump_version(new_version, project_dir, downgrade):
             bump_template_version(new_version, project_dir)
         else:
-            sys.exit(0)
+            sys.exit(1)
 
 
 @qube_cli.command(help_priority=6, short_help='Sync your existing QUBE project with the most recent template')

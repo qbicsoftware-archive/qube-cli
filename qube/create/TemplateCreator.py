@@ -2,6 +2,8 @@ import os
 import sys
 import shutil
 import tempfile
+import requests
+import re
 from distutils.dir_util import copy_tree
 from shutil import copy2
 from pathlib import Path
@@ -164,9 +166,14 @@ class TemplateCreator:
         self.creator_ctx.email = click.prompt('Please enter your personal or work email',
                                               type=str,
                                               default='homer.simpson@example.com')
-        self.creator_ctx.project_name = click.prompt('Please enter your project name',
-                                                     type=str,
-                                                     default='Exploding Springfield')
+        self.creator_ctx.project_name = click.prompt('Please enter your project name', type=str, default='Exploding Springfield')
+
+        # check if the project name is already taken on readthedocs.io
+        while self.readthedocs_slug_already_exists(self.creator_ctx.project_name):
+            click.echo(click.style(f'A project named {self.creator_ctx.project_name} already exists at readthedocs.io!', fg='red'))
+            if click.confirm(click.style('Do you want to choose another name for your project?\nOtherwise you are not able to host your docs at '
+                                         'readthedocs.io!', fg='blue')):
+                self.creator_ctx.project_name = click.prompt('Please enter your project name', type=str, default='Exploding Springfield')
         self.creator_ctx.project_slug = self.creator_ctx.project_name.replace(' ', '_')
         self.creator_ctx.project_short_description = click.prompt('Please enter a short description of your project.',
                                                                   type=str,
@@ -213,6 +220,17 @@ class TemplateCreator:
         delete_dir_tree(Path(f'{Path.cwd()}/common_files_util'))
         shutil.rmtree(tmp_dir)
         os.chdir(str(cwd_project))
+
+    def readthedocs_slug_already_exists(self, project_name: str) -> bool:
+        """
+        Test if there´s already a project with the same name on readthedocs
+        :param project_name Name of the project the user wants to create
+        """
+        request = requests.get(f'https://{project_name.replace(" ", "")}.readthedocs.io')
+        if request.status_code == 200:
+            return True
+        else:
+            return False
 
     def copy_into_already_existing_directory(self, common_path, dir: Path) -> None:
         """

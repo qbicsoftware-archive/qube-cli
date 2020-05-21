@@ -9,6 +9,22 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Checking whether project already exists on readthedocs
+
+**Fixed**
+
+* bump-version SNAPSHOT handling strongly improved
+
+**Dependencies**
+
+* requests==2.23.0 added
+
+**Deprecated**
+
+1.3.0 (2020-05-20)
+
+**Added**
+
 * bump-version now supports SNAPSHOTS
 * documentation about 4 portlet prompts
 * new COOKIETEMPLE docs css
