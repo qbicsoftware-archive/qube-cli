@@ -7,3 +7,4 @@ cookiecutter==1.7.2
 cffi==1.14.0
 cryptography==2.9.2
 requests==2.23.0
+packaging==20.4
