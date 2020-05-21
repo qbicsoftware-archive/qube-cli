@@ -3,7 +3,6 @@ import sys
 import shutil
 import tempfile
 import requests
-import re
 from distutils.dir_util import copy_tree
 from shutil import copy2
 from pathlib import Path

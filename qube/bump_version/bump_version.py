@@ -120,7 +120,7 @@ def can_run_bump_version(new_version: str, project_dir: str, downgrade: bool) ->
     """
     Ensure that all requirements are met, so that the bump version command can be run successfully.
     This included the following requirements:
-    1.) The new version matches the format (?<!\.)\d+(?:\.\d+){2}(?:-SNAPSHOT)?(?!\.)
+    1.) The new version matches the format (?<!\.)\d+(?:\.\d+){2}(?:-SNAPSHOT)?(?!\.) # noqa: W605
     2.) The new version is greater than the current one
     3.) The project is a QUBE project
 
@@ -172,6 +172,4 @@ def can_run_bump_version(new_version: str, project_dir: str, downgrade: bool) ->
                 f'\nNew version must be greater than the old one.', fg='red'))
 
         return is_greater
-        
-    return true
-
+    return True
