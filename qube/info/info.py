@@ -13,7 +13,7 @@ WD = os.path.dirname(__file__)
 TEMPLATES_PATH = f'{WD}/../create/templates'
 
 
-def show_info(handle: str):
+def show_info(handle: str) -> None:
     """
     Displays detailed information of a domain/language/template
 
@@ -104,31 +104,38 @@ def set_linebreaks(desc: str) -> str:
     return desc
 
 
-def non_existing_handle():
+def non_existing_handle() -> None:
     """
     Handling key not found access error for non existing template handles.
     Displays an error message and terminates QUBE.
 
     """
 
-    click.echo(click.style('Handle does not exist. Please enter a valid handle. Use ', fg='red')
+    click.echo(click.style('Handle does not exist. Please enter a valid handle.\n Use ', fg='red')
                + click.style('qube list', fg='green')
                + click.style(' to display all template handles.', fg='red'))
     sys.exit(1)
 
 
 def handle_non_existing_command(handle: str):
+    """
+    Handle the case, when an unknown handle was entered and try to find a similar handle.
+    :param handle: The non existing handle
+    """
     available_handles = load_available_handles()
     most_sim = most_similar_command(handle, available_handles)
     if most_sim:
         # found exactly one similar command
         if len(most_sim) == 1:
-            click.echo(click.style('Unknown handle \'{handle}\'. See ', fg='red') + click.style('qube list ', fg='green') +
-                       click.style(f'for all valid handles.\nDid you mean \'{most_sim[0]}\'?', fg='red'))
+            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style('qube list ', fg='green') +
+                       click.style('for all valid handles.\n', fg='red'))
+            click.echo(click.style('Will use best match ', fg='red') + click.style(f'{most_sim[0]}.\n', fg='green'))
+            # use best match if exactly one similar handle was found
+            show_info(most_sim[0])
         else:
             # found multiple similar commands
             nl = '\n'
-            click.echo(click.style('Unknown handle \'{handle}\'. See ', fg='red') + click.style('qube list ', fg='green') +
+            click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style('qube list ', fg='green') +
                        click.style(f'for all valid handles.\nMost similar commands are:{nl}{nl.join(most_sim)}', fg='red'))
         sys.exit(1)
 

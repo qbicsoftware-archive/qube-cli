@@ -5,7 +5,20 @@ Changelog
 This document records all notable changes to `HTTPie <https://httpie.org>`_.
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
-1.3.0 (2020-05-20)
+1.3.2 (2020-05-22)
+
+**Added**
+
+* Strongly simplified common files copying
+* info now automatically reruns the most similar handle
+
+**Fixed**
+
+**Dependencies**
+
+**Deprecated**
+
+1.3.1 (2020-05-20)
 
 **Added**
 
@@ -18,6 +31,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Dependencies**
 
 * requests==2.23.0 added
+* packaging==20.4 added
 
 **Deprecated**
 
