@@ -128,7 +128,7 @@ def handle_non_existing_command(handle: str):
         # found exactly one similar command
         if len(most_sim) == 1:
             click.echo(click.style(f'Unknown handle \'{handle}\'. See ', fg='red') + click.style('qube list ', fg='green') +
-                       click.style(f'for all valid handles.\n', fg='red'))
+                       click.style('for all valid handles.\n', fg='red'))
             click.echo(click.style('Will use best match ', fg='red') + click.style(f'{most_sim[0]}.\n', fg='green'))
             # use best match if exactly one similar handle was found
             show_info(most_sim[0])

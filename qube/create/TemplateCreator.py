@@ -2,7 +2,6 @@ import os
 import sys
 import click
 import shutil
-import re
 import tempfile
 import requests
 from distutils.dir_util import copy_tree
