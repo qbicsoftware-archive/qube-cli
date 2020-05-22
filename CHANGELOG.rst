@@ -18,6 +18,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Dependencies**
 
 * requests==2.23.0 added
+* packaging==20.4 added
 
 **Deprecated**
 
