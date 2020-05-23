@@ -58,6 +58,7 @@ def list_available_templates() -> None:
 
     console = Console()
     console.print(table)
+    
 
 def load_available_templates(AVAILABLE_TEMPLATES_PATH) -> dict:
     """

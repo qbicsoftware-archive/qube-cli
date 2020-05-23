@@ -70,6 +70,7 @@ def show_info(handle: str) -> None:
 
     console = Console()
     console.print(table)
+    
 
 def flatten_nested_dict(template_info_, templates_to_print) -> None:
     """
