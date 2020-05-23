@@ -33,4 +33,4 @@ jobs:
           version: 0.1.dev1
       - name: Hello World
         run: |
-          brainfucky --file ./hello.bf
+          brainfucky --file ExplodingSpringfield/hello.bf
