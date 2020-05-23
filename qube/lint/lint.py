@@ -6,6 +6,7 @@ from ruamel.yaml import YAML
 
 from qube.lint.TemplateLinter import TemplateLinter
 from qube.lint.domains.cli import CliJavaLint
+from qube.lint.domains.cli import CliBrainfuckLint
 from qube.lint.domains.gui import GuiJavaLint
 from qube.lint.domains.lib import LibJavaLint
 from qube.lint.domains.portlet import PortletGroovyLint
@@ -21,6 +22,7 @@ def lint_project(project_dir: str) -> TemplateLinter:
 
     switcher = {
         'cli-java': CliJavaLint,
+        'cli-brainfuck': CliBrainfuckLint,
         'lib-java': LibJavaLint,
         'gui-java': GuiJavaLint,
         'service-java': ServiceJavaLint,

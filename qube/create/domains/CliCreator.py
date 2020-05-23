@@ -17,6 +17,9 @@ class TemplateStructCli(QubeTemplateStruct):
     main_class_prefix: str = ''
     version: str = '1.0.0-SNAPSHOT'
 
+    """____BRAINFUCK___"""
+    version: str = '1.0.0'
+
 
 class CliCreator(TemplateCreator):
 
@@ -29,6 +32,7 @@ class CliCreator(TemplateCreator):
 
         '"" TEMPLATE VERSIONS ""'
         self.CLI_JAVA_TEMPLATE_VERSION = super().load_version('cli-java')
+        self.CLI_BRAINFUCK_TEMPLATE_VERSION = super().load_version('cli-brainfuck')
 
     def create_template(self):
         """
@@ -36,7 +40,7 @@ class CliCreator(TemplateCreator):
         """
 
         self.cli_struct.language = click.prompt('Choose between the following languages',
-                                                type=click.Choice(['java']),
+                                                type=click.Choice(['java', 'brainfuck']),
                                                 show_choices=True)
 
         # prompt the user to fetch general template configurations
@@ -45,6 +49,7 @@ class CliCreator(TemplateCreator):
         # switch case statement to prompt the user to fetch template specific configurations
         switcher = {
             'java': self.cli_java_options,
+            'brainfuck': self.cli_brainfuck_options
         }
         switcher.get(self.cli_struct.language.lower(), lambda: 'Invalid language!')()
 
@@ -54,6 +59,7 @@ class CliCreator(TemplateCreator):
         # switch case statement to fetch the template version
         switcher_version = {
             'java': self.CLI_JAVA_TEMPLATE_VERSION,
+            'brainfuck': self.CLI_BRAINFUCK_TEMPLATE_VERSION
         }
         self.cli_struct.template_version, self.cli_struct.template_handle = switcher_version.get(
             self.cli_struct.language.lower(), lambda: 'Invalid language!'), f'cli-{self.cli_struct.language.lower()}'
@@ -64,3 +70,6 @@ class CliCreator(TemplateCreator):
         self.cli_struct.main_class_prefix = click.prompt('Main class prefix:',
                                                          type=str,
                                                          default='Sample')
+
+    def cli_brainfuck_options(self):
+        pass
