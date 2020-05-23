@@ -3,6 +3,7 @@ import logging
 import os
 import sys
 from pathlib import Path
+from rich import traceback
 
 import click
 
@@ -19,15 +20,14 @@ WD = os.path.dirname(__file__)
 
 
 def main():
+    traceback.install()
     click.echo(click.style(r"""
- _______           ______   _______
-(  ___  )|\     /|(  ___ \ (  ____ \
-| (   ) || )   ( || (   ) )| (    \/
-| |   | || |   | || (__/ / | (__
-| |   | || |   | ||  __ (  |  __)
-| | /\| || |   | || (  \ \ | (
-| (_\ \ || (___) || )___) )| (____/\
-(____\/_)(_______)|/ \___/ (_______/
+ ██████  ██    ██ ██████  ███████ 
+██    ██ ██    ██ ██   ██ ██      
+██    ██ ██    ██ ██████  █████ 
+██ ▄▄ ██ ██    ██ ██   ██ ██    
+ ██████   ██████  ██████  ███████ 
+    ▀▀     
         """, fg='blue'))
 
     click.echo(click.style('Run ', fg='blue') + click.style('qube --help ', fg='green') + click.style('for an overview of all commands', fg='blue'))

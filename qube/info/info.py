@@ -2,7 +2,10 @@ import os
 import sys
 import click
 
-from tabulate import tabulate
+from rich.style import Style
+from rich.console import Console
+from rich.table import Table
+from rich.box import HEAVY_HEAD
 
 from qube.info.levensthein_dist import most_similar_command
 from qube.list.list import load_available_templates
@@ -55,8 +58,18 @@ def show_info(handle: str) -> None:
     for template in templates_to_print:
         template[2] = set_linebreaks(template[2])
 
-    click.echo(
-        tabulate(templates_to_print, headers=['Name', 'Handle', 'Description', 'Available Libraries', 'Version']))
+    table = Table(title=f'[bold]Info on QUBE\'s {handle} template(s)', title_style="blue", header_style=Style(color="blue", bold=True), box=HEAVY_HEAD)
+    table.add_column("Name", justify="left", style="green", no_wrap=True)
+    table.add_column("Handle", justify="left")
+    table.add_column("Short Description", justify="left")
+    table.add_column("Available Libraries", justify="left")
+    table.add_column("Version", justify="left")
+
+    for template in templates_to_print:
+        table.add_row(f'[bold]{template[0]}', template[1], template[2], template[3], template[4])
+
+    console = Console()
+    console.print(table)
 
 
 def flatten_nested_dict(template_info_, templates_to_print) -> None:
