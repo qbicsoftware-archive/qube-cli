@@ -7,6 +7,14 @@ cli:
         short description: Tools to be used using a console (e.g., postman-cli)
         long description: A template for Java based tools, which provide a command line user interface to the user.
             QBiC's command line library of choice is picocli (https://picocli.info/).
+    brainfuck:
+        name: Brainfuck Commandline Tool
+        handle: cli-brainfuck
+        version: 0.0.1
+        available libraries: none
+        short description: Brainfuck Commandline tool with ANSI coloring
+        long description: Amazing brainfuck tool, which can even show pretty unicorns in the console.
+            Due to ANSI coloring support they can even be pink! Please someone send help.
 lib:
     java:
         name: Generic Java Library
