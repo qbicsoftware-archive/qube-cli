@@ -5,6 +5,7 @@ import shutil
 import tempfile
 import requests
 from distutils.dir_util import copy_tree
+from shutil import copy2
 from pathlib import Path
 from dataclasses import asdict
 from ruamel.yaml import YAML
@@ -200,7 +201,22 @@ class TemplateCreator:
                      overwrite_if_exists=True)
 
         # recursively copy the common files directory content to the created project
-        copy_tree(f'{os.getcwd()}/common_files_util', f'{cwd_project}/{self.creator_ctx.project_slug}')
+        common_files = os.listdir(f'{os.getcwd()}/common_files_util/')
+
+        for f in common_files:
+            path = Path(f'{os.getcwd()}/common_files_util/{f}')
+            poss_dir = Path(f"{cwd_project}/{self.creator_ctx.project_slug}/{f}")
+            is_dir = poss_dir.is_dir()
+
+            if is_dir:
+                if any(Path(poss_dir).iterdir()):
+                    self.copy_into_already_existing_directory(path, poss_dir)
+
+            else:
+                if is_dir:
+                    delete_dir_tree(poss_dir)
+                shutil.copy(path, f"{cwd_project}/{self.creator_ctx.project_slug}/{f}")
+                os.remove(path)
         # delete the tmp cookiecuttered common files directory
         delete_dir_tree(Path(f'{Path.cwd()}/common_files_util'))
         shutil.rmtree(dirpath)
@@ -220,6 +236,23 @@ class TemplateCreator:
         except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
             click.echo(click.style('Cannot check whether name already taken on readthedocs.io because its unreachable at the moment!', fg='red'))
             return False
+
+    def copy_into_already_existing_directory(self, common_path, dir: Path) -> None:
+        """
+        This function copies all files of an arbitrarily deep nested directory that is already on the main directory
+        and just adds them where they belong.
+        :param common_path: Path where the common files are located
+        :param dir: The projects directory where collisions occurred (co-existence)
+        """
+        for child in common_path.iterdir():
+            if child.is_dir():
+                p = Path(f'{dir}/{child.name}')
+                if p.exists():
+                    self.copy_into_already_existing_directory(child.resolve(), p)
+                else:
+                    shutil.copytree(str(child), str(p))
+            if not child.is_dir():
+                copy2(str(child), str(dir))
 
     def directory_exists_warning(self) -> None:
         """

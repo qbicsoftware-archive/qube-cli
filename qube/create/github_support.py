@@ -70,7 +70,7 @@ def create_push_github_repository(project_name: str, project_description: str, t
     cloned_repo.git.add(A=True)
 
     # git commit
-    cloned_repo.index.commit(f'Created {project_name} using COOKIETEMPLE.')
+    cloned_repo.index.commit(f'Created {project_name} using QUBE.')
 
     click.echo(click.style('Pushing template to Github origin master.', fg='blue'))
     cloned_repo.remotes.origin.push(refspec='master:master')
