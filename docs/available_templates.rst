@@ -421,7 +421,7 @@ Purpose
 Design
 ^^^^^^^^
 
-service-java follows the standard Maven project layout.
+portlet-groovy follows the standard Maven project layout.
 
 .. code:: bash
 
