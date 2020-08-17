@@ -21,7 +21,7 @@ from rich import print
 from qube.create.github_support import decrypt_pat, load_github_username
 from qube.common.load_yaml import load_yaml_file
 from qube.create.create import choose_domain
-from qube.common.version import load_project_template_version_and_handle, load_ct_template_version
+from qube.common.version import load_project_template_version_and_handle, load_qube_template_version
 
 
 class TemplateSync:
@@ -369,7 +369,7 @@ class TemplateSync:
         """
         top_path = f'{os.path.dirname(__file__)}/..'
         available_templates_path = f'{str(top_path)}/create/templates/available_templates.yml'
-        return load_ct_template_version(handle, available_templates_path)
+        return load_qube_template_version(handle, available_templates_path)
 
     def sync_load_project_template_version_and_handle(self, project_dir: Path) -> str:
         """

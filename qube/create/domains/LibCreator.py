@@ -6,7 +6,7 @@ from qube.create.github_support import prompt_github_repo
 from qube.create.TemplateCreator import TemplateCreator
 from qube.create.domains.QubeTemplateStruct import QubeTemplateStruct
 from qube.custom_cli.questionary import qube_questionary_or_dot_qube
-from qube.common.version import load_ct_template_version
+from qube.common.version import load_qube_template_version
 
 
 @dataclass
@@ -26,7 +26,7 @@ class LibCreator(TemplateCreator):
         self.TEMPLATES_LIB_PATH = f'{self.WD_Path.parent}/templates/lib'
 
         '"" TEMPLATE VERSIONS ""'
-        self.LIB_JAVA_TEMPLATE_VERSION = load_ct_template_version('lib-java', self.AVAILABLE_TEMPLATES_PATH)
+        self.LIB_JAVA_TEMPLATE_VERSION = load_qube_template_version('lib-java', self.AVAILABLE_TEMPLATES_PATH)
 
     def create_template(self, dot_qube: dict or None):
         """

@@ -6,7 +6,7 @@ from qube.create.github_support import prompt_github_repo
 from qube.create.TemplateCreator import TemplateCreator
 from qube.create.domains.QubeTemplateStruct import QubeTemplateStruct
 from qube.custom_cli.questionary import qube_questionary_or_dot_qube
-from qube.common.version import load_ct_template_version
+from qube.common.version import load_qube_template_version
 
 
 @dataclass
@@ -26,7 +26,7 @@ class CliCreator(TemplateCreator):
         self.TEMPLATES_CLI_PATH = f'{self.WD_Path.parent}/templates/cli'
 
         '"" TEMPLATE VERSIONS ""'
-        self.CLI_JAVA_TEMPLATE_VERSION = load_ct_template_version('cli-java', self.AVAILABLE_TEMPLATES_PATH)
+        self.CLI_JAVA_TEMPLATE_VERSION = load_qube_template_version('cli-java', self.AVAILABLE_TEMPLATES_PATH)
 
     def create_template(self, dot_qube: dict or None):
         """
