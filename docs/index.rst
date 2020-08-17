@@ -8,12 +8,15 @@ Welcome to qube's documentation!
    newbie_guide
    installation
    usage
+   config
    create
    list_info
    lint
    bump_version
    sync
-   available_templates
+   upgrade
+   github_support
+   available_templates/available_templates
    adding_new_templates
    troubleshooting
    changelog

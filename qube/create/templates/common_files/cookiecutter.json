@@ -1,8 +1,14 @@
 {
-    "commonName": "common_files_util",
-    "full_name": "Homer Simpson",
-    "email": "homer.simpson@qbic.uni-tuebingen.de",
-    "copyright_holder": "QBiC",
-    "project_name": "Sample command-line Tool",
-    "project_slug": "The project slug"
+  "commonName": "common_files_util",
+  "full_name": "qubeusername",
+  "email": "qube@dummy.com",
+  "project_name": "projectname",
+  "project_slug": "cookietemplate",
+  "version": "0.1.0",
+  "license": "MIT",
+  "project_short_description" : "A qube template",
+  "language": "Language",
+  "domain": "domain",
+  "github_username": "github_user",
+  "copyright_holder": "QBiC"
 }
