@@ -1,4 +1,4 @@
-name: Sync cookietemple project
+name: Sync qube project
 
 on: [push]
 
