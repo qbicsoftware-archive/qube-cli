@@ -13,7 +13,7 @@ Welcome to qube's documentation!
    lint
    bump_version
    sync
-   available_templates
+   available_templates/available_templates
    adding_new_templates
    troubleshooting
    changelog
