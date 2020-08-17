@@ -37,7 +37,7 @@ class ConfigCommand:
         email = qube_questionary_or_dot_qube(function='text', question='Personal or work email',
                                              default='homer.simpson@example.com')
         github_username = qube_questionary_or_dot_qube(function='text', question='Github username',
-                                                       default='homer.simpson@example.com')
+                                                       default='HomerGithub')
 
         # if the configs exist, just update them
         if os.path.exists(ConfigCommand.CONF_FILE_PATH):

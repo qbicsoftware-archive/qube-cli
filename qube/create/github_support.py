@@ -216,7 +216,7 @@ def prompt_github_repo(dot_qube: OrderedDict or None) -> (bool, bool, bool, str)
                                                      default='No')
         github_org = qube_questionary_or_dot_qube(function='text',
                                                   question='Please enter the name of the Github organization',
-                                                  default='SpringfieldNuclearPowerPlant') if is_github_org else ''
+                                                  default='qbicsoftware') if is_github_org else ''
         private = qube_questionary_or_dot_qube(function='confirm',
                                                question='Do you want your repository to be private?',
                                                default='No')
