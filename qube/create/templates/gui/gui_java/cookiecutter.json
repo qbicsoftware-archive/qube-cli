@@ -4,6 +4,6 @@
     "project_name": "sample-gui",
     "project_slug": "sample-gui",
     "main_class_prefix": "Sample",
-    "version": "1.0.0-SNAPSHOT",
+    "version": "0.1.0-SNAPSHOT",
     "project_short_description": "Graphical user interface to..."
 }

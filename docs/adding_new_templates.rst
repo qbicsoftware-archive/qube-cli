@@ -45,82 +45,267 @@ Exceptions, where applicable, but they would have to be discussed beforehand. He
 Step by step guide to adding new templates
 ------------------------------------------
 
-Let's assume that we are planning to add a new commandline `Brainfuck <https://en.wikipedia.org/wiki/Brainfuck>`_ template to QUBE.
-We discussed our design at length with the core team and they approved our plan. For the sake of this tutorial we assume that the path / always points to /qube.
-Hence, at this level we see :code:`qube_cli.py` and a folder per CLI command.
+Let's assume that we are planning to add a new commandline `Brainfuck <https://en.wikipedia.org/wiki/Brainfuck>`_ template to mlf-core.
+We discussed our design at length with the core team and they approved our plan. For the sake of this tutorial **we assume that the path / always points to /mlf_core**.
+Hence, at this level we see ``mlf_core.py`` and a folder per CLI command.
 
-1. Let's add our brainfuck template information to :code:`/create/templates/available_templates.yml`.
+1. Let's add our brainfuck template information to ``/create/templates/available_templates.yml`` below the ``cli`` section.
 
-.. figure:: images/adding_templates_step_1.png
-   :scale: 100 %
-   :alt: Available Templates Brainfuck example
+.. code-block::
 
-   Addition of a cli-brainfuck template to available_templates.yml.
+    cli:
+        brainfuck:
+            name: Brainfuck Commandline Tool
+            handle: cli-brainfuck
+            version: 0.0.1
+            available libraries: none
+            short description: Brainfuck Commandline tool with ANSI coloring
+            long description: Amazing brainfuck tool, which can even show pretty unicorns in the console.
+                Due to ANSI coloring support they can even be pink! Please someone send help.
 
 2. | Next, we add our brainfuck template to :code:`/create/templates`
-   | Note that it should adhere to the standards mentioned above and include all required files. Don't forget to edit the qube.cfg file to facilitate bump-version. See :ref:`bump-version-configuration` for details.
+   | Note that it should adhere to the standards mentioned above and include all required files. Don't forget to add a mlf_core.cfg file to facilitate bump-version. See :ref:`bump-version-configuration` for details.
     It is **mandatory** to name the top level folder ``{{ cookiecutter.project_slug }}``, which ensures that the project after creation will have a proper name.
-    Furthermore, the cookiecutter.json file should have at least the following variables:
+    Furthermore, the ``cookiecutter.json`` file should have at least the following variables:
 
-.. figure:: images/adding_templates_step_2_1.png
-   :scale: 100 %
-   :alt: Available Templates Brainfuck example
+.. code-block::
 
-   cookiecutter.json file, which contains all variables that templates should have.
+    {
+    "full_name": "Homer Simpson",
+    "email": "homer.simpson@posteo.net",
+    "project_name": "sample-cli",
+    "project_slug": "sample-cli",
+    "version": "1.0.0",
+    "project_short_description": "Command-line utility to...",
+    "github_username": "homer_github"
+    }
 
-.. figure:: images/adding_templates_step_2_2.png
-   :scale: 100 %
-   :alt: Available Templates Brainfuck example
+The file tree of the template should resemble
 
-   File tree for our brainfuck template.
+.. code-block::
+
+    ├── cookiecutter.json
+    └── {{ cookiecutter.project_slug }}
+        ├── docs
+        │   ├── installation.rst
+        │   └── usage.rst
+        ├── .github
+        │   └── workflows
+        │       └── build_brainfuck.yml
+        ├── hello.bf
+        ├── mlf_core.cfg
+        └── README.rst
 
 3. | Now it is time to subclass the :code:`TemplateCreator` to implement all required functions to create our template!
-   | Let's edit :code:`/create/domains/CliCreator.py`. Note that for new domains you would simply create a new file called DomainCreator.
+   | Let's edit ``/create/domains/cli_creator.py``. Note that for new domains you would simply create a new file called DomainCreator.
    | In this case we suggest to simply copy the code of an existing Creator and adapt it to the new domain. Your new domain may make use of other creation functions instead of :code:`create_template_without_subdomain`, if they for example contain subdomains. You can examine :code:`create/TemplatorCreator.py` to see what's available. You may also remove functions such as the creation of common files.
    | If we have any brainfuck specific cookiecutter variables that we need to populate, we may add them to the TemplateStructCli.
    | Our brainfuck templates does not have them, so we just leave it as is.
    | For the next step we simply go through the :code:`CliCreator` class and add our brainfuck template where required. Moreover, we implement a :code:`cli_brainfuck_options` function, which we use to prompt for template specific cookiecutter variables.
 
-.. figure:: images/adding_templates_step_3.png
-   :scale: 100 %
-   :alt: Available Templates Brainfuck example
+.. code-block:: python
 
-   CliCreator.py after adding our brainfuck template.
+    @dataclass
+    class TemplateStructCli(MlfcoreTemplateStruct):
+        """
+        Intended Use: This class holds all attributes specific for CLI projects
+        """
 
-4. | If a new template were added we would also have to import our new Creator in :code:`create/create.py` and edit it accordingly.
-   | However, in this case we can simply skip this step.
+        """____BRAINFUCK___"""
+
+
+    class CliCreator(TemplateCreator):
+
+        def __init__(self):
+            self.cli_struct = TemplateStructCli(domain='cli')
+            super().__init__(self.cli_struct)
+            self.WD = os.path.dirname(__file__)
+            self.WD_Path = Path(self.WD)
+            self.TEMPLATES_CLI_PATH = f'{self.WD_Path.parent}/templates/cli'
+
+            '"" TEMPLATE VERSIONS ""'
+            self.CLI_BRAINFUCK_TEMPLATE_VERSION = super().load_version('cli-brainfuck')
+
+        def create_template(self, dot_mlf_core: dict or None):
+            """
+            Handles the CLI domain. Prompts the user for the language, general and domain specific options.
+            """
+
+            self.cli_struct.language = mlf_core_questionary_or_dot_mlf_core(function='select',
+                                                                                    question='Choose the project\'s primary language',
+                                                                                    choices=['brainfuck'],
+                                                                                    default='python',
+                                                                                    dot_mlf_core=dot_mlf_core,
+                                                                                    to_get_property='language')
+
+            # prompt the user to fetch general template configurations
+            super().prompt_general_template_configuration(dot_mlf_core)
+
+            # switch case statement to prompt the user to fetch template specific configurations
+            switcher = {
+                'brainfuck': self.cli_brainfuck_options
+            }
+            switcher.get(self.cli_struct.language)(dot_mlf_core)
+
+            self.cli_struct.is_github_repo, \
+                self.cli_struct.is_repo_private, \
+                self.cli_struct.is_github_orga, \
+                self.cli_struct.github_orga \
+                = prompt_github_repo(dot_mlf_core)
+
+            if self.cli_struct.is_github_orga:
+                self.cli_struct.github_username = self.cli_struct.github_orga
+
+            # create the chosen and configured template
+            super().create_template_without_subdomain(f'{self.TEMPLATES_CLI_PATH}')
+
+            # switch case statement to fetch the template version
+            switcher_version = {
+                'brainfuck': self.CLI_BRAINFUCK_TEMPLATE_VERSION
+            }
+            self.cli_struct.template_version, self.cli_struct.template_handle = switcher_version.get(
+                self.cli_struct.language.lower()), f'cli-{self.cli_struct.language.lower()}'
+
+            super().process_common_operations(domain='cli', language=self.cli_struct.language, dot_mlf_core=dot_mlf_core)
+
+            [...]
+
+        def cli_brainfuck_options(self):
+            """ Prompts for cli-brainfuck specific options and saves them into the MlfcoreTemplateStruct """
+            pass
+
+
+4. | If a new template were added we would also have to import our new Creator in :code:`create/create.py` and add the new domain to the domain prompt and the switcher.
+   | However, in this case we can simply skip this step, since ``cli`` is already included.
+
+.. code-block::
+
+    def choose_domain(domain: str):
+        """
+        Prompts the user for the template domain.
+        Creates the .mlf_core file.
+        Prompts the user whether or not to create a Github repository
+        :param domain: Template domain
+        """
+        if not domain:
+            domain = click.prompt('Choose between the following domains',
+                                type=click.Choice(['cli']))
+
+        switcher = {
+            'cli': CliCreator,
+        }
+
+        creator_obj = switcher.get(domain.lower())()
+        creator_obj.create_template()
 
 5. | Linting is up next! We need to ensure that our brainfuck template always adheres to the highest standards! Let's edit :code:`lint/domains/cli.py`.
    | We need to add a new class, which inherits from TemplateLinter and add our linting functions to it.
 
-.. figure:: images/adding_templates_step_5_1.png
-   :scale: 100 %
-   :alt: Available Templates Brainfuck example
+.. code-block:: python
 
-   Our new CliBrainfuckLinter, which lints our brainfuck template. Note that it inherits from TemplateLinter.
+    class CliBrainfuckLint(TemplateLinter, metaclass=GetLintingFunctionsMeta):
+        def __init__(self, path):
+            super().__init__(path)
 
-   We need to ensure that our new linting function is found when linting is applied. Therefore, we turn our eyes to :code:`lint/lint.py`, import our CliBrainfuckLinter and add it to the switcher.
+        def lint(self):
+            super().lint_project(self, self.methods)
 
-.. figure:: images/adding_templates_step_5_2.png
-   :scale: 100 %
-   :alt: Available Templates Brainfuck example
+        def brainfuck_files_exist(self) -> None:
+            """
+            Checks a given pipeline directory for required files.
+            Iterates through the templates's directory content and checkmarks files for presence.
+            Files that **must** be present::
+                'hello.bf',
+            Files that *should* be present::
+                '.github/workflows/build_brainfuck.yml',
+            Files that *must not* be present::
+                none
+            Files that *should not* be present::
+                none
+            """
 
-   Our shiny new CliBrainfuckLinter is now ready for action!
+            # NB: Should all be files, not directories
+            # List of lists. Passes if any of the files in the sublist are found.
+            files_fail = [
+                ['hello.bf'],
+            ]
+            files_warn = [
+                [os.path.join('.github', 'workflows', 'build_brainfuck.yml')],
+            ]
 
-6. | The only things that is left to do now is to add a new Github Actions workflow for our template. Let's go one level up in the folder tree and create :code:`.github/workflows/create_cli_brainfuck.yml`.
+            # List of strings. Fails / warns if any of the strings exist.
+            files_fail_ifexists = [
+
+            ]
+            files_warn_ifexists = [
+
+            ]
+
+            files_exist_linting(self, files_fail, files_fail_ifexists, files_warn, files_warn_ifexists)
+
+
+We need to ensure that our new linting function is found when linting is applied. Therefore, we turn our eyes to :code:`lint/lint.py`, import our CliBrainfuckLinter and add it to the switcher.
+
+.. code-block:: python
+
+    from mlf_core.lint.domains.cli import CliBrainfuckLint
+
+    switcher = {
+        'cli-brainfuck': CliBrainfuckLint,
+    }
+
+Our shiny new CliBrainfuckLinter is now ready for action!
+
+6. | The only thing left to do now is to add a new Github Actions workflow for our template. Let's go one level up in the folder tree and create :code:`.github/workflows/create_cli_brainfuck.yml`.
    | We want to ensure that if we change something in our template, that it still builds!
 
-.. figure:: images/adding_templates_step_6.png
-   :scale: 100 %
-   :alt: Available Templates Brainfuck example
+.. code-block::
+
+    name: Create cli-brainfuck Template
+
+    on: [push]
+
+    jobs:
+      build:
+
+          runs-on: ubuntu-latest
+          strategy:
+            matrix:
+              python: [3.7, 3.8]
+
+          steps:
+          - uses: actions/checkout@v2
+            name: Check out source-code repository
+
+          - name: Setup Python
+            uses: actions/setup-python@v1
+            with:
+              python-version: ${{ matrix.python }}
+
+          - name: Build mlf-core
+            run: |
+              python setup.py clean --all install
+
+          - name: Create cli-brainfuck Template
+            run: |
+              echo -e "\n\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\ndescription\nhomergithub\nn" | mlf-core create
+
+          - name: Build Package
+            uses: fabasoad/setup-brainfuck-action@master
+            with:
+              version: 0.1.dev1
+          - name: Hello World
+            run: |
+              brainfucky --file ExplodingSpringfield/hello.bf
+
 
    We were pleasently surprised to see that someone already made a Github Action for brainfuck.
 
-7. | Finally, we add some documentation to :code:`/docs/available_templates.rst` and explain the purpose, design and frameworks/libraries.
+8. | Finally, we add some documentation to :code:`/docs/available_templates.rst` and explain the purpose, design and frameworks/libraries.
 
-   That's it! We should now be able to try out your new template using :code:`qube create`
-   The template should be creatable, it should automatically lint after the creation and Github support should be enabled as well! If we run :code:`qube list`
+   That's it! We should now be able to try out your new template using :code:`mlf-core create`
+   The template should be creatable, it should automatically lint after the creation and Github support should be enabled as well! If we run :code:`mlf-core list`
    Our new template should show up as well!
-   I'm sure that you noticed that there's not actually a brainfuck template in QUBE (yet!).
+   I'm sure that you noticed that there's not actually a brainfuck template in mlf-core (yet!).
 
    To quote our mighty Math professors: 'We'll leave this as an exercise to the reader.'

@@ -1,13 +1,41 @@
+.. _changelog_f:
+
 ==========
 Changelog
 ==========
 
-This document records all notable changes to `HTTPie <https://httpie.org>`_.
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.0.0 (2020-08-17)
+------------------
+
+**Added**
+
+* Strong code refactoring overhauling everything
+* Added config command to recreate config files
+* Added upgrade command to update qube itself
+* Added sync command to sync a qube project
+* Help messages are now custom
+* Bump-version lints versions before updating
+* Added a metaclass to fetch all linting functions
+* Master requires PR review & no stale PRs
+* Greatly improved the documentation
+* Much more...
+
+**Fixed**
+
+* PR check WF now correctly requires PRs to master to be from *patch* or *release* branches
+
+**Dependencies**
+
+* Too many updates to jot down...!
+
+**Deprecated**
+
+
 1.4.1 (2020-05-23)
----------------------
+------------------
 
 **Added**
 
@@ -20,7 +48,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Deprecated**
 
 1.4.0 (2020-05-23)
----------------------
+------------------
 
 **Added**
 
@@ -34,7 +62,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Deprecated**
 
 1.3.2 (2020-05-22)
----------------------
+------------------
 
 **Added**
 
@@ -48,7 +76,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Deprecated**
 
 1.3.1 (2020-05-20)
----------------------
+------------------
 
 **Added**
 
@@ -66,7 +94,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Deprecated**
 
 1.3.0 (2020-05-20)
----------------------
+------------------
 
 **Added**
 
@@ -83,7 +111,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Deprecated**
 
 1.2.1 (2020-05-03)
----------------------
+------------------
 
 **Added**
 
@@ -96,7 +124,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Deprecated**
 
 1.2.0 (2020-05-03)
----------------------
+------------------
 
 **Added**
 
@@ -118,7 +146,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
 1.1.0 (2020-05-03)
----------------------
+------------------
 
 **Added**
 
@@ -133,7 +161,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 **Deprecated**
 
 1.0.0 (2020-05-03)
----------------------
+------------------
 
 **Added**
 

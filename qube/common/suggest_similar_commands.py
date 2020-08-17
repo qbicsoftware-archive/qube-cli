@@ -1,15 +1,18 @@
 import os
 
-from qube.list.list import load_available_templates
+from qube.common.load_yaml import load_yaml_file
 from qube.util.dict_util import is_nested_dictionary
 
-TEMPLATES_PATH = f'{os.path.dirname(__file__)}/../create/templates'
+AVAILABLE_TEMPLATES_PATH = f'{os.path.dirname(__file__)}/../create/templates/available_templates.yml'
 
-# QUBE main commands
-MAIN_COMMANDS = ['create', 'lint', 'list', 'info', 'bump_version', 'sync']
+# qubes main commands
+MAIN_COMMANDS = ['create', 'lint', 'list', 'info', 'bump-version', 'sync', 'config', 'upgrade']
 
-# the fraction a given command could differ from the "right one" to be counted as this command by QUBE
-SIMILARITY_FACTOR = (1 / 3)
+# the fraction relative to the commands length, a given input could differ from the real command to be automatically used instead
+SIMILARITY_USE_FACTOR = 1 / 3
+
+# the fraction relative to the commands length, a given input could differ from the real command to be suggested (if >1/3 of course)
+SIMILARITY_SUGGEST_FACTOR = 2 / 3
 
 
 def load_available_handles() -> set:
@@ -18,13 +21,12 @@ def load_available_handles() -> set:
 
     :return: A set of all available handles
     """
-    available_templates = load_available_templates(f'{TEMPLATES_PATH}/available_templates.yml')
-    unsplitted_handles = set()
+    available_templates = load_yaml_file(f'{AVAILABLE_TEMPLATES_PATH}')
+    unsplit_handles = set()
     all_handles = set()
-    nested_dict_to_handle_set(available_templates, unsplitted_handles)
-    all_handles.update(unsplitted_handles)
-    split_handles(unsplitted_handles, all_handles)
-
+    nested_dict_to_handle_set(available_templates, unsplit_handles)
+    all_handles.update(unsplit_handles)
+    split_handles(unsplit_handles, all_handles)
     return all_handles
 
 
@@ -51,7 +53,7 @@ def split_handles(unsplitted_handles, all_handles) -> None:
     Split handles into all possible combinations.
 
     :param unsplitted_handles: A set of unsplitted handles
-    :param all_handles: All handles Cookietemple currently supports
+    :param all_handles: All handles qube currently supports
     """
     for handle in unsplitted_handles:
         parts = handle.split('-')
@@ -60,4 +62,4 @@ def split_handles(unsplitted_handles, all_handles) -> None:
             all_handles.add(parts[0])
         elif len(parts) == 3:
             all_handles.add(parts[0])
-            all_handles.add(f'{parts[0]}-'+parts[1])
+            all_handles.add(f'{parts[0]}-' + parts[1])

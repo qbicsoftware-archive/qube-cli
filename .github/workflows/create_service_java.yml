@@ -25,7 +25,7 @@ jobs:
 
       - name: Create service-java Template
         run: |
-          echo -e "service\njava\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\ndescription\nhomergithub\nClassPrefix\nn" | qube create
+            echo -e "\033[B\033[B\033[B\n\n\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\n\n\n\n\nn" | qube create
 
       - name: Build Package
         uses: actions/setup-java@v1

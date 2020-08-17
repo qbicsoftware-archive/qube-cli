@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/homersimpson/qube
+    $ git clone git://github.com/qbicsoftware/qube
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl -OJL https://github.com/homersimpson/qube/tarball/master
+    $ curl -OJL https://github.com/qbicsoftware/qube/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/homersimpson/qube
-.. _tarball: https://github.com/homersimpson/qube/tarball/master
+.. _Github repo: https://github.com/qbicsoftware/qube
+.. _tarball: https://github.com/qbicsoftware/qube/tarball/master

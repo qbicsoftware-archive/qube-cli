@@ -25,7 +25,7 @@ jobs:
 
       - name: Create cli-java Template
         run: |
-          echo -e "cli\njava\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\ndescription\nhomergithub\nClassPrefix\nn" | qube create
+          echo -e "\n\n\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\n\n\n\n\nn" | qube create
 
       - name: Build Package
         uses: actions/setup-java@v1
