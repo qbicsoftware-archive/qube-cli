@@ -227,7 +227,7 @@ class TemplateCreator:
                                                                                   to_get_property='project_short_description')
         poss_vers = qube_questionary_or_dot_qube(function='text',
                                                  question='Initial version of your project',
-                                                 default='0.1.0',
+                                                 default='0.1.0-SNAPSHOT',
                                                  dot_qube=dot_qube,
                                                  to_get_property='version')
 
@@ -237,7 +237,7 @@ class TemplateCreator:
                   'Please enter the version in the format [number].[number].[number]!')
             poss_vers = qube_questionary_or_dot_qube(function='text',
                                                      question='Initial version of your project',
-                                                     default='0.1.0')
+                                                     default='0.1.0-SNAPSHOT')
         self.creator_ctx.version = poss_vers
 
         self.creator_ctx.license = qube_questionary_or_dot_qube(function='select',

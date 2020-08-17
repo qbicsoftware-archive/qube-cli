@@ -71,7 +71,7 @@ class CliCreator(TemplateCreator):
         super().process_common_operations(domain='cli', language=self.cli_struct.language, dot_qube=dot_qube)
 
     def cli_java_options(self, dot_qube: dict or None) -> None:
-        """ Prompts for cli-java specific options and saves them into the qubeTemplateStruct """
+        """ Prompts for cli-java specific options and saves them into the QubeTemplateStruct """
         self.cli_struct.main_class_prefix = qube_questionary_or_dot_qube(function='text',
                                                                          question='Main class prefix',
                                                                          default='Qbic',
