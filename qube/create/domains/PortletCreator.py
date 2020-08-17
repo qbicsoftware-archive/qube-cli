@@ -15,7 +15,6 @@ class TemplateStructPortlet(QubeTemplateStruct):
 
     """______GROOVY______"""
     main_class_prefix: str = ''
-    version: str = '1.0.0-SNAPSHOT'
     use_openbis_client = 'no'
     use_openbis_raw_api = 'no'
     use_qbic_databases = 'no'

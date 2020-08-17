@@ -14,7 +14,6 @@ class TemplateStructLib(QubeTemplateStruct):
     """
 
     """______JAVA______"""
-    version: str = '1.0.0-SNAPSHOT'
 
 
 class LibCreator(TemplateCreator):

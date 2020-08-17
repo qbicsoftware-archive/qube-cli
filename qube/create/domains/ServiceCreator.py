@@ -15,7 +15,6 @@ class TemplateStructService(QubeTemplateStruct):
 
     """______JAVA______"""
     main_class_prefix: str = ''
-    version: str = '1.0.0-SNAPSHOT'
 
 
 class ServiceCreator(TemplateCreator):

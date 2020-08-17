@@ -15,7 +15,6 @@ class TemplateStructGui(QubeTemplateStruct):
 
     """______JAVA______"""
     main_class_prefix: str = ''
-    version: str = '1.0.0-SNAPSHOT'
 
 
 class GuiCreator(TemplateCreator):
