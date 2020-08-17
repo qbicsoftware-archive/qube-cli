@@ -29,7 +29,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Dependencies**
 
-* Too many updates to fill!
+* Too many updates to jot down...!
 
 **Deprecated**
 

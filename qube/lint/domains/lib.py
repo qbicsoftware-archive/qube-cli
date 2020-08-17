@@ -19,14 +19,12 @@ class LibJavaLint(TemplateLinter, metaclass=GetLintingFunctionsMeta):
         Files that **must** be present::
             'pom.xml',
         Files that *should* be present::
+            '.github/workflows/build_docs.yml',
             '.github/workflows/build_package.yml',
-            '.github/workflows/publish_package.yml',
-            '.github/workflows/tox_testsuite.yml',
-            '.github/workflows/flake8.yml',
         Files that *must not* be present::
             none
         Files that *should not* be present::
-            '__pycache__'
+            none
         """
 
         # NB: Should all be files, not directories
