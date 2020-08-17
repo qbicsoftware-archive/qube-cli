@@ -73,7 +73,7 @@ class ServiceCreator(TemplateCreator):
     def service_java_options(self, dot_qube: dict or None) -> None:
         """ Prompts for service-java specific options and saves them into the QubeTemplateStruct """
         self.service_struct.main_class_prefix = qube_questionary_or_dot_qube(function='text',
-                                                                         question='Main class prefix',
-                                                                         default='Qbic',
-                                                                         dot_qube=dot_qube,
-                                                                         to_get_property='main_class_prefix')
+                                                                             question='Main class prefix',
+                                                                             default='Qbic',
+                                                                             dot_qube=dot_qube,
+                                                                             to_get_property='main_class_prefix')
