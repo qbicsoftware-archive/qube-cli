@@ -12,9 +12,24 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Strong code refactoring overhauling everything
+* Added config command to recreate config files
+* Added upgrade command to update qube itself
+* Added sync command to sync a qube project
+* Help messages are now custom
+* Bump-version lints versions before updating
+* Added a metaclass to fetch all linting functions
+* Master requires PR review & no stale PRs
+* Greatly improved the documentation
+* Much more...
+
 **Fixed**
 
+* PR check WF now correctly requires PRs to master to be from *patch* or *release* branches
+
 **Dependencies**
+
+* Too many updates to fill!
 
 **Deprecated**
 
