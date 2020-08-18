@@ -4,15 +4,15 @@
 Adding new templates
 ============================
 
-Adding new templates is one of the major improvements to QUBE, which is why we are dedicating a whole section to it.
+Adding new templates is one of the major improvements to qube, which is why we are dedicating a whole section to it.
 Please note that creating new templates is a time consuming task. So be prepared to invest a few hours to bring a new template to life.
-The integration into QUBE however, is straight forward if you follow the guide below.
-Due to the tight coupling of our templates with all QUBE commands such as :code:`create`, :code:`list`, :code:`info`, :code:`lint` and :code:`bump-version`,
+The integration into qube however, is straight forward if you follow the guide below.
+Due to the tight coupling of our templates with all qube commands such as :code:`create`, :code:`list`, :code:`info`, :code:`lint` and :code:`bump-version`,
 new templates require the modification of several files.
 
-QUBE uses `cookiecutter <https://cookiecutter.readthedocs.io/en/1.7.2/>`_ to create all templates.
+qube uses `cookiecutter <https://cookiecutter.readthedocs.io/en/1.7.2/>`_ to create all templates.
 You need to familiarize yourself beforehand with cookiecutter to able to write templates, but don't worry, it's pretty easy and you usually get by with very few cookiecutter variables.
-You can start with you `very first cookiecutter template <https://cookiecutter.readthedocs.io/en/1.7.2/first_steps.html>`_ and then simply see how the other existing QUBE templates are made and copy what you need.
+You can start with you `very first cookiecutter template <https://cookiecutter.readthedocs.io/en/1.7.2/first_steps.html>`_ and then simply see how the other existing qube templates are made and copy what you need.
 
 The following sections will line out the requirements for new templates and guide you through the process of adding new templates step by step.
 Nevertheless, we strongly encourage you to discuss your proposed template first with us in public *via* a Github issue.
@@ -40,7 +40,7 @@ Exceptions, where applicable, but they would have to be discussed beforehand. He
 
 7. All templates should have Github workflows, which at least build the documentation and the project.
 
-8. Every template should also have a workflow inside QUBE, which creates a project from the template with dummy values.
+8. Every template should also have a workflow inside qube, which creates a project from the template with dummy values.
 
 Step by step guide to adding new templates
 ------------------------------------------
@@ -288,7 +288,7 @@ Our shiny new CliBrainfuckLinter is now ready for action!
 
           - name: Create cli-brainfuck Template
             run: |
-              echo -e "\n\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\ndescription\nhomergithub\nn" | qube create
+              echo -e "\n\n\n\n\nn\n\n\n\nn" | qube create
 
           - name: Build Package
             uses: fabasoad/setup-brainfuck-action@master
