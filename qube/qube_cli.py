@@ -165,7 +165,7 @@ def sync(project_dir, set_token, pat, username, check_update) -> None:
     if check_update:
         # a template update has been released by qube
         if any(change for change in (major_change, minor_change, patch_change)):
-            print(f'[bold blue]Your templates version received an update from {proj_template_version} to {ct_template_version}!\n'
+            print(f'[bold blue]Your templates version received an update from {proj_template_version} to {qube_template_version}!\n'
                   f' Use [green]qube sync [blue]to sync your project')
         # no updates were found
         else:
