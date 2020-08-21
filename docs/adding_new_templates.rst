@@ -4,15 +4,15 @@
 Adding new templates
 ============================
 
-Adding new templates is one of the major improvements to QUBE, which is why we are dedicating a whole section to it.
+Adding new templates is one of the major improvements to qube, which is why we are dedicating a whole section to it.
 Please note that creating new templates is a time consuming task. So be prepared to invest a few hours to bring a new template to life.
-The integration into QUBE however, is straight forward if you follow the guide below.
-Due to the tight coupling of our templates with all QUBE commands such as :code:`create`, :code:`list`, :code:`info`, :code:`lint` and :code:`bump-version`,
+The integration into qube however, is straight forward if you follow the guide below.
+Due to the tight coupling of our templates with all qube commands such as :code:`create`, :code:`list`, :code:`info`, :code:`lint` and :code:`bump-version`,
 new templates require the modification of several files.
 
-QUBE uses `cookiecutter <https://cookiecutter.readthedocs.io/en/1.7.2/>`_ to create all templates.
+qube uses `cookiecutter <https://cookiecutter.readthedocs.io/en/1.7.2/>`_ to create all templates.
 You need to familiarize yourself beforehand with cookiecutter to able to write templates, but don't worry, it's pretty easy and you usually get by with very few cookiecutter variables.
-You can start with you `very first cookiecutter template <https://cookiecutter.readthedocs.io/en/1.7.2/first_steps.html>`_ and then simply see how the other existing QUBE templates are made and copy what you need.
+You can start with you `very first cookiecutter template <https://cookiecutter.readthedocs.io/en/1.7.2/first_steps.html>`_ and then simply see how the other existing qube templates are made and copy what you need.
 
 The following sections will line out the requirements for new templates and guide you through the process of adding new templates step by step.
 Nevertheless, we strongly encourage you to discuss your proposed template first with us in public *via* a Github issue.
@@ -40,14 +40,14 @@ Exceptions, where applicable, but they would have to be discussed beforehand. He
 
 7. All templates should have Github workflows, which at least build the documentation and the project.
 
-8. Every template should also have a workflow inside QUBE, which creates a project from the template with dummy values.
+8. Every template should also have a workflow inside qube, which creates a project from the template with dummy values.
 
 Step by step guide to adding new templates
 ------------------------------------------
 
-Let's assume that we are planning to add a new commandline `Brainfuck <https://en.wikipedia.org/wiki/Brainfuck>`_ template to mlf-core.
-We discussed our design at length with the core team and they approved our plan. For the sake of this tutorial **we assume that the path / always points to /mlf_core**.
-Hence, at this level we see ``mlf_core.py`` and a folder per CLI command.
+Let's assume that we are planning to add a new commandline `Brainfuck <https://en.wikipedia.org/wiki/Brainfuck>`_ template to qube.
+We discussed our design at length with the core team and they approved our plan. For the sake of this tutorial **we assume that the path / always points to /qube**.
+Hence, at this level we see ``cli.py`` and a folder per CLI command.
 
 1. Let's add our brainfuck template information to ``/create/templates/available_templates.yml`` below the ``cli`` section.
 
@@ -64,7 +64,7 @@ Hence, at this level we see ``mlf_core.py`` and a folder per CLI command.
                 Due to ANSI coloring support they can even be pink! Please someone send help.
 
 2. | Next, we add our brainfuck template to :code:`/create/templates`
-   | Note that it should adhere to the standards mentioned above and include all required files. Don't forget to add a mlf_core.cfg file to facilitate bump-version. See :ref:`bump-version-configuration` for details.
+   | Note that it should adhere to the standards mentioned above and include all required files. Don't forget to add a qube.cfg file to facilitate bump-version. See :ref:`bump-version-configuration` for details.
     It is **mandatory** to name the top level folder ``{{ cookiecutter.project_slug }}``, which ensures that the project after creation will have a proper name.
     Furthermore, the ``cookiecutter.json`` file should have at least the following variables:
 
@@ -93,7 +93,7 @@ The file tree of the template should resemble
         │   └── workflows
         │       └── build_brainfuck.yml
         ├── hello.bf
-        ├── mlf_core.cfg
+        ├── qube.cfg
         └── README.rst
 
 3. | Now it is time to subclass the :code:`TemplateCreator` to implement all required functions to create our template!
@@ -126,32 +126,32 @@ The file tree of the template should resemble
             '"" TEMPLATE VERSIONS ""'
             self.CLI_BRAINFUCK_TEMPLATE_VERSION = super().load_version('cli-brainfuck')
 
-        def create_template(self, dot_mlf_core: dict or None):
+        def create_template(self, dot_qube: dict or None):
             """
             Handles the CLI domain. Prompts the user for the language, general and domain specific options.
             """
 
-            self.cli_struct.language = mlf_core_questionary_or_dot_mlf_core(function='select',
-                                                                                    question='Choose the project\'s primary language',
-                                                                                    choices=['brainfuck'],
-                                                                                    default='python',
-                                                                                    dot_mlf_core=dot_mlf_core,
-                                                                                    to_get_property='language')
+            self.cli_struct.language = qube_questionary_or_dot_qube(function='select',
+                                                                    question='Choose the project\'s primary language',
+                                                                    choices=['brainfuck'],
+                                                                    default='python',
+                                                                    dot_qube=dot_qube,
+                                                                    to_get_property='language')
 
             # prompt the user to fetch general template configurations
-            super().prompt_general_template_configuration(dot_mlf_core)
+            super().prompt_general_template_configuration(dot_qube)
 
             # switch case statement to prompt the user to fetch template specific configurations
             switcher = {
                 'brainfuck': self.cli_brainfuck_options
             }
-            switcher.get(self.cli_struct.language)(dot_mlf_core)
+            switcher.get(self.cli_struct.language)(dot_qube)
 
             self.cli_struct.is_github_repo, \
                 self.cli_struct.is_repo_private, \
                 self.cli_struct.is_github_orga, \
                 self.cli_struct.github_orga \
-                = prompt_github_repo(dot_mlf_core)
+                = prompt_github_repo(dot_qube)
 
             if self.cli_struct.is_github_orga:
                 self.cli_struct.github_username = self.cli_struct.github_orga
@@ -166,7 +166,7 @@ The file tree of the template should resemble
             self.cli_struct.template_version, self.cli_struct.template_handle = switcher_version.get(
                 self.cli_struct.language.lower()), f'cli-{self.cli_struct.language.lower()}'
 
-            super().process_common_operations(domain='cli', language=self.cli_struct.language, dot_mlf_core=dot_mlf_core)
+            super().process_common_operations(domain='cli', language=self.cli_struct.language, dot_qube=dot_qube)
 
             [...]
 
@@ -183,7 +183,7 @@ The file tree of the template should resemble
     def choose_domain(domain: str):
         """
         Prompts the user for the template domain.
-        Creates the .mlf_core file.
+        Creates the .qube.yml file.
         Prompts the user whether or not to create a Github repository
         :param domain: Template domain
         """
@@ -248,7 +248,7 @@ We need to ensure that our new linting function is found when linting is applied
 
 .. code-block:: python
 
-    from mlf_core.lint.domains.cli import CliBrainfuckLint
+    from qube.lint.domains.cli import CliBrainfuckLint
 
     switcher = {
         'cli-brainfuck': CliBrainfuckLint,
@@ -282,13 +282,13 @@ Our shiny new CliBrainfuckLinter is now ready for action!
             with:
               python-version: ${{ matrix.python }}
 
-          - name: Build mlf-core
+          - name: Build qube
             run: |
               python setup.py clean --all install
 
           - name: Create cli-brainfuck Template
             run: |
-              echo -e "\n\nHomer\nhomer.simpson@hotmail.com\nExplodingSpringfield\ndescription\nhomergithub\nn" | mlf-core create
+              echo -e "\n\n\n\n\nn\n\n\n\nn" | qube create
 
           - name: Build Package
             uses: fabasoad/setup-brainfuck-action@master
@@ -303,9 +303,9 @@ Our shiny new CliBrainfuckLinter is now ready for action!
 
 8. | Finally, we add some documentation to :code:`/docs/available_templates.rst` and explain the purpose, design and frameworks/libraries.
 
-   That's it! We should now be able to try out your new template using :code:`mlf-core create`
-   The template should be creatable, it should automatically lint after the creation and Github support should be enabled as well! If we run :code:`mlf-core list`
+   That's it! We should now be able to try out your new template using :code:`qube create`
+   The template should be creatable, it should automatically lint after the creation and Github support should be enabled as well! If we run :code:`qube list`
    Our new template should show up as well!
-   I'm sure that you noticed that there's not actually a brainfuck template in mlf-core (yet!).
+   I'm sure that you noticed that there's not actually a brainfuck template in qube (yet!).
 
    To quote our mighty Math professors: 'We'll leave this as an exercise to the reader.'

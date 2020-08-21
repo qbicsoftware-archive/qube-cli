@@ -39,8 +39,10 @@ class ConfigCommand:
         """
         ConfigCommand.check_ct_config_dir_exists()
         full_name = qube_questionary_or_dot_qube(function='text', question='Full name', default='Homer Simpson')
-        email = qube_questionary_or_dot_qube(function='text', question='Personal or work email', default='homer.simpson@example.com')
-        github_username = qube_questionary_or_dot_qube(function='text', question='Github username', default='HomerGithub')
+        email = qube_questionary_or_dot_qube(function='text', question='Personal or work email',
+                                             default='homer.simpson@example.com')
+        github_username = qube_questionary_or_dot_qube(function='text', question='Github username',
+                                                       default='HomerGithub')
 
         # if the configs exist, just update them
         if os.path.exists(ConfigCommand.CONF_FILE_PATH):
@@ -80,18 +82,18 @@ class ConfigCommand:
             print('[bold blue]Lets create one before setting your Github personal access token!')
             ConfigCommand.config_general_settings()
 
-        if qube_questionary_or_dot_qube('confirm',
-                                                        'Do you want to configure your GitHub personal access token right now?\n'
-                                                        'You can still configure it later '
-                                                        'by calling    qube config pat',
-                                                        default='Yes'):
+        if qube_questionary_or_dot_qube(function='confirm',
+                                        question='Do you want to configure your GitHub personal access token right now?\n'
+                                                 'You can still configure it later by calling    qube config pat',
+                                        default='Yes'):
             access_token = qube_questionary_or_dot_qube('password', 'Please enter your Github Access token')
             access_token_b = access_token.encode('utf-8')
 
             # ask for confirmation since this action will delete the PAT irrevocably if the user has not saved it anywhere else
-            if not qube_questionary_or_dot_qube('confirm', 'You´re about to update your personal access token. This action cannot be undone!\n'
-                                                                           'Do you really want to continue?',
-                                                                default='Yes'):
+            if not qube_questionary_or_dot_qube(function='confirm',
+                                                question='You´re about to update your personal access token. This action cannot be undone!\n'
+                                                         'Do you really want to continue?',
+                                                default='Yes'):
                 sys.exit(1)
 
             # encrypt the given PAT and save the encryption key and encrypted PAT in separate files
@@ -120,19 +122,20 @@ class ConfigCommand:
         settings = load_yaml_file(ConfigCommand.CONF_FILE_PATH)
 
         # create the table and print
-        table = Table(title="[bold]Your current configuration", title_style="blue", header_style=Style(color="blue", bold=True), box=HEAVY_HEAD)
+        table = Table(title="[bold]Your current configuration", title_style="blue",
+                      header_style=Style(color="blue", bold=True), box=HEAVY_HEAD)
         table.add_column('Name', style='green')
         table.add_column('Value', style='green')
         # add rows to the table consisting of the name and value of the current setting
         for (name, value) in settings.items():
             # don't print token directly, just inform it's set
             if name == 'pat':
-                table.add_row(f'[bold]Personal access token', 'TOKEN_IS_SET')
+                table.add_row('[bold]Personal access token', 'TOKEN_IS_SET')
             else:
                 table.add_row(f'[bold]{name.capitalize().replace("_", " ")}', f'[white]{value}')
         # don't print PAT directly but inform if not set
         if 'pat' not in settings.keys():
-            table.add_row(f'[bold]Personal access token', '[red]NO_TOKEN_SET')
+            table.add_row('[bold]Personal access token', '[red]NO_TOKEN_SET')
 
         console = Console()
         console.print(table)
@@ -156,7 +159,8 @@ class ConfigCommand:
             # multiple best matches
         elif len(com_list) > 1:
             nl = '\n'
-            print(f'[bold red]Unknown handle \'{section}\'.\nMost similar handles are: [green]{nl}{nl.join(sorted(com_list))}')
+            print(
+                f'[bold red]Unknown handle \'{section}\'.\nMost similar handles are: [green]{nl}{nl.join(sorted(com_list))}')
         else:
             # unknown handle and no best match found
             print('[bold red]Unknown handle. [green]See qube --help [red]for more information on valid handles')

@@ -269,7 +269,6 @@ def config(ctx, view: bool, section: str) -> None:
         ConfigCommand.similar_handle(section)
 
 
-
 @qube_cli.command(short_help='Check for a newer version of qube and upgrade if required.', cls=CustomHelpSubcommand)
 def upgrade() -> None:
     """
