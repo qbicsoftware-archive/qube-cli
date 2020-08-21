@@ -47,3 +47,10 @@ If you for any reason need to regenerate your PAT rerun :code:`qube config pat`.
 If not you should also update your Github username *via* :code:`qube config general`.
 Additionally, any of your already created projects may still feature your old PAT and you may therefore run into issues when attempting to push.
 Hence, you must also `update your remote URL <https://help.github.com/en/github/using-git/changing-a-remotes-url>`_ for those projects!
+
+Viewing the current configuration
+--------------------------------
+
+If you want to see your current configuration (in case of an update for example), you can use ``qube config --view``.
+This will output your current qube configuration. Note that this will only inform you whether your personal access token (PAT) is set or not. It won't actually
+print its (encrypted) value.

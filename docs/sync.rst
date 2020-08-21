@@ -29,6 +29,42 @@ For syncing to work properly, your project has to satisfy a few things:
 
  5.) It is strongly advised not to touch the ``TEMPLATE`` branch.
 
+How to use sync?
+----------------
+
+The ``sync`` command from qube has a few options to run with. For a first overview see ``$ qube sync --help``.
+Note that you never need to run ``qube sync`` manually with the workflow, but you can do any time if you want.
+
+What command line options are available?
+-----------------------------------------
+The basic sync command syntax is: ``$ qube sync [PROJECT_DIR] --SET_TOKEN ([PAT] [GITHUB_USERNAME]) --CHECK_UPDATE``
+
+Running sync manually on an active qube project with a Github repo, you should never ever have to set the ``PAT`` or ``GITHUB_USERNAME``. These
+are options that are only required for the ``sync_project`` workflow for automatic sycning.
+So: **You never need to care about these parameters when calling qube sync manually**.
+
+An important parameter is ``PROJECT_DIR``. This parameter contains the (relative) path to the qube projects top level directory, you would like to sync.
+Per default, this one is set to the current working directory. So, for example, if your current working directory is like ``/home/homersimpson/projects`` and you would like to sync
+your project named ``ExplodingSpringfield`` located in ``/home/homersimpson/projects`` you need to call ``$ qube sync ExplodingSpringfield/``.
+This one should be always set (unless your current working directory is the top level directory of the project you'd like to sync).
+
+Next, ``sync`` provides two flags: ``$ qube sync [PROJECT_DIR] --set_token`` can be used to update your ``CT_SYNC_TOKEN``, which qube uses
+to sync your project (especially when syncing with the workflow). This could be useful, for example, when the ownership of a repo had changed.
+
+The ``--check_update`` flag, called via ``$ qube sync [PROJECT_DIR] --check_update``, can be used for manually checking whether a new version for your template has been released by qube.
+Note that when you call ``$ qube sync [PROJECT_DIR]`` qube also runs this check, but then proceeds with syncing rather than exiting.
+
+What happens when my project gets synced?
+-------------------------------------------
+Syncing can happen via two ways: One way is when you call ``$ qube sync [PROJECT_DIR]`` manually from your command line.
+This way, qube checks whether a new version has been released or not, and if so, creates a pull request with all changes (excluding blacklisted files) from the ``TEMPLATE`` branch to your
+current working branch.
+
+The other way would be via the ``sync_project.yml`` workflow. This workflow triggers on push everytime you push changes to your repository. You can safely modify this behaviour to only trigger
+this workflow for example when a PR is created. The result is the same like above but you don't need to remember to run sync manually on a regular basis.
+
+Note that the PR is currently automatically created by the one who initially created/owns this repository.
+
 Configuring sync
 -----------------------
 

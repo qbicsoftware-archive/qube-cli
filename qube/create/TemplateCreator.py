@@ -252,8 +252,10 @@ class TemplateCreator:
                                                                 to_get_property='license')
         if dot_qube:
             self.creator_ctx.github_username = dot_qube['github_username']
+            self.creator_ctx.creator_github_username = dot_qube['creator_github_username']
         else:
             self.creator_ctx.github_username = load_github_username()
+            self.creator_ctx.creator_github_username = self.creator_ctx.github_username
 
     def create_common_files(self) -> None:
         """
@@ -278,7 +280,8 @@ class TemplateCreator:
                                     'version': self.creator_ctx.version,
                                     'license': self.creator_ctx.license,
                                     'project_short_description': self.creator_ctx.project_short_description,
-                                    'github_username': self.creator_ctx.github_username},
+                                    'github_username': self.creator_ctx.github_username,
+                                    'creator_github_username': self.creator_ctx.creator_github_username},
                      no_input=True,
                      overwrite_if_exists=True)
 

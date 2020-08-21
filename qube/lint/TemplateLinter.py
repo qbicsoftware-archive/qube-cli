@@ -160,7 +160,7 @@ class TemplateLinter(object):
 
     def check_qube_todos(self) -> None:
         """
-        Go through all template files looking for the string 'TODO QUBE:'
+        Go through all template files looking for the string 'TODO QUBE:' or 'QUBE TODO:'
         """
         ignore = ['.git']
         if os.path.isfile(os.path.join(self.path, '.gitignore')):
@@ -177,12 +177,16 @@ class TemplateLinter(object):
             for fname in files:
                 with io.open(os.path.join(root, fname), 'rt', encoding='latin1') as file:
                     for line in file:
-                        if 'TODO QUBE:' in line:
+                        if any(todostring in line for todostring in ['TODO QUBE:', 'QUBE TODO:']):
                             line = line.replace('<!--', '') \
                                 .replace('-->', '') \
                                 .replace('# TODO QUBE: ', '') \
                                 .replace('// TODO QUBE: ', '') \
-                                .replace('TODO QUBE: ', '').strip()
+                                .replace('TODO QUBE: ', '') \
+                                .replace('# QUBE TODO: ', '') \
+                                .replace('// QUBE TODO: ', '') \
+                                .replace('QUBE TODO: ', '') \
+                                .strip()
                             self.warned.append(('general-3', f'TODO string found in {self._wrap_quotes(fname)}: {line}'))
 
     def check_no_cookiecutter_strings(self) -> None:
