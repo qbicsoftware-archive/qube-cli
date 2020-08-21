@@ -7,6 +7,25 @@ Changelog
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.1.0 (2020-08-21)
+------------------
+
+**Added**
+
+* Option to config --view to get the current set configuration
+* Option --set_token to set the sync token again
+* Sync docs improved
+* Support for QUBE TODO: and TODO QUBE:
+
+**Fixed**
+
+* Sync for organization repositories
+
+**Dependencies**
+
+**Deprecated**
+
+
 2.0.0 (2020-08-17)
 ------------------
 

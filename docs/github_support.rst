@@ -80,7 +80,7 @@ The secret contains your encrypted personal access token as its value. Note that
 If you remove the secret or change its value (even with another personal access token of you) the syncing feature will no longer work.
 In case you are creating an organisation repository, the secret will also be stored as a repository secret, only usable for your specific project.
 
-See section below in case your Github repo creation failed during the create process.
+See section below in case your Github repository creation failed during the create process.
 
 
 Error Handling due to failed Github repo creation
@@ -95,12 +95,10 @@ Some common error sources are:
 
 3. A repo with the same name already exists in your account/your organisation.
 
-A detailed error message may help you finding the issue.
-
 Creation fails, ok: But how can I then access the full features of qube?
-You can try to fix the issue (or wait some time on case, for example, when Github is down) and then process to create a Github repo manually.
-After this, make sure to create a secret named :code:`QUBE_SYNC_TOKEN` for your repository. See `the Github docs <https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets>`_
-for info on how to create a secret.
+You can try to fix the issue (or wait some time on case, for example, when Github is down) and then process to create a Github repostiryo manually.
+After this, make sure to create a secret named :code:`QUBE_SYNC_TOKEN` with the value of your PAT for your repository. See `the Github docs <https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets>`_
+for more information on how to create a secret.
 
 
 Issue labels
