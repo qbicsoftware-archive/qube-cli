@@ -12,7 +12,14 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Option to config --view to get the current set configuration
+* Option --set_token to set the sync token again
+* Sync docs improved
+* Support for QUBE TODO: and TODO QUBE:
+
 **Fixed**
+
+* Sync for organization repositories
 
 **Dependencies**
 
