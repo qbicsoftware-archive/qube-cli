@@ -7,6 +7,21 @@ Changelog
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.2.0 (2020-08-21)
+------------------
+
+**Added**
+
+**Fixed**
+
+* Couple of docs fixes
+* Now always using hyphens for options
+
+**Dependencies**
+
+**Deprecated**
+
+
 2.1.0 (2020-08-21)
 ------------------
 
