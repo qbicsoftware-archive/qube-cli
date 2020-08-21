@@ -14,6 +14,9 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Fixed**
 
+* Couple of docs fixes
+* Now always using hyphens for options
+
 **Dependencies**
 
 **Deprecated**
