@@ -12,7 +12,7 @@ jobs:
       # PRs to the repository master branch are only ok if coming from any patch or release branch
       - name: Check PRs
         run: |
-          { [[ $GITHUB_HEAD_REF = *"release"* ]]; } || [[ $GITHUB_HEAD_REF == *"patch"* ]]
+          { [[ $GITHUB_HEAD_REF = *"release"* ]]; } || [[ $GITHUB_HEAD_REF == *"hotfix"* ]]
 
 {% raw %}
       # If the above check failed, post a comment on the PR explaining the failure
