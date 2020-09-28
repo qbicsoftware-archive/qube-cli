@@ -12,7 +12,15 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Added release deployment GA workflow for JVM templates
+* Added workflow to build software reports and internal documentation
+* 
+
 **Fixed**
+
+* Fixed parent-pom version being outdated -> 3.1.0
+* Fixed further outdated dependencies in various poms
+* Fixed release URL in all poms
 
 **Dependencies**
 
