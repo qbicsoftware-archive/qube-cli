@@ -20,6 +20,8 @@ branches:
   only:
   - master
   - development
+  - /^hotfix\/.*$/
+  - /^release\/.*$/
   # Travis treats pushed tags as branches
   - /^[vV]?\d+\.\d+\.\d+$/ # matches e.g., v1.2.3, 1.2.3, V1.2.3
 
@@ -34,26 +36,6 @@ before_script: if [ "$VAADIN_CHARTS_LICENSE_CODE" != "" ]; then
 # upload code coverage report, generate maven site (javadocs, documentation, static code analysis, etc.)
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-
-# upload to maven
-deploy:
-  # as agreed in our SOP, builds on development branch will deploy to our maven repository after validating
-  # the artifact has a proper SNAPSHOT version
-  # make sure to skip integration tests! (using -DskipITs)
-- skip_cleanup: true
-  provider: script
-  script: mvn --quiet --activate-profiles development-build,!release-build --settings .travis.settings.xml deploy -DskipITs
-  on:
-    branch: development
-    condition: '"$TRAVIS_EVENT_TYPE" = "push"'
-  # as agreed in our SOP, releases are performed by tagging commits,
-  # the version string and version of dependencies are validated (no snapshots allowed)
-- skip_cleanup: true
-  provider: script
-  script: mvn --quiet --activate-profiles !development-build,release-build --settings .travis.settings.xml deploy -DskipITs
-  on:
-    condition: '"$TRAVIS_EVENT_TYPE" = "push"'
-    tags: true
 
 # change according to your needs, but we recommend to deactivate email notifications
 # for now, we configured Travis to send a notification to the #travis-ci Slack channel
