@@ -14,7 +14,6 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 * Added release deployment GA workflow for JVM templates
 * Added workflow to build software reports and internal documentation
-* 
 
 **Fixed**
 
