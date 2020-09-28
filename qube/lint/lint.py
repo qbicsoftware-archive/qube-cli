@@ -43,9 +43,6 @@ def lint_project(project_dir: str, is_create: bool = False) -> TemplateLinter:
         # Run the project specific linting
         print(f'[bold blue]Running {template_handle} linting')
 
-        # for every python project that is created autopep8 will run one time
-        # when linting en existing python qube project, autopep8 should be now optional,
-        # because (for example) it messes up Jinja syntax (if included in project)
         lint_obj.lint()
     except AssertionError as e:
         print(f'[bold red]Critical error: {e}')

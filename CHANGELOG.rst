@@ -7,6 +7,29 @@ Changelog
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.3.0 (2020-09-28)
+------------------
+
+**Added**
+
+* Added release deployment GA workflow for JVM templates
+* Added workflow to build software reports and internal documentation
+
+**Fixed**
+
+* Fixed parent-pom version being outdated -> 3.1.0
+* Fixed further outdated dependencies in various poms
+* Fixed release URL in all poms
+* Allow PR from 'hotfix' branches
+
+**Dependencies**
+
+**Deprecated**
+
+* Removed PR allowance from patch branches
+* Removed Travis CI support
+
+
 2.2.0 (2020-08-21)
 ------------------
 
