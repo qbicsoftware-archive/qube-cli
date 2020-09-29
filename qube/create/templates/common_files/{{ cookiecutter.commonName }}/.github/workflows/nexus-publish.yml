@@ -27,7 +27,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.m2/repository
-          key: { % raw % }${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}{% endraw %}
+          key: { % raw % }${{ runner.os }}{% endraw %}-maven-{ % raw % }${{ hashFiles('**/pom.xml') }}{% endraw %}
           restore-keys: |
             {% raw %}${{ runner.os }}-maven-{% endraw %}
 
