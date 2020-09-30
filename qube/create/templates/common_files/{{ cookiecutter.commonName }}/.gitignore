@@ -28,3 +28,6 @@ src/main/webapp/VAADIN/widgetsets
 
 # From docs
 **/__pycache__
+
+# Properties, which may contain sensitive information
+**/developer.properties
