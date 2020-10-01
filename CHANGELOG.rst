@@ -11,6 +11,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Enables debug logging
+
 **Fixed**
 
 **Dependencies**
