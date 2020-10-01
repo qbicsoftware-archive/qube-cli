@@ -51,7 +51,8 @@ class TemplateSync:
                  token=None,
                  major_update=False,
                  minor_update=False,
-                 patch_update=False):
+                 patch_update=False,
+                 repo_owner=None):
         self.project_dir = os.path.abspath(project_dir)
         self.from_branch = from_branch
         self.original_branch = None
@@ -63,7 +64,7 @@ class TemplateSync:
         self.gh_username = gh_username if gh_username else load_github_username()
         self.token = token if token else decrypt_pat()
         self.dot_qube = {}
-        self.repo_owner = self.gh_username
+        self.repo_owner = repo_owner
         self.new_template_version = new_template_version
 
     def sync(self):
