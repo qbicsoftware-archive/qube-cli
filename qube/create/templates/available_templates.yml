@@ -11,7 +11,7 @@ lib:
     java:
         name: Generic Java Library
         handle: lib-java
-        version: 1.0.1
+        version: 1.0.2
         available libraries: none
         short description: Generic library for Java based projects
         long description: A template for Java based libraries, which provide functionalities to other projects.
