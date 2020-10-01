@@ -9,6 +9,7 @@ from distutils.dir_util import copy_tree
 from subprocess import Popen, PIPE
 
 import git
+import logging
 import json
 import os
 import requests
@@ -83,6 +84,7 @@ class TemplateSync:
             except Exception as e:
                 self.reset_target_dir()
                 print(f'[bold red]{e}')
+                logging.debug(f'{sys.exc_info()[2]}')  # print traceback
                 sys.exit(1)
 
         self.reset_target_dir()
