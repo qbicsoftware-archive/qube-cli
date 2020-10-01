@@ -7,6 +7,24 @@ Changelog
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.4.0 (2020-10-01)
+------------------
+
+**Added**
+
+* Now using Johnny5 for the sync workflow by default
+* Maven caching for tests
+
+**Fixed**
+
+* Add all `src/main/webapp/VAADIN/widgetsets` folders to `.gitignore`
+* Makefile now uses pip instead of setup.py by default
+
+**Dependencies**
+
+**Deprecated**
+
+
 2.3.0 (2020-09-28)
 ------------------
 

@@ -24,7 +24,7 @@ logs/
 **/.factorypath
 
 # compiled Vaadin widgetsets
-src/main/webapp/VAADIN/widgetsets
+**/src/main/webapp/VAADIN/widgetsets
 
 # From docs
 **/__pycache__
