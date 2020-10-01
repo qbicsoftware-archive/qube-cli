@@ -145,12 +145,10 @@ def sync(project_dir, set_token, pat, username, check_update) -> None:
             repo_owner = project_data['github_username']
             # if project is an orga repo, pass orga name as username
             if project_data['is_github_repo'] and project_data['is_github_orga']:
-                TemplateSync.update_sync_token(project_name=project_data['project_slug'],
-                    gh_username=project_data['github_orga'], repo_owner=repo_owner)
+                TemplateSync.update_sync_token(project_name=project_data['project_slug'], gh_username=project_data['github_orga'], repo_owner=repo_owner)
             # if not, use default username
             elif project_data['is_github_repo']:
-                TemplateSync.update_sync_token(project_name=project_data['project_slug'],
-                    repo_owner=repo_owner)
+                TemplateSync.update_sync_token(project_name=project_data['project_slug'], repo_owner=repo_owner)
             else:
                 print('[bold red]Your current project does not seem to have a Github repository!')
                 sys.exit(1)
