@@ -13,6 +13,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Fixed**
 
+* Sets correct repo owner for the :code:`qube sync`
+
 **Dependencies**
 
 **Deprecated**
