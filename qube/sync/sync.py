@@ -83,6 +83,7 @@ class TemplateSync:
             except Exception as e:
                 self.reset_target_dir()
                 print(f'[bold red]{e}')
+                print(f'{sys.exc_info()[2]}')  # print traceback
                 sys.exit(1)
 
         self.reset_target_dir()
