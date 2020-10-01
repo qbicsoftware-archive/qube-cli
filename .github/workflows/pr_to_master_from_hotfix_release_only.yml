@@ -1,4 +1,4 @@
-name: PR to master branch from PATCH/release branch only
+name: PR to master branch from hotfix/release branch only
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
       # PRs to the repository master branch are only ok if coming from any patch or release branch
       - name: Check PRs
         run: |
-          { [[ $GITHUB_HEAD_REF = *"release"* ]]; } || [[ $GITHUB_HEAD_REF == *"patch"* ]]
+          { [[ $GITHUB_HEAD_REF = *"release"* ]]; } || [[ $GITHUB_HEAD_REF == *"hotfix"* ]]
 
       # If the above check failed, post a comment on the PR explaining the failure
       # NOTE - this may not work if the PR is coming from a fork, due to limitations in GitHub actions secrets
@@ -25,7 +25,7 @@ jobs:
 
             It looks like this pull-request is has been made against the ${{github.event.pull_request.head.repo.full_name}} `master` branch.
             The `master` branch should always contain code from the latest release.
-            Because of this, PRs to `master` are only allowed if they come from any ${{github.event.pull_request.head.repo.full_name}} `release` or `patch` branch.
+            Because of this, PRs to `master` are only allowed if they come from any ${{github.event.pull_request.head.repo.full_name}} `release` or `hotfix` branch.
 
             You do not need to close this PR, you can change the target branch to `development` by clicking the _"Edit"_ button at the top of this page.
 
