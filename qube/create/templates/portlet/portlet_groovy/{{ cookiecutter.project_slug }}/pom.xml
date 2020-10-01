@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>life.qbic</groupId>
 		<artifactId>portlet-parent-pom</artifactId>
-		<version>3.1.0</version>
+		<version>3.1.1</version>
 	</parent>
 	<artifactId>{{ cookiecutter.project_slug }}</artifactId>
 	<version>{{ cookiecutter.version }}</version> <!-- <<QUBE_FORCE_BUMP>> -->
