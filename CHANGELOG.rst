@@ -6,6 +6,19 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+2.4.1 (2020-10-01)
+------------------
+
+**Added**
+
+**Fixed**
+
+**Dependencies**
+
+* Updated parent pom to 3.1.1
+* Updated template versions to 1.0.1
+
+**Deprecated**
 
 2.4.0 (2020-10-01)
 ------------------
