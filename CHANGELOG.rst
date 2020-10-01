@@ -6,6 +6,19 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+2.3.1 (2020-10-01)
+------------------
+
+**Added**
+
+**Fixed**
+
+* Add all `src/main/webapp/VAADIN/widgetsets` folders to `.gitignore`
+
+**Dependencies**
+
+**Deprecated**
+
 
 2.3.0 (2020-09-28)
 ------------------
