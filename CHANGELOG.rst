@@ -13,10 +13,10 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Fixed**
 
-* Fix the pull request creation after updating syncing the TEMPLATE branch. Qube reported a
-:code:`FileNotFoundError` for the sync workflow file, because it tried to access this file in
-an empty directory.
+* Fix the pull request creation after updating syncing the TEMPLATE branch. Qube reported a :code:`FileNotFoundError` for the sync workflow file, because it tried to access this file in an empty directory.
+
 * Removed redundant sync_workflow workarounds
+
 * sync and maven test workflow yaml syntax
 
 **Dependencies**
