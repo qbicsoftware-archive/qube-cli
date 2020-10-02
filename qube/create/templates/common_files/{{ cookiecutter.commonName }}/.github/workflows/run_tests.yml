@@ -14,12 +14,12 @@ jobs:
           java-version: 1.8
 
       - name: Load local Maven repository cache
-          uses: actions/cache@v2
-          with:
-            path: ~/.m2/repository
-            key: {% raw %}${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}{% endraw %}
-            restore-keys: |
-              {% raw %}${{ runner.os }}-maven-{% endraw %}
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: {% raw %}${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}{% endraw %}
+          restore-keys: |
+            {% raw %}${{ runner.os }}-maven-{% endraw %}
 
       - name: Run tests
         run: mvn clean verify
