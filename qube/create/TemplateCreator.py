@@ -40,6 +40,9 @@ class TemplateCreator:
         self.AVAILABLE_TEMPLATES = load_yaml_file(self.AVAILABLE_TEMPLATES_PATH)
         self.CWD = os.getcwd()
         self.creator_ctx = creator_ctx
+        for key, val in asdict(self.creator_ctx).items():
+            print(f'{key}: {val}')
+
 
     def process_common_operations(self, skip_common_files=False, skip_fix_underline=False,
                                   domain: str = None, subdomain: str = None, language: str = None,
