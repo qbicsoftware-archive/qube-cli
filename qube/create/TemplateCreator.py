@@ -335,9 +335,7 @@ class TemplateCreator:
         """
         self.creator_ctx.template_version = f'{template_version} # <<QUBE_NO_BUMP>>'
         self.creator_ctx.qube_version = f'{qube.__version__} # <<QUBE_NO_BUMP>>'
-        # Python does not allow for hyphens (module imports etc) -> remove them
-        no_hyphen = self.creator_ctx.project_slug.replace('-', '_')
-        with open(f'{self.creator_ctx.project_slug if self.creator_ctx.language != "python" else no_hyphen}/.qube.yml', 'w') as f:
+        with open(f'{self.creator_ctx.project_slug}/.qube.yml', 'w') as f:
             yaml = YAML()
             struct_to_dict = self.creator_ctx_to_dict()
             yaml.dump(struct_to_dict, f)

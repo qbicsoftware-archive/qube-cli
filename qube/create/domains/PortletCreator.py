@@ -16,7 +16,7 @@ class TemplateStructPortlet(QubeTemplateStruct):
     """
     main_class_prefix: str = ''
     use_openbis_client: str = 'no'
-    use_openbis_raw_api: str= 'no'
+    use_openbis_raw_api: str = 'no'
     use_qbic_databases: str = 'no'
     use_vaadin_charts: str = 'no'
 
