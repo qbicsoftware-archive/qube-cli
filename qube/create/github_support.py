@@ -2,8 +2,6 @@ import os
 import sys
 import requests
 import json
-import tempfile
-import shutil
 
 from base64 import b64encode
 from nacl import encoding, public
@@ -68,19 +66,14 @@ def create_push_github_repository(project_path: str, creator_ctx: QubeTemplateSt
 
         # git clone
         print('[bold blue]Cloning empty Github repository')
-        Repo.clone_from(
-            f'https://{creator_ctx.github_username}:{access_token}@github.com/{creator_ctx.github_username}/{creator_ctx.project_slug}',
-            repository)
+        Repo.clone_from(f'https://{creator_ctx.github_username}:{access_token}@github.com/{creator_ctx.github_username}/{creator_ctx.project_slug}',
+                        repository)
 
         # Copy files which should be included in the initial commit -> basically the template
         copy_tree(f'{repository}', project_path)
 
-        # the created projct repository with the copied .git directory
+        # the created project repository with the copied .git directory
         cloned_repo = Repo(path=project_path)
-
-        fd, temp_path = tempfile.mkstemp()
-        shutil.copy2(f'{project_path}/.github/workflows/sync_project.yml', temp_path)
-        os.remove(f'{project_path}/.github/workflows/sync_project.yml')
 
         # git add
         print('[bold blue]Staging template')
@@ -99,9 +92,8 @@ def create_push_github_repository(project_path: str, creator_ctx: QubeTemplateSt
                 "master")
             master_branch.edit_protection(dismiss_stale_reviews=True)
         else:
-            print(
-                '[bold blue]Cannot set branch protection rules due to your repository being private or an orga repo!\n'
-                'You can set it manually later on.')
+            print('[bold blue]Cannot set branch protection rules due to your repository being private or an organization repository!\n'
+                  'You can set it manually later on.')
 
         # git create development branch
         print('[bold blue]Creating development branch.')
@@ -114,36 +106,13 @@ def create_push_github_repository(project_path: str, creator_ctx: QubeTemplateSt
         # git create TEMPLATE branch
         print('[bold blue]Creating TEMPLATE branch.')
         cloned_repo.git.checkout('-b', 'TEMPLATE')
+
+        # git push to origin TEMPLATE
+        print('[bold blue]Pushing template to Github origin TEMPLATE.')
         cloned_repo.remotes.origin.push(refspec='TEMPLATE:TEMPLATE')
 
-        # checkout to development branch again
-        print('[bold blue]Checking out master branch.')
-        cloned_repo.git.checkout('master')
-        shutil.copy2(temp_path, f'{project_path}/.github/workflows/sync_project.yml')
-        # git add
-        print('[bold blue]Staging template')
-        cloned_repo.git.add(A=True)
-        # git commit
-        cloned_repo.index.commit('Added qube sync workflow')
-        # git push to master branch
-        print('[bold blue]Pushing template to Github origin master')
-        cloned_repo.remotes.origin.push(refspec='master:master')
-        # git checkout to development branch
-        cloned_repo.git.checkout('development')
-        shutil.copy2(temp_path, f'{project_path}/.github/workflows/sync_project.yml')
-        # git add
-        print('[bold blue]Staging template')
-        cloned_repo.git.add(A=True)
-        # git commit
-        cloned_repo.index.commit('Added qube sync workflow')
-        # git push to development branch
-        print('[bold blue]Pushing template to Github origin development')
-        cloned_repo.remotes.origin.push(refspec='development:development')
-        # remove temp workflow file
-        os.remove(temp_path)
-        # did any errors occur?
-        print(
-            f'[bold green]Successfully created a Github repository at https://github.com/{creator_ctx.github_username}/{creator_ctx.project_slug}')
+        print(f'[bold green]Successfully created a Github repository at'
+              f' https://github.com/{creator_ctx.github_username}/{creator_ctx.project_slug}')
 
     except (GithubException, ConnectionError) as e:
         handle_failed_github_repo_creation(e)

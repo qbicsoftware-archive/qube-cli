@@ -24,7 +24,7 @@ jobs:
               name: 'JohnnyQ5'
               email: 'support@qbic.zendesk.com'
               actor: 'JohnnyQ5'
-               token: '{% raw %}${{ secrets.JOHNNY_Q5_REPORTS_TOKEN}}{% endraw %}'
+              token: '{% raw %}${{ secrets.JOHNNY_Q5_REPORTS_TOKEN}}{% endraw %}'
 
         - name: Sync project
           run: qube sync . {% raw %}${{ secrets.JOHNNY_Q5_REPORTS_TOKEN  }}{% endraw %} JohnnyQ5
