@@ -6,6 +6,21 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+2.4.6 (2020-10-02)
+------------------
+
+**Added**
+
+**Fixed**
+
+* Fix missing properties for portlet domain
+* Fix #169
+
+**Dependencies**
+
+**Deprecated**
+
+
 2.4.5 (2020-10-02)
 ------------------
 
