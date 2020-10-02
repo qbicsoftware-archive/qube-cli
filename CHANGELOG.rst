@@ -6,6 +6,23 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+2.4.5 (2020-10-02)
+------------------
+
+**Added**
+
+* Ignores additional Maven files
+
+**Fixed**
+
+* Preserve boolean case when loading YAML boolean values
+* Force push changes to the TEMPLATE branch during sync
+
+**Dependencies**
+
+**Deprecated**
+
+
 2.4.4 (2020-10-02)
 ------------------
 

@@ -213,7 +213,7 @@ class TemplateSync:
         try:
             origin = self.repo.remote('origin')
             self.repo.head.ref.set_tracking_branch(origin.refs.TEMPLATE)
-            self.repo.git.push()
+            self.repo.git.push(force=True)
         except git.exc.GitCommandError as e:
             print(f'Could not push TEMPLATE branch:\n{e}')
             sys.exit(1)
@@ -247,7 +247,7 @@ class TemplateSync:
             'body': pr_body_text,
             'maintainer_can_modify': True,
             'head': 'TEMPLATE',
-            'base': self.from_branch,
+            'base': 'development',
         }
 
         r = requests.post(
@@ -277,11 +277,10 @@ class TemplateSync:
 
         :return Whether a qube sync PR is already open or not
         """
-        state = {'state': 'open'}
-        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls'
+        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls?state=open'
         headers = {'Authorization': f'token {self.token}'}
         # query all open PRs
-        r = requests.get(query_url, headers=headers, data=json.dumps(state))
+        r = requests.get(query_url, headers=headers)
         query_data = r.json()
         # iterate over the open PRs of the repo to check if a qube sync PR is open
         for pull_request in query_data:
