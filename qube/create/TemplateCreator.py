@@ -41,7 +41,6 @@ class TemplateCreator:
         self.CWD = os.getcwd()
         self.creator_ctx = creator_ctx
 
-
     def process_common_operations(self, skip_common_files=False, skip_fix_underline=False,
                                   domain: str = None, subdomain: str = None, language: str = None,
                                   dot_qube: OrderedDict = None) -> None:
