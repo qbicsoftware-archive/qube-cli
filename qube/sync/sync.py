@@ -170,8 +170,6 @@ class TemplateSync:
             choose_domain(domain=None, dot_qube=self.dot_qube)
             # copy into the cleaned TEMPLATE branch's project directory
             content = os.listdir(tmpdirname)
-            for line in content:
-                print(line)
             copy_tree(os.path.join(tmpdirname, self.dot_qube['project_slug']), str(self.project_dir))
             os.chdir(old_cwd)
 
@@ -280,11 +278,10 @@ class TemplateSync:
 
         :return Whether a qube sync PR is already open or not
         """
-        state = {'state': 'open'}
-        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls'
+        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls?state=open'
         headers = {'Authorization': f'token {self.token}'}
         # query all open PRs
-        r = requests.get(query_url, headers=headers, data=json.dumps(state))
+        r = requests.get(query_url, headers=headers)
         query_data = r.json()
         # iterate over the open PRs of the repo to check if a qube sync PR is open
         for pull_request in query_data:
