@@ -169,7 +169,6 @@ class TemplateSync:
             os.chdir(tmpdirname)
             choose_domain(domain=None, dot_qube=self.dot_qube)
             # copy into the cleaned TEMPLATE branch's project directory
-            content = os.listdir(tmpdirname)
             copy_tree(os.path.join(tmpdirname, self.dot_qube['project_slug']), str(self.project_dir))
             os.chdir(old_cwd)
 
