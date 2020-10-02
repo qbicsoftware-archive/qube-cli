@@ -169,6 +169,9 @@ class TemplateSync:
             os.chdir(tmpdirname)
             choose_domain(domain=None, dot_qube=self.dot_qube)
             # copy into the cleaned TEMPLATE branch's project directory
+            content = os.listdir(tmpdirname)
+            for line in content:
+                print(line)
             copy_tree(os.path.join(tmpdirname, self.dot_qube['project_slug']), str(self.project_dir))
             os.chdir(old_cwd)
 
@@ -213,7 +216,7 @@ class TemplateSync:
         try:
             origin = self.repo.remote('origin')
             self.repo.head.ref.set_tracking_branch(origin.refs.TEMPLATE)
-            self.repo.git.push()
+            self.repo.git.push(force=True)
         except git.exc.GitCommandError as e:
             print(f'Could not push TEMPLATE branch:\n{e}')
             sys.exit(1)
