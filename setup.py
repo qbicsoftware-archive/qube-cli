@@ -72,6 +72,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/qbicsoftware/qube',
-    version='2.4.4',
+    version='2.4.5',
     zip_safe=False,
 )
