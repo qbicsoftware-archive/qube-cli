@@ -12,6 +12,3 @@ def load_yaml_file(yaml_file_path: str) -> dict:
     yaml = YAML()
     yaml.boolean_representation = ['False', 'True']
     return yaml.load(path)
-
-
-
