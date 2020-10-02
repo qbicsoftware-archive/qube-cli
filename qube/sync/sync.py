@@ -247,7 +247,7 @@ class TemplateSync:
             'body': pr_body_text,
             'maintainer_can_modify': True,
             'head': 'TEMPLATE',
-            'base': self.from_branch,
+            'base': 'development',
         }
 
         r = requests.post(
