@@ -11,7 +11,11 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Ignores additional Maven files
+
 **Fixed**
+
+* Force push changes to the TEMPLATE branch during sync
 
 **Dependencies**
 
