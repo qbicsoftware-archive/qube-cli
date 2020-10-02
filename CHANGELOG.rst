@@ -15,6 +15,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Fixed**
 
+* Preserve boolean case when loading YAML boolean values
 * Force push changes to the TEMPLATE branch during sync
 
 **Dependencies**
