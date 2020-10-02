@@ -30,6 +30,8 @@ an empty directory.
 **Fixed**
 
 * Sets correct repo owner for the :code:`qube sync`
+* Removed redundant sync_workflow workarounds
+* sync and maven test workflow yaml syntax
 
 **Dependencies**
 
