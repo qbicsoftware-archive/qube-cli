@@ -63,7 +63,7 @@ class TemplateSync:
         self.patch_update = patch_update
         self.gh_username = gh_username if gh_username else load_github_username()
         self.token = token if token else decrypt_pat()
-        self.repo_owner = repo_owner
+        self.repo_owner = repo_owner if repo_owner else gh_username
         self.dot_qube = {}
         self.new_template_version = new_template_version
 
@@ -268,7 +268,8 @@ class TemplateSync:
 
         # Something went wrong
         else:
-            print(f'GitHub API returned code {r.status_code}: \n{returned_data_prettyprint}')
+            print(f'[bold red]GitHub API returned code {r.status_code}')
+            print(returned_data_prettyprint)
             sys.exit(1)
 
     def check_pull_request_exists(self) -> bool:
