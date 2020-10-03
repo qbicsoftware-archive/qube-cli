@@ -38,6 +38,7 @@ class TemplateSync:
     original_branch (str): Repo branch that was checked out before we started.
     made_changes (bool): Whether making the new template project introduced any changes
     gh_username (str): GitHub username
+    repo_owner (str): Owner of the repo (either orga name or personal github username)
     patch_update (bool): Whether a patch update was found for the template or not
     minor_update (bool): Whether a minor update was found for the template or not
     major_update (bool): Whether a major update was found for the template or not
@@ -48,6 +49,7 @@ class TemplateSync:
                  from_branch=None,
                  gh_username=None,
                  token=None,
+                 repo_owner=None,
                  major_update=False,
                  minor_update=False,
                  patch_update=False):
@@ -61,6 +63,7 @@ class TemplateSync:
         self.patch_update = patch_update
         self.gh_username = gh_username if gh_username else load_github_username()
         self.token = token if token else decrypt_pat()
+        self.repo_owner = repo_owner
         self.dot_qube = {}
         self.new_template_version = new_template_version
 
@@ -219,6 +222,8 @@ class TemplateSync:
         """
         Create a pull request to a base branch from a head branch (default: TEMPLATE)
         """
+        if self.dot_qube['is_github_orga']:
+            self.repo_owner = self.dot_qube['github_orga']
         pr_title = f'Important qube template update {self.new_template_version} released!'
         pr_body_text = (
             'A new release of the main template in qube has just been released. '
@@ -246,7 +251,7 @@ class TemplateSync:
         }
 
         r = requests.post(
-            url=f'https://api.github.com/repos/{self.gh_username}/{self.dot_qube["project_slug"]}/pulls',
+            url=f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls',
             data=json.dumps(pr_content),
             auth=requests.auth.HTTPBasicAuth(self.gh_username, self.token),
         )
@@ -272,7 +277,7 @@ class TemplateSync:
 
         :return Whether a qube sync PR is already open or not
         """
-        query_url = f'https://api.github.com/repos/{self.gh_username}/{self.dot_qube["project_slug"]}/pulls?state=open'
+        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls?state=open'
         headers = {'Authorization': f'token {self.token}'}
         # query all open PRs
         r = requests.get(query_url, headers=headers)
