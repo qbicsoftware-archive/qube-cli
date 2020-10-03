@@ -169,7 +169,7 @@ def sync(project_dir, set_token, pat, username, check_update) -> None:
         except FileNotFoundError:
             print(f'[bold red]There exists no .qube.yml file at {project_dir_path}. Is this a qube project?')
         except KeyError:
-            print(f'[bold red]Your token value is not a valid personal access token for your account.')
+            print('[bold red]Your token value is not a valid personal access token for your account.')
             sys.exit(1)
         sys.exit(0)
 
