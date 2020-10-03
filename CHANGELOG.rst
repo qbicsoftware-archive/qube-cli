@@ -11,10 +11,12 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* verbose support #186
+
 **Fixed**
 
-* #170
-* #190
+* sync workflow now polls instead of being triggered on push #170
+* renamed branch protection workflow #190
 
 **Dependencies**
 
