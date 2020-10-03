@@ -17,6 +17,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 * sync workflow now polls instead of being triggered on push #170
 * renamed branch protection workflow #190
+* refactored sync command
 
 **Dependencies**
 

@@ -349,14 +349,14 @@ class TemplateSync:
             sys.exit(1)
 
     @staticmethod
-    def update_sync_token(project_name: str, gh_username='') -> None:
+    def update_sync_token(project_name: str, gh_username: str = '') -> None:
         """
         Update the sync token secret for the repository.
         :param project_name Name of the users project
-        :param gh_username The Github username (only gets passed, if the repo is an orga repo)
+        :param gh_username The Github username (only gets passed, if the repo is an organization repo)
         """
         gh_username = load_yaml_file(ConfigCommand.CONF_FILE_PATH)['github_username'] if not gh_username else gh_username
-        # get the personal access token for user authentification
+        # get the personal access token for user authentication
         updated_sync_token = qube_questionary_or_dot_qube('password', 'Please enter your updated sync token value')
         print(f'[bold blue]\nUpdating sync secret for project {project_name}.')
         create_sync_secret(gh_username, project_name, updated_sync_token)
