@@ -48,7 +48,7 @@ def main():
 
 
 @click.group(cls=HelpErrorHandling)
-@click.version_option(qube.__version__, message=click.style(f'mlf-core Version: {qube.__version__}', fg='blue'))
+@click.version_option(qube.__version__, message=click.style(f'qube Version: {qube.__version__}', fg='blue'))
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Enable verbose output (print debug statements).')
 @click.option("-l", "--log-file", help="Save a verbose log to a file.")
 @click.pass_context
@@ -144,7 +144,7 @@ def info(ctx, handle: str) -> None:
 @qube_cli.command(short_help='Sync your project with the latest template release.', cls=CustomHelpSubcommand)
 @click.argument('project_dir', type=str, default=Path(f'{Path.cwd()}'), helpmsg='The projects top level directory you would like to sync. Default is current '
                                                                                 'working directory.', cls=CustomArg)
-@click.option('--set-token', '-st', is_flag=True, help='Set sync token to a new personal access token of the current repo owner.')
+@click.option('--set-token', '-st', is_flag=True, help='Set sync token to a new personal access token of the current repository owner.')
 @click.argument('pat', type=str, required=False, helpmsg='Personal access token. Not needed for manual, local syncing!', cls=CustomArg)
 @click.argument('username', type=str, required=False, helpmsg='Github username. Not needed for manual, local syncing!', cls=CustomArg)
 @click.option('--check-update', '-ch', is_flag=True, help='Check whether a new template version is available for your project.')
@@ -161,13 +161,9 @@ def sync(project_dir, set_token, pat, username, check_update) -> None:
     if set_token:
         try:
             project_data = load_yaml_file(f'{project_dir}/.qube.yml')
-            repo_owner = project_data['github_username']
-            # if project is an orga repo, pass orga name as username
-            if project_data['is_github_repo'] and project_data['is_github_orga']:
-                TemplateSync.update_sync_token(project_name=project_data['project_slug'], gh_username=project_data['github_orga'], repo_owner=repo_owner)
-            # if not, use default username
-            elif project_data['is_github_repo']:
-                TemplateSync.update_sync_token(project_name=project_data['project_slug'], repo_owner=repo_owner)
+            # if project is an organization repo, pass organization name as username
+            if project_data['is_github_repo']:
+                TemplateSync.update_sync_token(project_name=project_data['project_slug'], gh_username=project_data['github_username'])
             else:
                 print('[bold red]Your current project does not seem to have a Github repository!')
                 sys.exit(1)
