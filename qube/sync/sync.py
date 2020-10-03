@@ -9,6 +9,7 @@ from distutils.dir_util import copy_tree
 from subprocess import Popen, PIPE
 
 import git
+import logging
 import json
 import os
 import requests
@@ -50,7 +51,8 @@ class TemplateSync:
                  token=None,
                  major_update=False,
                  minor_update=False,
-                 patch_update=False):
+                 patch_update=False,
+                 repo_owner=None):
         self.project_dir = os.path.abspath(project_dir)
         self.from_branch = from_branch
         self.original_branch = None
@@ -62,7 +64,7 @@ class TemplateSync:
         self.gh_username = gh_username if gh_username else load_github_username()
         self.token = token if token else decrypt_pat()
         self.dot_qube = {}
-        self.repo_owner = self.gh_username
+        self.repo_owner = repo_owner
         self.new_template_version = new_template_version
 
     def sync(self):
@@ -83,6 +85,7 @@ class TemplateSync:
             except Exception as e:
                 self.reset_target_dir()
                 print(f'[bold red]{e}')
+                logging.debug(f'{sys.exc_info()[2]}')  # print traceback
                 sys.exit(1)
 
         self.reset_target_dir()
@@ -165,7 +168,6 @@ class TemplateSync:
             old_cwd = str(Path.cwd())
             os.chdir(tmpdirname)
             choose_domain(domain=None, dot_qube=self.dot_qube)
-            os.remove(f'{tmpdirname}/{self.dot_qube["project_slug"]}/.github/workflows/sync_project.yml')
             # copy into the cleaned TEMPLATE branch's project directory
             copy_tree(os.path.join(tmpdirname, self.dot_qube['project_slug']), str(self.project_dir))
             os.chdir(old_cwd)
@@ -211,7 +213,7 @@ class TemplateSync:
         try:
             origin = self.repo.remote('origin')
             self.repo.head.ref.set_tracking_branch(origin.refs.TEMPLATE)
-            self.repo.git.push()
+            self.repo.git.push(force=True)
         except git.exc.GitCommandError as e:
             print(f'Could not push TEMPLATE branch:\n{e}')
             sys.exit(1)
@@ -245,7 +247,7 @@ class TemplateSync:
             'body': pr_body_text,
             'maintainer_can_modify': True,
             'head': 'TEMPLATE',
-            'base': self.from_branch,
+            'base': 'development',
         }
 
         r = requests.post(
@@ -275,11 +277,10 @@ class TemplateSync:
 
         :return Whether a qube sync PR is already open or not
         """
-        state = {'state': 'open'}
-        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls'
+        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls?state=open'
         headers = {'Authorization': f'token {self.token}'}
         # query all open PRs
-        r = requests.get(query_url, headers=headers, data=json.dumps(state))
+        r = requests.get(query_url, headers=headers)
         query_data = r.json()
         # iterate over the open PRs of the repo to check if a qube sync PR is open
         for pull_request in query_data:

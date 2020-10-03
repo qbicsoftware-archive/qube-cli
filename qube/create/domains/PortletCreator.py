@@ -15,10 +15,10 @@ class TemplateStructPortlet(QubeTemplateStruct):
     PORTLET-GROOVY
     """
     main_class_prefix: str = ''
-    use_openbis_client = 'no'
-    use_openbis_raw_api = 'no'
-    use_qbic_databases = 'no'
-    use_vaadin_charts = 'no'
+    use_openbis_client: str = 'no'
+    use_openbis_raw_api: str = 'no'
+    use_qbic_databases: str = 'no'
+    use_vaadin_charts: str = 'no'
 
 
 class PortletCreator(TemplateCreator):

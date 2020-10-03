@@ -118,7 +118,7 @@ class TemplateLinter(object):
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'bug_report.md')],
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'feature_request.md')],
             [os.path.join('.github', 'ISSUE_TEMPLATE', 'general_question.md')],
-            [os.path.join('.github', 'workflows', 'pr_to_master_from_patch_release_only.yml')],
+            [os.path.join('.github', 'workflows', 'pr_to_master_from_hotfix_release_only.yml')],
             [os.path.join('.github', 'workflows', 'qube_lint.yml')],
             [os.path.join('.github', 'workflows', 'sync_project.yml')],
             [os.path.join('.github', 'pull_request_template.md')]

@@ -6,6 +6,97 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+2.4.6 (2020-10-02)
+------------------
+
+**Added**
+
+**Fixed**
+
+* Fix missing properties for portlet domain
+* Fix #169
+
+**Dependencies**
+
+**Deprecated**
+
+
+2.4.5 (2020-10-02)
+------------------
+
+**Added**
+
+* Ignores additional Maven files
+
+**Fixed**
+
+* Preserve boolean case when loading YAML boolean values
+* Force push changes to the TEMPLATE branch during sync
+
+**Dependencies**
+
+**Deprecated**
+
+
+2.4.4 (2020-10-02)
+------------------
+
+**Added**
+
+**Fixed**
+
+* Fix the pull request creation after updating syncing the TEMPLATE branch. Qube reported a :code:`FileNotFoundError` for the sync workflow file, because it tried to access this file in an empty directory.
+
+* Removed redundant sync_workflow workarounds
+
+* sync and maven test workflow yaml syntax
+
+**Dependencies**
+
+**Deprecated**
+
+
+2.4.3 (2020-10-01)
+------------------
+
+**Added**
+
+**Fixed**
+
+* Sets correct repo owner for the :code:`qube sync`
+
+**Dependencies**
+
+**Deprecated**
+
+
+2.4.2 (2020-10-01)
+------------------
+
+**Added**
+
+* Enables debug logging
+
+**Fixed**
+
+**Dependencies**
+
+**Deprecated**
+
+
+2.4.1 (2020-10-01)
+------------------
+
+**Added**
+
+**Fixed**
+
+**Dependencies**
+
+* Updated parent pom to 3.1.1
+* Updated template versions to 1.0.1
+
+**Deprecated**
 
 2.4.0 (2020-10-01)
 ------------------
