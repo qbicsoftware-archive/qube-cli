@@ -157,10 +157,11 @@ def sync(project_dir, set_token, pat, username, check_update) -> None:
     If no repository exists the TEMPLATE branch will be updated and you can merge manually.
     """
     project_dir_path = Path(f'{Path.cwd()}/{project_dir}') if not str(project_dir).startswith(str(Path.cwd())) else Path(project_dir)
+    project_data = load_yaml_file(f'{project_dir}/.qube.yml')
+
     # if set_token flag is set, update the sync token value and exit
     if set_token:
         try:
-            project_data = load_yaml_file(f'{project_dir}/.qube.yml')
             if project_data['is_github_repo']:
                 TemplateSync.update_sync_token(project_name=project_data['project_slug'], gh_username=project_data['github_username'])
             else:
@@ -173,7 +174,7 @@ def sync(project_dir, set_token, pat, username, check_update) -> None:
             sys.exit(1)
         sys.exit(0)
 
-    syncer = TemplateSync(new_template_version='', project_dir=project_dir_path, gh_username=username, token=pat)
+    syncer = TemplateSync(new_template_version='', project_dir=project_dir_path, gh_username=username, token=pat, repo_owner=project_data['github_username'])
     # check for template version updates
     major_change, minor_change, patch_change, project_template_version, qube_template_version = syncer.has_template_version_changed(project_dir_path)
     syncer.new_template_version = qube_template_version
