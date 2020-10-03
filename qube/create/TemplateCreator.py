@@ -49,16 +49,12 @@ class TemplateCreator:
         create and copy common files, fix docs style, lint the project and ask whether the user wants to create a github repo.
         """
         # create the common files and copy them into the templates directory (skip if flag is set)
-
         if not skip_common_files:
             self.create_common_files()
 
         self.create_dot_qube(template_version=self.creator_ctx.template_version)
 
-        if self.creator_ctx.language == 'python':
-            project_path = f'{self.CWD}/{self.creator_ctx.project_slug.replace("-", "_")}'
-        else:
-            project_path = f'{self.CWD}/{self.creator_ctx.project_slug}'
+        project_path = f'{self.CWD}/{self.creator_ctx.project_slug}'
 
         # Ensure that docs are looking good (skip if flag is set)
         if not skip_fix_underline:
@@ -76,14 +72,12 @@ class TemplateCreator:
 
         if subdomain:
             print()
-            print(
-                '[bold blue]Please visit: https://qube.readthedocs.io/en/latest/available_templates/available_templates.html'
-                f'#{domain}-{subdomain}-{language} for more information about how to use your chosen template.')
+            print('[bold blue]Please visit: https://qube.readthedocs.io/en/latest/available_templates/available_templates.html'
+                  f'#{domain}-{subdomain}-{language} for more information about how to use your chosen template.')
         else:
             print()
-            print(
-                '[bold blue]Please visit: https://qube.readthedocs.io/en/latest/available_templates/available_templates.html'
-                f'#{domain}-{language} for more information about how to use your chosen template.')
+            print('[bold blue]Please visit: https://qube.readthedocs.io/en/latest/available_templates/available_templates.html'
+                  f'#{domain}-{language} for more information about how to use your chosen template.')
 
     def create_template_without_subdomain(self, domain_path: str) -> None:
         """
@@ -306,8 +300,7 @@ class TemplateCreator:
                 return True
         # catch exceptions when server may be unavailable or the request timed out
         except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
-            print(
-                '[bold red]Cannot check whether name already taken on readthedocs.io because its unreachable at the moment!')
+            print('[bold red]Cannot check whether name already taken on readthedocs.io because its unreachable at the moment!')
             return False
 
     def directory_exists_warning(self) -> None:
@@ -316,13 +309,11 @@ class TemplateCreator:
         Otherwise print a warning that a directory already exists and any further action on the directory will overwrite its contents.
         """
         if is_git_repo(Path(f'{os.getcwd()}/{self.creator_ctx.project_slug}')):
-            print(
-                f'[bold red]Error: A git project named {self.creator_ctx.project_slug} already exists at [green]{os.getcwd()}\n')
+            print('[bold red]Error: A git project named {self.creator_ctx.project_slug} already exists at [green]{os.getcwd()}\n')
             print('[bold red]Aborting!')
             sys.exit(1)
         else:
-            print(
-                f'[bold yellow]WARNING: [red]A directory named {self.creator_ctx.project_slug} already exists at [blue]{os.getcwd()}\n')
+            print(f'[bold yellow]WARNING: [red]A directory named {self.creator_ctx.project_slug} already exists at [blue]{os.getcwd()}\n')
             print('Proceeding now will overwrite this directory and its content!')
 
     def create_dot_qube(self, template_version: str):

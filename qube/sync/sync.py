@@ -38,7 +38,6 @@ class TemplateSync:
     original_branch (str): Repo branch that was checked out before we started.
     made_changes (bool): Whether making the new template project introduced any changes
     gh_username (str): GitHub username
-    repo_owner (str): Owner of the repo (either orga name or personal github username)
     patch_update (bool): Whether a patch update was found for the template or not
     minor_update (bool): Whether a minor update was found for the template or not
     major_update (bool): Whether a major update was found for the template or not
@@ -51,8 +50,7 @@ class TemplateSync:
                  token=None,
                  major_update=False,
                  minor_update=False,
-                 patch_update=False,
-                 repo_owner=None):
+                 patch_update=False):
         self.project_dir = os.path.abspath(project_dir)
         self.from_branch = from_branch
         self.original_branch = None
@@ -64,7 +62,6 @@ class TemplateSync:
         self.gh_username = gh_username if gh_username else load_github_username()
         self.token = token if token else decrypt_pat()
         self.dot_qube = {}
-        self.repo_owner = repo_owner
         self.new_template_version = new_template_version
 
     def sync(self):
@@ -164,7 +161,7 @@ class TemplateSync:
         print('[bold blue]Creating a new template project.')
         # dry create run from dot_qube in tmp directory
         with tempfile.TemporaryDirectory() as tmpdirname:
-            # TODO REFACTOR THIS BY PASSING A PATH PARAM TO CHOOSE DOMAIN WHICH DEFAULTS TO CWD WHEN NOT PASSED (INITIAL CREATE)
+            # COOKIETEMPLE TODO: Refactor this by passing a path param to the create and choose_domain functions, which default to PWD if not passed
             old_cwd = str(Path.cwd())
             os.chdir(tmpdirname)
             choose_domain(domain=None, dot_qube=self.dot_qube)
@@ -222,8 +219,6 @@ class TemplateSync:
         """
         Create a pull request to a base branch from a head branch (default: TEMPLATE)
         """
-        if self.dot_qube['is_github_orga']:
-            self.repo_owner = self.dot_qube['github_orga']
         pr_title = f'Important qube template update {self.new_template_version} released!'
         pr_body_text = (
             'A new release of the main template in qube has just been released. '
@@ -251,7 +246,7 @@ class TemplateSync:
         }
 
         r = requests.post(
-            url=f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls',
+            url=f'https://api.github.com/repos/{self.gh_username}/{self.dot_qube["project_slug"]}/pulls',
             data=json.dumps(pr_content),
             auth=requests.auth.HTTPBasicAuth(self.gh_username, self.token),
         )
@@ -277,7 +272,7 @@ class TemplateSync:
 
         :return Whether a qube sync PR is already open or not
         """
-        query_url = f'https://api.github.com/repos/{self.repo_owner}/{self.dot_qube["project_slug"]}/pulls?state=open'
+        query_url = f'https://api.github.com/repos/{self.gh_username}/{self.dot_qube["project_slug"]}/pulls?state=open'
         headers = {'Authorization': f'token {self.token}'}
         # query all open PRs
         r = requests.get(query_url, headers=headers)
@@ -304,8 +299,8 @@ class TemplateSync:
             # check for proper configuration if the sync_level section (only one item named ct_sync_level with valid levels major or minor
             if len(level_item) != 1 or 'ct_sync_level' not in level_item[0][0] or not any(level_item[0][1] == valid_lvl for valid_lvl in
                                                                                           ['major', 'minor', 'patch']):
-                print('[bold red]Your sync_level section is missconfigured. Make sure that it only contains one item named ct_sync_level with only valid levels'
-                      ' patch, minor or major!')
+                print('[bold red]Your sync_level section is missconfigured. Make sure that it only contains one item named qube_sync_level'
+                      ' with only valid levels patch, minor or major!')
                 sys.exit(1)
             # check in case of minor update that level is not set to major (major case must not be handled as level is a lower bound)
             if self.patch_update:
@@ -316,8 +311,7 @@ class TemplateSync:
                 return True
         # qube.cfg file was not found or has no section sync_level
         except NoSectionError:
-            print('[bold red]Could not read from qube.cfg file. Make sure your specified path contains a qube.cfg file and has a sync_level '
-                  'section!')
+            print('[bold red]Could not read from qube.cfg file. Make sure your specified path contains a qube.cfg file and has a sync_level section!')
             sys.exit(1)
 
     def get_blacklisted_sync_globs(self) -> list:
@@ -333,8 +327,8 @@ class TemplateSync:
 
         # qube.cfg file was not found or has no section called sync_files_blacklisted
         except NoSectionError:
-            print('[bold red]Could not read from qube.cfg file. Make sure your specified path contains a qube.cfg file and has a '
-                  'sync_files_blacklisted section!')
+            print('[bold red]Could not read from qube.cfg file. '
+                  'Make sure your specified path contains a qube.cfg file and has a sync_files_blacklisted section!')
             sys.exit(1)
 
     def reset_target_dir(self):

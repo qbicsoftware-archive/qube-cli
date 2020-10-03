@@ -46,12 +46,10 @@ def create_push_github_repository(project_path: str, creator_ctx: QubeTemplateSt
         print('[bold blue]Creating Github repository')
         if creator_ctx.is_github_orga:
             org = authenticated_github_user.get_organization(creator_ctx.github_orga)
-            repo = org.create_repo(creator_ctx.project_slug, description=creator_ctx.project_short_description,
-                                   private=creator_ctx.is_repo_private)
+            repo = org.create_repo(creator_ctx.project_slug, description=creator_ctx.project_short_description, private=creator_ctx.is_repo_private)
             creator_ctx.github_username = creator_ctx.github_orga
         else:
-            repo = user.create_repo(creator_ctx.project_slug, description=creator_ctx.project_short_description,
-                                    private=creator_ctx.is_repo_private)
+            repo = user.create_repo(creator_ctx.project_slug, description=creator_ctx.project_short_description, private=creator_ctx.is_repo_private)
 
         print('[bold blue]Creating labels and default Github settings')
         create_github_labels(repo=repo, labels=[('DEPENDABOT', '1BB0CE')])
@@ -92,7 +90,7 @@ def create_push_github_repository(project_path: str, creator_ctx: QubeTemplateSt
                 "master")
             master_branch.edit_protection(dismiss_stale_reviews=True)
         else:
-            print('[bold blue]Cannot set branch protection rules due to your repository being private or an organization repository!\n'
+            print('[bold yellow]Cannot set branch protection rules due to your repository being private or an organization repository!\n'
                   'You can set it manually later on.')
 
         # git create development branch
@@ -111,8 +109,8 @@ def create_push_github_repository(project_path: str, creator_ctx: QubeTemplateSt
         print('[bold blue]Pushing template to Github origin TEMPLATE.')
         cloned_repo.remotes.origin.push(refspec='TEMPLATE:TEMPLATE')
 
-        print(f'[bold green]Successfully created a Github repository at'
-              f' https://github.com/{creator_ctx.github_username}/{creator_ctx.project_slug}')
+        print(f'[bold green]Successfully created a Github repository at '
+              f'https://github.com/{creator_ctx.github_username}/{creator_ctx.project_slug}')
 
     except (GithubException, ConnectionError) as e:
         handle_failed_github_repo_creation(e)
@@ -222,6 +220,7 @@ def get_repo_public_key(username: str, repo_name: str, token: str) -> dict:
     query_url = f'https://api.github.com/repos/{username}/{repo_name}/actions/secrets/public-key'
     headers = {'Authorization': f'token {token}'}
     r = requests.get(query_url, headers=headers)
+
     return r.json()
 
 
@@ -242,7 +241,7 @@ def create_secret(username: str, repo_name: str, token: str, public_key_value: s
         "encrypted_value": encrypted_value,
         "key_id": public_key_id
     }
-    # the authentification header
+    # the authentication header
     headers = {'Authorization': f'token {token}'}
     # the url used for PUT
     put_url = f'https://api.github.com/repos/{username}/{repo_name}/actions/secrets/QUBE_SYNC_TOKEN'
@@ -261,6 +260,7 @@ def encrypt_sync_secret(public_key: str, token: str) -> str:
     public_key = public.PublicKey(public_key.encode("utf-8"), encoding.Base64Encoder())
     sealed_box = public.SealedBox(public_key)
     encrypted = sealed_box.encrypt(token.encode("utf-8"))
+
     return b64encode(encrypted).decode("utf-8")
 
 
