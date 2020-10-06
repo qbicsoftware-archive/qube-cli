@@ -6,6 +6,10 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+**Fixed**
+
+* Faster build time by fixing the order of Maven repositories for dependency resolvement
+
 2.4.7 (2020-10-03)
 ------------------
 
