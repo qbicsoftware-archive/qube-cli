@@ -6,6 +6,27 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+
+2.5.0 (2020-10-06)
+------------------
+
+**Added**
+
+* verbose support #186
+
+**Fixed**
+
+* sync workflow now polls instead of being triggered on push #170
+* renamed branch protection workflow #190
+* refactored sync command
+* Faster build time by fixing the order of Maven repositories for dependency resolving
+* Ignore rule for Vaadin widgetsets
+
+**Dependencies**
+
+**Deprecated**
+
+
 2.4.6 (2020-10-02)
 ------------------
 

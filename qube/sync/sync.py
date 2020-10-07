@@ -49,10 +49,10 @@ class TemplateSync:
                  from_branch=None,
                  gh_username=None,
                  token=None,
+                 repo_owner=None,
                  major_update=False,
                  minor_update=False,
-                 patch_update=False,
-                 repo_owner=None):
+                 patch_update=False):
         self.project_dir = os.path.abspath(project_dir)
         self.from_branch = from_branch
         self.original_branch = None
@@ -63,8 +63,8 @@ class TemplateSync:
         self.patch_update = patch_update
         self.gh_username = gh_username if gh_username else load_github_username()
         self.token = token if token else decrypt_pat()
+        self.repo_owner = repo_owner if repo_owner else gh_username
         self.dot_qube = {}
-        self.repo_owner = repo_owner
         self.new_template_version = new_template_version
 
     def sync(self):
@@ -164,7 +164,7 @@ class TemplateSync:
         print('[bold blue]Creating a new template project.')
         # dry create run from dot_qube in tmp directory
         with tempfile.TemporaryDirectory() as tmpdirname:
-            # TODO REFACTOR THIS BY PASSING A PATH PARAM TO CHOOSE DOMAIN WHICH DEFAULTS TO CWD WHEN NOT PASSED (INITIAL CREATE)
+            # COOKIETEMPLE TODO: Refactor this by passing a path param to the create and choose_domain functions, which default to PWD if not passed
             old_cwd = str(Path.cwd())
             os.chdir(tmpdirname)
             choose_domain(domain=None, dot_qube=self.dot_qube)
@@ -268,7 +268,8 @@ class TemplateSync:
 
         # Something went wrong
         else:
-            print(f'GitHub API returned code {r.status_code}: \n{returned_data_prettyprint}')
+            print(f'[bold red]GitHub API returned code {r.status_code}')
+            print(returned_data_prettyprint)
             sys.exit(1)
 
     def check_pull_request_exists(self) -> bool:
@@ -304,8 +305,8 @@ class TemplateSync:
             # check for proper configuration if the sync_level section (only one item named ct_sync_level with valid levels major or minor
             if len(level_item) != 1 or 'ct_sync_level' not in level_item[0][0] or not any(level_item[0][1] == valid_lvl for valid_lvl in
                                                                                           ['major', 'minor', 'patch']):
-                print('[bold red]Your sync_level section is missconfigured. Make sure that it only contains one item named ct_sync_level with only valid levels'
-                      ' patch, minor or major!')
+                print('[bold red]Your sync_level section is missconfigured. Make sure that it only contains one item named qube_sync_level'
+                      ' with only valid levels patch, minor or major!')
                 sys.exit(1)
             # check in case of minor update that level is not set to major (major case must not be handled as level is a lower bound)
             if self.patch_update:
@@ -316,8 +317,7 @@ class TemplateSync:
                 return True
         # qube.cfg file was not found or has no section sync_level
         except NoSectionError:
-            print('[bold red]Could not read from qube.cfg file. Make sure your specified path contains a qube.cfg file and has a sync_level '
-                  'section!')
+            print('[bold red]Could not read from qube.cfg file. Make sure your specified path contains a qube.cfg file and has a sync_level section!')
             sys.exit(1)
 
     def get_blacklisted_sync_globs(self) -> list:
@@ -333,8 +333,8 @@ class TemplateSync:
 
         # qube.cfg file was not found or has no section called sync_files_blacklisted
         except NoSectionError:
-            print('[bold red]Could not read from qube.cfg file. Make sure your specified path contains a qube.cfg file and has a '
-                  'sync_files_blacklisted section!')
+            print('[bold red]Could not read from qube.cfg file. '
+                  'Make sure your specified path contains a qube.cfg file and has a sync_files_blacklisted section!')
             sys.exit(1)
 
     def reset_target_dir(self):
@@ -349,14 +349,14 @@ class TemplateSync:
             sys.exit(1)
 
     @staticmethod
-    def update_sync_token(project_name: str, gh_username='') -> None:
+    def update_sync_token(project_name: str, gh_username: str = '') -> None:
         """
         Update the sync token secret for the repository.
         :param project_name Name of the users project
-        :param gh_username The Github username (only gets passed, if the repo is an orga repo)
+        :param gh_username The Github username (only gets passed, if the repo is an organization repo)
         """
         gh_username = load_yaml_file(ConfigCommand.CONF_FILE_PATH)['github_username'] if not gh_username else gh_username
-        # get the personal access token for user authentification
+        # get the personal access token for user authentication
         updated_sync_token = qube_questionary_or_dot_qube('password', 'Please enter your updated sync token value')
         print(f'[bold blue]\nUpdating sync secret for project {project_name}.')
         create_sync_secret(gh_username, project_name, updated_sync_token)
