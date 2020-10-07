@@ -20,6 +20,7 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 * renamed branch protection workflow #190
 * refactored sync command
 * Faster build time by fixing the order of Maven repositories for dependency resolving
+* Ignore rule for Vaadin widgetsets
 
 **Dependencies**
 
