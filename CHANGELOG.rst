@@ -6,11 +6,22 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
+
+2.5.1 (2020-10-16)
+------------------
+
+**Added**
+
 **Fixed**
 
-* Faster build time by fixing the order of Maven repositories for dependency resolvement
+* qube lint now wraps too long lines
 
-2.4.7 (2020-10-03)
+**Dependencies**
+
+**Deprecated**
+
+
+2.5.0 (2020-10-06)
 ------------------
 
 **Added**
@@ -21,6 +32,9 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 * sync workflow now polls instead of being triggered on push #170
 * renamed branch protection workflow #190
+* refactored sync command
+* Faster build time by fixing the order of Maven repositories for dependency resolving
+* Ignore rule for Vaadin widgetsets
 
 **Dependencies**
 

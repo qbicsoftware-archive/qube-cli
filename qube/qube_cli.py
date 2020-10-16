@@ -48,7 +48,7 @@ def main():
 
 
 @click.group(cls=HelpErrorHandling)
-@click.version_option(qube.__version__, message=click.style(f'mlf-core Version: {qube.__version__}', fg='blue'))
+@click.version_option(qube.__version__, message=click.style(f'qube Version: {qube.__version__}', fg='blue'))
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Enable verbose output (print debug statements).')
 @click.option("-l", "--log-file", help="Save a verbose log to a file.")
 @click.pass_context
@@ -144,7 +144,7 @@ def info(ctx, handle: str) -> None:
 @qube_cli.command(short_help='Sync your project with the latest template release.', cls=CustomHelpSubcommand)
 @click.argument('project_dir', type=str, default=Path(f'{Path.cwd()}'), helpmsg='The projects top level directory you would like to sync. Default is current '
                                                                                 'working directory.', cls=CustomArg)
-@click.option('--set-token', '-st', is_flag=True, help='Set sync token to a new personal access token of the current repo owner.')
+@click.option('--set-token', '-st', is_flag=True, help='Set sync token to a new personal access token of the current repository owner.')
 @click.argument('pat', type=str, required=False, helpmsg='Personal access token. Not needed for manual, local syncing!', cls=CustomArg)
 @click.argument('username', type=str, required=False, helpmsg='Github username. Not needed for manual, local syncing!', cls=CustomArg)
 @click.option('--check-update', '-ch', is_flag=True, help='Check whether a new template version is available for your project.')
@@ -157,49 +157,47 @@ def sync(project_dir, set_token, pat, username, check_update) -> None:
     If no repository exists the TEMPLATE branch will be updated and you can merge manually.
     """
     project_dir_path = Path(f'{Path.cwd()}/{project_dir}') if not str(project_dir).startswith(str(Path.cwd())) else Path(project_dir)
+    project_data = load_yaml_file(f'{project_dir}/.qube.yml')
+
     # if set_token flag is set, update the sync token value and exit
     if set_token:
         try:
-            project_data = load_yaml_file(f'{project_dir}/.qube.yml')
-            repo_owner = project_data['github_username']
-            # if project is an orga repo, pass orga name as username
-            if project_data['is_github_repo'] and project_data['is_github_orga']:
-                TemplateSync.update_sync_token(project_name=project_data['project_slug'], gh_username=project_data['github_orga'], repo_owner=repo_owner)
-            # if not, use default username
-            elif project_data['is_github_repo']:
-                TemplateSync.update_sync_token(project_name=project_data['project_slug'], repo_owner=repo_owner)
+            if project_data['is_github_repo']:
+                TemplateSync.update_sync_token(project_name=project_data['project_slug'], gh_username=project_data['github_username'])
             else:
                 print('[bold red]Your current project does not seem to have a Github repository!')
                 sys.exit(1)
-        except (FileNotFoundError, KeyError):
-            print(f'[bold red]Your token value is not a valid personal access token for your account or there exists no .qube.yml file at '
-                  f'{project_dir_path}. Is this a qube project?')
+        except FileNotFoundError:
+            print(f'[bold red]There exists no .qube.yml file at {project_dir_path}. Is this a qube project?')
+        except KeyError:
+            print('[bold red]Your token value is not a valid personal access token for your account.')
             sys.exit(1)
         sys.exit(0)
 
-    syncer = TemplateSync(new_template_version='', project_dir=project_dir_path, gh_username=username, token=pat)
+    syncer = TemplateSync(new_template_version='', project_dir=project_dir_path, gh_username=username, token=pat, repo_owner=project_data['github_username'])
     # check for template version updates
-    major_change, minor_change, patch_change, proj_template_version, qube_template_version = syncer.has_template_version_changed(project_dir_path)
+    major_change, minor_change, patch_change, project_template_version, qube_template_version = syncer.has_template_version_changed(project_dir_path)
     syncer.new_template_version = qube_template_version
     # check for user without actually syncing
     if check_update:
         # a template update has been released by qube
         if any(change for change in (major_change, minor_change, patch_change)):
-            print(f'[bold blue]Your templates version received an update from {proj_template_version} to {qube_template_version}!\n'
+            print(f'[bold blue]Your templates version received an update from {project_template_version} to {qube_template_version}!\n'
                   f' Use [green]qube sync [blue]to sync your project')
-        # no updates were found
         else:
             print('[bold blue]Using the latest template version. No sync required.')
         # exit without syncing
         sys.exit(0)
+
     # set sync flags indicating a major, minor or patch update
     syncer.major_update = major_change
     syncer.minor_update = minor_change
     syncer.patch_update = patch_change
-    # sync the project if any changes
+
+    # sync the project if any changes were detected
     if any(change for change in (major_change, minor_change, patch_change)):
+        # If required sync level is set -> sync
         if syncer.check_sync_level():
-            # check if a pull request should be created according to set level constraints
             syncer.sync()
         else:
             print('[bold red]Aborting sync due to set level constraints. '
