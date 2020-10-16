@@ -14,6 +14,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Fixed**
 
+* qube lint now wraps too long lines
+
 **Dependencies**
 
 **Deprecated**
