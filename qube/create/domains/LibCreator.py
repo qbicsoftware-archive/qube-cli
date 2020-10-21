@@ -34,7 +34,7 @@ class LibCreator(TemplateCreator):
         """
         self.lib_struct.language = qube_questionary_or_dot_qube(function='select',
                                                                 question='Choose the project\'s primary language',
-                                                                choices=['java','groovy'],
+                                                                choices=['java', 'groovy'],
                                                                 default='groovy',
                                                                 dot_qube=dot_qube,
                                                                 to_get_property='language')
