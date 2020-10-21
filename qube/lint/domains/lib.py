@@ -47,6 +47,7 @@ class LibJavaLint(TemplateLinter, metaclass=GetLintingFunctionsMeta):
 
         files_exist_linting(self, files_fail, files_fail_ifexists, files_warn, files_warn_ifexists)
 
+
 class LibGroovyLint(TemplateLinter, metaclass=GetLintingFunctionsMeta):
     def __init__(self, path):
         super().__init__(path)
