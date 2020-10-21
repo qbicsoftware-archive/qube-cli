@@ -1,5 +1,8 @@
 package life.qbic.example
 
+import org.osgi.framework.BundleActivator
+import org.osgi.framework.BundleContext
+
 class Activator implements BundleActivator{
 
     @Override
