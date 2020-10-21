@@ -35,7 +35,7 @@ class LibCreator(TemplateCreator):
         self.lib_struct.language = qube_questionary_or_dot_qube(function='select',
                                                                 question='Choose the project\'s primary language',
                                                                 choices=['java','groovy'],
-                                                                default='groocy',
+                                                                default='groovy',
                                                                 dot_qube=dot_qube,
                                                                 to_get_property='language')
 
@@ -45,6 +45,7 @@ class LibCreator(TemplateCreator):
         # switch case statement to prompt the user to fetch template specific configurations
         switcher = {
             'java': self.lib_java_options,
+            'groovy': self.lib_groovy_options
         }
         switcher.get(self.lib_struct.language)(dot_qube)
 
@@ -71,4 +72,8 @@ class LibCreator(TemplateCreator):
 
     def lib_java_options(self, dot_qube: dict or None) -> None:
         """ Prompts for lib-java specific options and saves them into the QubeTemplateStruct """
+        pass
+
+    def lib_groovy_options(self, dot_qube: dict or None) -> None:
+        """ Prompts for lib-groovy specific options and saves them into the QubeTemplateStruct """
         pass

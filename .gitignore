@@ -130,6 +130,7 @@ dmypy.json
 # Jetbrains IDE
 .idea/
 *.iml
+.DS_Store
 
 # Coala
 *.orig
