@@ -26,7 +26,7 @@ class LibCreator(TemplateCreator):
         self.TEMPLATES_LIB_PATH = f'{self.WD_Path.parent}/templates/lib'
 
         '"" TEMPLATE VERSIONS ""'
-        self.LIB_JAVA_TEMPLATE_VERSION = load_qube_template_version('lib-java', self.AVAILABLE_TEMPLATES_PATH)
+        self.LIB_JAVA_TEMPLATE_VERSION = load_qube_template_version('lib-groovy', self.AVAILABLE_TEMPLATES_PATH)
 
     def create_template(self, dot_qube: dict or None):
         """
@@ -34,8 +34,8 @@ class LibCreator(TemplateCreator):
         """
         self.lib_struct.language = qube_questionary_or_dot_qube(function='select',
                                                                 question='Choose the project\'s primary language',
-                                                                choices=['java'],
-                                                                default='java',
+                                                                choices=['java','groovy'],
+                                                                default='groocy',
                                                                 dot_qube=dot_qube,
                                                                 to_get_property='language')
 
