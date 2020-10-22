@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Build QUBE
+      - name: Build qube
         run: |
           python setup.py clean --all install
 
@@ -30,7 +30,7 @@ jobs:
       - name: Build Package
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 1.11
           name: Build with Maven
           run: |
             cd ExplodingSpringfield
