@@ -4,7 +4,7 @@ lib-groovy
 Purpose
 ^^^^^^^^
 
-| cli-lib is by design more open end than the other templates.
+| lib-groovy is by design more open end than the other templates.
   The goal of a cli-lib project is not to be run as a standalone, but rather to be included as a library in other JVM based projects.
 
 Design

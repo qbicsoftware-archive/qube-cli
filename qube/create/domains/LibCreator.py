@@ -26,9 +26,11 @@ class LibCreator(TemplateCreator):
         self.TEMPLATES_LIB_PATH = f'{self.WD_Path.parent}/templates/lib'
 
         '"" TEMPLATE VERSIONS ""'
-        self.LIB_JAVA_TEMPLATE_VERSION = load_qube_template_version('lib-groovy', self.AVAILABLE_TEMPLATES_PATH)
+        self.LIB_JAVA_TEMPLATE_VERSION = load_qube_template_version('lib-java', self.AVAILABLE_TEMPLATES_PATH)
+        self.LIB_GROOVY_TEMPLATE_VERSION = load_qube_template_version('lib-groovy', self.AVAILABLE_TEMPLATES_PATH)
 
-    def create_template(self, dot_qube: dict or None):
+
+def create_template(self, dot_qube: dict or None):
         """
         Handles the CLI domain. Prompts the user for the language, general and domain specific options.
         """
@@ -62,7 +64,8 @@ class LibCreator(TemplateCreator):
 
         # switch case statement to fetch the template version
         switcher_version = {
-            'java': self.LIB_JAVA_TEMPLATE_VERSION
+            'java': self.LIB_JAVA_TEMPLATE_VERSION,
+            'groovy': self.LIB_GROOVY_TEMPLATE_VERSION
         }
         self.lib_struct.template_version, self.lib_struct.template_handle = switcher_version.get(
             self.lib_struct.language), f'lib-{self.lib_struct.language.lower()}'
