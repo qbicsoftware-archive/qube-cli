@@ -55,7 +55,7 @@ class LibGroovyLint(TemplateLinter, metaclass=GetLintingFunctionsMeta):
     def lint(self):
         super().lint_project(self, self.methods)
 
-    def java_files_exist(self) -> None:
+    def groovy_files_exist(self) -> None:
         """
         Checks a given pipeline directory for required files.
         Iterates through the templates's directory content and checkmarks files for presence.
