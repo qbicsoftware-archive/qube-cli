@@ -6,23 +6,6 @@ Changelog
 
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
-2.5.2 (2020-10-21)
-------------------
-
-**Added**
-
-* new template for groovy libraries with qube
-
-* upgrade to java 11 in this library
-
-* the groovy library supports the OSGi framework
-
-**Fixed**
-
-**Dependencies**
-
-**Deprecated**
-
 
 2.5.1 (2020-10-16)
 ------------------
