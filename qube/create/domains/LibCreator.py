@@ -29,7 +29,6 @@ class LibCreator(TemplateCreator):
         self.LIB_JAVA_TEMPLATE_VERSION = load_qube_template_version('lib-java', self.AVAILABLE_TEMPLATES_PATH)
         self.LIB_GROOVY_TEMPLATE_VERSION = load_qube_template_version('lib-groovy', self.AVAILABLE_TEMPLATES_PATH)
 
-
     def create_template(self, dot_qube: dict or None):
         """
         Handles the CLI domain. Prompts the user for the language, general and domain specific options.
