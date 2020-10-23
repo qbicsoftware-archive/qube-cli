@@ -31,16 +31,18 @@ class PortletCreator(TemplateCreator):
 
         '"" TEMPLATE VERSIONS ""'
         self.PORTLET_GROOVY_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy', self.AVAILABLE_TEMPLATES_PATH)
+        self.PORTLET_GROOVY_OSGI_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy-osgi', self.AVAILABLE_TEMPLATES_PATH)
 
-    def create_template(self, dot_qube: dict or None):
+
+def create_template(self, dot_qube: dict or None):
         """
         Handles the PORTLET domain. Prompts the user for the language, general and domain specific options.
         """
 
         self.portlet_struct.language = qube_questionary_or_dot_qube(function='select',
                                                                     question='Choose the project\'s primary language',
-                                                                    choices=['groovy'],
-                                                                    default='groovy',
+                                                                    choices=['groovy','groovy_osgi'],
+                                                                    default='groovy_osgi',
                                                                     dot_qube=dot_qube,
                                                                     to_get_property='language')
 
@@ -66,7 +68,8 @@ class PortletCreator(TemplateCreator):
 
         # switch case statement to fetch the template version
         switcher_version = {
-            'groovy': self.PORTLET_GROOVY_TEMPLATE_VERSION
+            'groovy': self.PORTLET_GROOVY_TEMPLATE_VERSION,
+            'groovy_osgi': self.PORTLET_GROOVY_OSGI_TEMPLATE_VERSION
         }
         self.portlet_struct.template_version, self.portlet_struct.template_handle = switcher_version.get(
             self.portlet_struct.language), f'portlet-{self.portlet_struct.language.lower()}'
@@ -101,3 +104,13 @@ class PortletCreator(TemplateCreator):
                                                                                       default='no',
                                                                                       dot_qube=dot_qube,
                                                                                       to_get_property='use_vaadin_charts') else 'no'
+
+
+    def portlet_groovy_osgi_options(self, dot_qube: dict or None) -> None:
+        """ Prompts for portlet-groovy specific options and saves them into the QubeTemplateStruct """
+        self.portlet_struct.main_class_prefix = qube_questionary_or_dot_qube(function='text',
+                                                                             question='Main class prefix',
+                                                                             default='Qbic',
+                                                                             dot_qube=dot_qube,
+                                                                             to_get_property='main_class_prefix')
+
