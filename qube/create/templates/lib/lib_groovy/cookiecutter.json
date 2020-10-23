@@ -4,6 +4,7 @@
     "project_name": "sample-lib",
     "project_slug": "sample-lib",
     "version": "0.1.0-SNAPSHOT",
-    "project_short_description": "Groovy based library "
+    "project_short_description": "Groovy based library ",
+    "license": "MIT"
 }
 
