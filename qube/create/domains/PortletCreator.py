@@ -34,7 +34,7 @@ class PortletCreator(TemplateCreator):
         self.PORTLET_GROOVY_OSGI_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy-osgi', self.AVAILABLE_TEMPLATES_PATH)
 
 
-def create_template(self, dot_qube: dict or None):
+    def create_template(self, dot_qube: dict or None):
         """
         Handles the PORTLET domain. Prompts the user for the language, general and domain specific options.
         """
@@ -52,6 +52,7 @@ def create_template(self, dot_qube: dict or None):
         # switch case statement to prompt the user to fetch template specific configurations
         switcher = {
             'groovy': self.portlet_groovy_options,
+            'groovy_osgi': self.portlet_groovy_osgi_options
         }
         switcher.get(self.portlet_struct.language)(dot_qube)
 
