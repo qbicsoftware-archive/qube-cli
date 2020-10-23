@@ -73,10 +73,10 @@ def create_template(self, dot_qube: dict or None):
         # perform general operations like creating a GitHub repository and general linting
         super().process_common_operations(domain='lib', language=self.lib_struct.language, dot_qube=dot_qube)
 
-    def lib_java_options(self, dot_qube: dict or None) -> None:
-        """ Prompts for lib-java specific options and saves them into the QubeTemplateStruct """
-        pass
+def lib_java_options(self, dot_qube: dict or None) -> None:
+    """ Prompts for lib-java specific options and saves them into the QubeTemplateStruct """
+    pass
 
-    def lib_groovy_options(self, dot_qube: dict or None) -> None:
-        """ Prompts for lib-groovy specific options and saves them into the QubeTemplateStruct """
-        pass
+def lib_groovy_options(self, dot_qube: dict or None) -> None:
+    """ Prompts for lib-groovy specific options and saves them into the QubeTemplateStruct """
+    pass
