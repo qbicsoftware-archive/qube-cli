@@ -30,7 +30,7 @@ class LibCreator(TemplateCreator):
         self.LIB_GROOVY_TEMPLATE_VERSION = load_qube_template_version('lib-groovy', self.AVAILABLE_TEMPLATES_PATH)
 
 
-def create_template(self, dot_qube: dict or None):
+    def create_template(self, dot_qube: dict or None):
         """
         Handles the CLI domain. Prompts the user for the language, general and domain specific options.
         """
@@ -73,10 +73,12 @@ def create_template(self, dot_qube: dict or None):
         # perform general operations like creating a GitHub repository and general linting
         super().process_common_operations(domain='lib', language=self.lib_struct.language, dot_qube=dot_qube)
 
-def lib_java_options(self, dot_qube: dict or None) -> None:
-    """ Prompts for lib-java specific options and saves them into the QubeTemplateStruct """
-    pass
 
-def lib_groovy_options(self, dot_qube: dict or None) -> None:
-    """ Prompts for lib-groovy specific options and saves them into the QubeTemplateStruct """
-    pass
+    def lib_java_options(self, dot_qube: dict or None) -> None:
+        """ Prompts for lib-java specific options and saves them into the QubeTemplateStruct """
+        pass
+
+
+    def lib_groovy_options(self, dot_qube: dict or None) -> None:
+        """ Prompts for lib-groovy specific options and saves them into the QubeTemplateStruct """
+        pass
