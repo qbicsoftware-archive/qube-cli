@@ -33,7 +33,6 @@ class PortletCreator(TemplateCreator):
         self.PORTLET_GROOVY_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy', self.AVAILABLE_TEMPLATES_PATH)
         self.PORTLET_GROOVY_OSGI_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy_osgi', self.AVAILABLE_TEMPLATES_PATH)
 
-
     def create_template(self, dot_qube: dict or None):
         """
         Handles the PORTLET domain. Prompts the user for the language, general and domain specific options.
@@ -41,7 +40,7 @@ class PortletCreator(TemplateCreator):
 
         self.portlet_struct.language = qube_questionary_or_dot_qube(function='select',
                                                                     question='Choose the project\'s primary language',
-                                                                    choices=['groovy','groovy_osgi'],
+                                                                    choices=['groovy', 'groovy_osgi'],
                                                                     default='groovy_osgi',
                                                                     dot_qube=dot_qube,
                                                                     to_get_property='language')
@@ -106,7 +105,6 @@ class PortletCreator(TemplateCreator):
                                                                                       default='no',
                                                                                       dot_qube=dot_qube,
                                                                                       to_get_property='use_vaadin_charts') else 'no'
-
 
     def portlet_groovy_osgi_options(self, dot_qube: dict or None) -> None:
         """ Prompts for portlet-groovy specific options and saves them into the QubeTemplateStruct """
