@@ -113,4 +113,3 @@ class PortletCreator(TemplateCreator):
                                                                              default='Qbic',
                                                                              dot_qube=dot_qube,
                                                                              to_get_property='main_class_prefix')
-
