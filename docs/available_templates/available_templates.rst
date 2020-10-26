@@ -20,6 +20,7 @@ It is recommended to use the sidebar to navigate this documentation, since it is
 .. include:: cli_java.rst
 .. include:: gui_java.rst
 .. include:: lib_java.rst
+.. include:: lib_groovy.rst
 .. include:: service_java.rst
 .. include:: portlet_groovy.rst
 .. include:: portlet_groovy_osgi.rst
