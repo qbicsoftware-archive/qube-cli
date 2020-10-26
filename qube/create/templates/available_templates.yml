@@ -17,6 +17,17 @@ lib:
         long description: A template for Java based libraries, which provide functionalities to other projects.
             Projects created with this template should not be run as a standalone,
             but rather be included in other projects and ease the developer's experience.
+
+    groovy:
+        name: Generic Groovy Library
+        handle: lib-groovy
+        version: 1.0.0
+        available libraries: none
+        short description: Generic library for Groovy based projects
+        long description: A template for Groovy based libraries, which provide functionalities to other projects.
+            Projects created with this template should not be run as a standalone,
+            but rather be included in other projects and ease the developer's experience.
+
 gui:
     java:
         name: JavaFX based GUI
