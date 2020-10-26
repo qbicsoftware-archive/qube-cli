@@ -31,7 +31,7 @@ class PortletCreator(TemplateCreator):
 
         '"" TEMPLATE VERSIONS ""'
         self.PORTLET_GROOVY_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy', self.AVAILABLE_TEMPLATES_PATH)
-        self.PORTLET_GROOVY_OSGI_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy-osgi', self.AVAILABLE_TEMPLATES_PATH)
+        self.PORTLET_GROOVY_OSGI_TEMPLATE_VERSION = load_qube_template_version('portlet-groovy_osgi', self.AVAILABLE_TEMPLATES_PATH)
 
 
     def create_template(self, dot_qube: dict or None):
@@ -64,6 +64,7 @@ class PortletCreator(TemplateCreator):
 
         if self.portlet_struct.is_github_orga:
             self.portlet_struct.github_username = self.portlet_struct.github_orga
+
         # create the chosen and configured template
         super().create_template_without_subdomain(self.TEMPLATES_Portlet_PATH)
 

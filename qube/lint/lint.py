@@ -27,7 +27,7 @@ def lint_project(project_dir: str, is_create: bool = False) -> TemplateLinter:
         'gui-java': GuiJavaLint,
         'service-java': ServiceJavaLint,
         'portlet-groovy': PortletGroovyLint,
-        'portlet-groovy-osgi': PortletGroovyOsgiLint
+        'portlet-groovy_osgi': PortletGroovyOsgiLint
     }
 
     try:
