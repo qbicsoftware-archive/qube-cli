@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.ServiceScope;
     scope = ServiceScope.PROTOTYPE)  // New instance created for each distinct request. Mandatory.
 class {{ cookiecutter.main_class_prefix }}PortletUI extends UI {
 
-    private static final Log log = LogFactoryUtil.getLog(MyPortletUI.class)
+    private static final Log log = LogFactoryUtil.getLog({{ cookiecutter.main_class_prefix }}PortletUI.class)
 
     // Get Bundle metadata at runtime
     //private static final Bundle bundle = FrameworkUtil.getBundle(MyPortletUI.class);
