@@ -114,7 +114,7 @@ During the creation you will be asked whether or not you want to use the
     2. :code:`groovy_checkstyle.yml`, which runs `npm-groovy-lint <https://github.com/nvuillam/npm-groovy-lint>`_, which can be seen as a wrapper around `CodeNarc <https://codenarc.github.io/CodeNarc/>`_.
     3. :code:`run_test.yml`, which runs all `junit4 <https://junit.org/junit4/>`_ tests.
     4. :code:`qube_lint.yml`, which runs QUBE's linting on the project.
-    5. :code:`pr_to_master_from_development_only.yml` which fails if a pull request from master does not come from development
+    5. :code:`pr_to_master_from_development_only.yml` which fails iif the PR does not come from a release or hotfix branch
 
 Usage
 ^^^^^^^^

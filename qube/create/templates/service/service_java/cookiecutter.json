@@ -4,6 +4,7 @@
     "project_name": "sample-cli",
     "project_slug": "sample-cli",
     "main_class_prefix": "Sample",
+    "license": "MIT",
     "version": "0.1.0-SNAPSHOT",
     "project_short_description": "Service to..."
 }

@@ -3,6 +3,7 @@
     "email": "homer.simpson@qbic.uni-tuebingen.de",
     "project_name": "sample-cli",
     "project_slug": "sample-cli",
+    "license": "MIT",
     "main_class_prefix": "Sample",
     "version": "0.1.0-SNAPSHOT",
     "project_short_description": "Command-line utility to..."
