@@ -18,7 +18,6 @@ def load_qube_template_version(handle: str, yaml_path: str) -> str:
     if len(parts) == 2:
         return available_templates[parts[0]][parts[1]]['version']
     elif len(parts) == 3:
-        print(available_templates)
         return available_templates[parts[0]][parts[1]][parts[2]]['version']
 
 
