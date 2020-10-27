@@ -17,7 +17,7 @@
 
 		<init-param>
 			<param-name>UI</param-name>
-			<param-value>life.qbic.portal.portlet.{{ cookiecutter.main_class_prefix }}Portlet</param-value>
+			<param-value>life.qbic.portal.portlet.MyPortletUI</param-value>
 		</init-param>
 
 	</servlet>
