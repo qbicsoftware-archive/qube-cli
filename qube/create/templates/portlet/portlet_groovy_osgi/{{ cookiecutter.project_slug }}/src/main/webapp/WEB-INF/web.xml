@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	
+	<!-- Set to false only if you know what you are doing. -->
+	<!-- You don't know what you're doing but want to know? 
+		 Check this out: https://vaadin.com/docs/v7/framework/advanced/advanced-debug.html#advanced.debug -->
+	<context-param>
+  		<param-name>productionMode</param-name>
+  		<param-value>true</param-value>
+	</context-param>
+
+	<display-name>${project.name}</display-name>
+	<servlet>
+		<servlet-name>${project.artifactId}</servlet-name>
+		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
+
+		<init-param>
+			<param-name>UI</param-name>
+			<param-value>life.qbic.portal.portlet.{{ cookiecutter.main_class_prefix }}Portlet</param-value>
+		</init-param>
+
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>${project.artifactId}</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>
