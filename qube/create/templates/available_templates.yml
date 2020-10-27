@@ -55,3 +55,11 @@ portlet:
         short description: Vaadin based portlet, which build the foundation of QBiC's web presence
         long description: Portlets are web-based components, which process requests and create dynamic content.
             The backend and frontend of this template is based on Vaadin 8 (https://vaadin.com/vaadin-8).
+    groovy_osgi:
+        name: Portlet
+        handle: portlet-groovy_osgi
+        version: 1.0.3
+        available libraries: Vaadin
+        short description: Vaadin based portlet, which build the foundation of QBiC's web presence
+        long description: Portlets are web-based components, which process requests and create dynamic content.
+            The backend and frontend of this template is based on Vaadin 8 (https://vaadin.com/vaadin-8).
