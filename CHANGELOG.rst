@@ -12,11 +12,18 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Add template for OSGi Groovy library bundles
+* Add template for OSGi Groovy portlet bundles
+
 **Fixed**
+
+* Fix missing license property bug, that showed up if the license placeholder was referenced in a template.
 
 **Dependencies**
 
 **Deprecated**
+
+* Java 8, templates now build with JDK 11.
 
 
 2.5.1 (2020-10-16)
