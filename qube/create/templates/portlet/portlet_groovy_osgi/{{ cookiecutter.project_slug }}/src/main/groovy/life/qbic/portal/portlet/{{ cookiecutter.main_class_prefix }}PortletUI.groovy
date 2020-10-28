@@ -1,21 +1,21 @@
 package life.qbic.portal.portlet
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.Log
+import com.liferay.portal.kernel.log.LogFactoryUtil
 
-import com.vaadin.annotations.Theme;
-import com.vaadin.icons.VaadinIcons;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinService;
-import com.vaadin.shared.ui.ContentMode;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.annotations.Theme
+import com.vaadin.icons.VaadinIcons
+import com.vaadin.server.VaadinRequest
+import com.vaadin.server.VaadinService
+import com.vaadin.shared.ui.ContentMode
+import com.vaadin.ui.*
+import com.vaadin.ui.themes.ValoTheme
 
 
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.ServiceScope;
+import org.osgi.framework.Bundle
+import org.osgi.framework.FrameworkUtil
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.ServiceScope
 
 
 @Theme("mytheme")
@@ -89,7 +89,7 @@ class {{ cookiecutter.main_class_prefix }}PortletUI extends UI {
         layout.setSpacing(true)
         layout.addComponents(buttonRow, textArea)
 
-        return layout;
+        return layout
     }
 
     private void addPortletInfo(final Layout layout) {
