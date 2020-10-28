@@ -90,12 +90,13 @@
 
 	<dependencies>
         <!-- Example OSGi bundle dependency -->
-        <!--<dependency>
-      <groupId>life.qbic</groupId>
-      <artifactId>example-osgi-library</artifactId>
-      <version>1.0.0</version>
-      <scope>provided</scope>
-    </dependency>-->
+        <dependency>
+            <groupId>life.qbic</groupId>
+            <artifactId>example-osgi-library</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
         <!-- Vaadin dependencies -->
         <dependency>
             <groupId>com.vaadin</groupId>
