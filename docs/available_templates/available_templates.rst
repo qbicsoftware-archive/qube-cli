@@ -9,8 +9,10 @@ qube currently has the following templates available:
 1. `cli-java`_
 2. `gui-java`_
 3. `lib-java`_
-4. `service-java`_
-5. `portlet-groovy`_
+4. `lib-groovy`_
+5. `service-java`_
+6. `portlet-groovy`_
+7. `portlet-groovy-osgi`_
 
 In the following every template is devoted its own section, which explains its purpose, design, included frameworks/libraries, usage and frequently asked questions.
 A set of frequently questions, which all templates share see here: :ref:`all_templates_faq` FAQ.
@@ -19,8 +21,11 @@ It is recommended to use the sidebar to navigate this documentation, since it is
 .. include:: cli_java.rst
 .. include:: gui_java.rst
 .. include:: lib_java.rst
+.. include:: lib_groovy.rst
 .. include:: service_java.rst
 .. include:: portlet_groovy.rst
+.. include:: portlet_groovy_osgi.rst
+
 
 .. _all_templates_faq:
 

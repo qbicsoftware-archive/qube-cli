@@ -7,6 +7,8 @@ from qube.lint.TemplateLinter import TemplateLinter
 from qube.lint.domains.cli import CliJavaLint
 from qube.lint.domains.gui import GuiJavaLint
 from qube.lint.domains.lib import LibJavaLint
+from qube.lint.domains.portlet import PortletGroovyOsgiLint
+from qube.lint.domains.lib import LibGroovyLint
 from qube.lint.domains.portlet import PortletGroovyLint
 from qube.lint.domains.service import ServiceJavaLint
 
@@ -23,9 +25,11 @@ def lint_project(project_dir: str, is_create: bool = False) -> TemplateLinter:
     switcher = {
         'cli-java': CliJavaLint,
         'lib-java': LibJavaLint,
+        'lib-groovy': LibGroovyLint,
         'gui-java': GuiJavaLint,
         'service-java': ServiceJavaLint,
-        'portlet-groovy': PortletGroovyLint
+        'portlet-groovy': PortletGroovyLint,
+        'portlet-groovy_osgi': PortletGroovyOsgiLint
     }
 
     try:

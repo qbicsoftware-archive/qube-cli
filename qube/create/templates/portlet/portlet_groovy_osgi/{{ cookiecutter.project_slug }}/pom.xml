@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <groupId>life.qbic</groupId>
+	<artifactId>{{ cookiecutter.project_slug }}</artifactId>
+	<version>{{ cookiecutter.version }}</version> <!-- <<QUBE_FORCE_BUMP>> -->
+	<name>{{ cookiecutter.project_name }}</name>
+	<url>http://github.com/qbicsoftware/{{ cookiecutter.project_slug }}</url>
+	<description>{{ cookiecutter.project_short_description }}</description>
+    <packaging>${packaging.type}</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <liferay.version>7.3.5</liferay.version>
+        <vaadin.version>8.11.1</vaadin.version>
+        <vaadin.plugin.version>8.11.1</vaadin.plugin.version>
+        <biz.aQute.bndlib.version>5.1.2</biz.aQute.bndlib.version>
+    </properties>
+
+    <repositories>
+        <!-- Liferay Public Repo -->
+        <repository>
+            <id>liferay-public</id>
+            <url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
+        </repository>
+
+        <!-- QBiC Nexus Repo -->
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <id>nexus-snapshots</id>
+            <name>QBiC Snapshots</name>
+            <url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>nexus-releases</id>
+            <name>QBiC Releases</name>
+            <url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.liferay.portal</groupId>
+                <artifactId>release.portal.bom</artifactId>
+                <version>${liferay.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-bom</artifactId>
+                <version>3.0.6</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+	<dependencies>
+        <!-- Example OSGi bundle dependency -->
+        <!--<dependency>
+      <groupId>life.qbic</groupId>
+      <artifactId>example-osgi-library</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>-->
+        <!-- Vaadin dependencies -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-server</artifactId>
+            <scope>${osgi.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-themes</artifactId>
+            <scope>${osgi.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-client-compiled</artifactId>
+            <scope>${osgi.scope}</scope>
+        </dependency>
+
+        <!-- javax dependencies -->
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Liferay dependencies -->
+        <dependency>
+            <groupId>com.liferay.portal</groupId>
+            <artifactId>com.liferay.portal.kernel</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- OSGi Dependencies -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.core</artifactId>
+            <version>6.0.0</version>
+            <scope>${osgi.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.annotation</artifactId>
+            <version>6.0.1</version>
+            <scope>${osgi.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.cmpn</artifactId>
+            <version>6.0.0</version>
+            <scope>${osgi.scope}</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.component.annotations</artifactId>
+            <version>1.4.0</version>
+            <scope>${osgi.scope}</scope>
+        </dependency>
+        <!-- dependencies used for unit tests (spock) -->
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>1.3-groovy-2.5</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-all</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+	</dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>src/main/webapp/VAADIN/widgetsets</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>
+                            ${project.build.outputDirectory}/META-INF/MANIFEST.MF
+                        </manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+                <version>${biz.aQute.bndlib.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bnd-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${vaadin.plugin.version}</version>
+                <configuration>
+                    <deploy>${project.build.directory}/gwt-deploy</deploy>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>update-theme</goal>
+                            <goal>update-widgetset</goal>
+                            <goal>compile</goal>
+                            <goal>compile-theme</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>no-liferay</id>
+            <properties>
+                <packaging.type>war</packaging.type>
+                <osgi.scope>compile</osgi.scope>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/webapp</directory>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>9.4.32.v20200930</version>
+                        <configuration>
+                            <!-- Jetty's hot deploy enabled has been enabled by default!
+
+                 If you want to disable jetty's hot deploy feature, activate the 'jetty-cold-deploy' profile
+                 via the command line:
+
+                 mvn -P jetty-cold-deploy
+
+                  Or, alternatively, you can change your settings.xml to permanently activate this profile.
+
+                  For more information on how to permanently activate a property,
+                  see: https://maven.apache.org/settings.html#Profiles
+
+                  For more information about the origin of this long comment, see:
+                  https://github.com/qbicsoftware/parent-poms/issues/4 -->
+                            <scanIntervalSeconds>2</scanIntervalSeconds>
+                            <useProvidedScope>true</useProvidedScope>
+                            <stopPort>8005</stopPort>
+                            <stopKey>STOP</stopKey>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start-jetty</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                                <configuration>
+                                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>stop-jetty</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>liferay</id>
+            <properties>
+                <packaging.type>jar</packaging.type>
+                <osgi.scope>provided</osgi.scope>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/webapp</directory>
+                        <excludes>
+                            <exclude>**/web.xml</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <!-- For more information about the origin of this profile, see:
+         https://github.com/qbicsoftware/parent-poms/issues/4 -->
+            <id>jetty-cold-deploy</id>
+            <properties>
+                <jetty.scanIntervalSeconds>0</jetty.scanIntervalSeconds>
+            </properties>
+        </profile>
+        <profile>
+            <!-- Vaadin pre-release repositories -->
+            <id>vaadin-prerelease</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <repositories>
+                <repository>
+                    <id>vaadin-prereleases</id>
+                    <url>https://maven.vaadin.com/vaadin-prereleases</url>
+                </repository>
+                <repository>
+                    <id>vaadin-snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>vaadin-prereleases</id>
+                    <url>https://maven.vaadin.com/vaadin-prereleases</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>vaadin-snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+</project>

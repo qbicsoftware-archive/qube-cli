@@ -91,7 +91,7 @@ Included frameworks/libraries
     3. :code:`java_checkstyle.yml`, which runs `Checkstyle <https://checkstyle.sourceforge.io/>`_ using `Google's Styleguides <https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml>`_.
     4. :code:`run_test.yml`, which runs all `junit4 <https://junit.org/junit4/>`_ tests.
     5. :code:`qube_lint.yml`, which runs QUBE's linting on the project.
-    6. :code:`pr_to_master_from_development_only.yml` which fails if a pull request from master does not come from development
+    6. :code:`pr_to_master_from_development_only.yml` which fails if the PR does not come from a release or hotfix branch
 
 Usage
 ^^^^^^^^

@@ -11,11 +11,7 @@
 
 .. image:: https://github.com/qbicsoftware/{{ cookiecutter.project_slug }}/workflows/QUBE%20lint/badge.svg
     :target: https://github.com/qbicsoftware/{{ cookiecutter.project_slug }}/workflows/QUBE%20lint/badge.svg
-    :alt: QUBE Lint Status
-
-.. image:: https://img.shields.io/travis/qbicsoftware/{{ cookiecutter.project_slug }}.svg
-    :target: https://travis-ci.org/qbicsoftware/{{ cookiecutter.project_slug }}
-    :alt: Travis CI Status
+    :alt: qube Lint Status
 
 .. image:: https://readthedocs.org/projects/{{ cookiecutter.project_slug | replace("_", "-") }}/badge/?version=latest
     :target: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io/en/latest/?badge=latest
@@ -28,7 +24,7 @@
 
 {{ cookiecutter.project_short_description }}
 
-* Free software: MIT license
+* Free software: {{ cookiecutter.license }}
 * Documentation: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io.
 
 Features
@@ -39,6 +35,6 @@ Features
 Credits
 -------
 
-This project was created with QUBE_.
+This project was created with qube_.
 
-.. _QUBE: https://github.com/qbicsoftware/qube
+.. _qube: https://github.com/qbicsoftware/qube
