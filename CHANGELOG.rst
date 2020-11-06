@@ -12,6 +12,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Add report generation script to common files
+
 **Fixed**
 
 **Dependencies**
