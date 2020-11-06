@@ -7,6 +7,39 @@ Changelog
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.6.1 (2020-11-06)
+------------------
+
+**Added**
+
+* Add report generation script to common files
+
+**Fixed**
+
+**Dependencies**
+
+**Deprecated**
+
+
+2.6.0 (2020-10-27)
+------------------
+
+**Added**
+
+* Add template for OSGi Groovy library bundles
+* Add template for OSGi Groovy portlet bundles
+
+**Fixed**
+
+* Fix missing license property bug, that showed up if the license placeholder was referenced in a template.
+
+**Dependencies**
+
+**Deprecated**
+
+* Java 8, templates now build with JDK 11.
+
+
 2.5.1 (2020-10-16)
 ------------------
 

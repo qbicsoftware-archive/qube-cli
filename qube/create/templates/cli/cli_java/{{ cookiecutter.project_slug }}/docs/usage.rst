@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use {{ cookiecutter.project_slug }} in a project::
+To use {{ cookiecutter.project_slug }}::
 
-    import {{ cookiecutter.project_slug }}
+    run {{ cookiecutter.project_slug }} with the commands TODO
