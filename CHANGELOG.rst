@@ -7,6 +7,20 @@ Changelog
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.6.1 (2020-11-06)
+------------------
+
+**Added**
+
+* Add report generation script to common files
+
+**Fixed**
+
+**Dependencies**
+
+**Deprecated**
+
+
 2.6.0 (2020-10-27)
 ------------------
 
