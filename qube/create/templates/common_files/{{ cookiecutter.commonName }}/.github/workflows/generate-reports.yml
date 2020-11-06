@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - development
+  workflow_dispatch:
 
 jobs:
   build:
