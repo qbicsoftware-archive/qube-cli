@@ -1,12 +1,9 @@
 version: 2
-updates:
-- package-ecosystem: maven
+updates_configs:
+- package_manager: "java:maven"
   directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
+  update_schedule: "daily"
   target-branch: development
-  labels:
-  - DEPENDABOT
+  default_labels: "dependabot"
   commit-message:
     prefix: "[DEPENDABOT]"

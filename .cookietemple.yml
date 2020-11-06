@@ -7,7 +7,7 @@ full_name: Lukas Heumos
 email: lukas.heumos@posteo.net
 project_name: qube
 project_short_description: QBiC's internal project template collection.
-version: 2.5.1
+version: 2.6.0
 license: MIT
 command_line_interface: Click
 use_pytest: y

@@ -129,9 +129,15 @@ dmypy.json
 
 # Jetbrains IDE
 .idea/
+*.iml
+
+.DS_Store
 
 # Coala
 *.orig
 
 # VS Code
 .vscode/
+
+# Mac
+.DS_Store
