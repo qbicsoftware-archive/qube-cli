@@ -2,7 +2,7 @@ package life.qbic.portal.portlet
 
 import spock.lang.Specification
 
-class Test extends Specification{
+class {{ cookiecutter.main_class_prefix }}Test extends Specification{
 
     def "first test"(){
         when:
