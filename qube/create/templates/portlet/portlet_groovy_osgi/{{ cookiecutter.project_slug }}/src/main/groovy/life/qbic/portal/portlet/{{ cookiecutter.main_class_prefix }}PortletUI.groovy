@@ -25,8 +25,8 @@ import org.osgi.service.component.annotations.ServiceScope
     service = UI.class,
     property = {
         "com.liferay.portlet.display-category=category.sample",  // Widget category
-        "javax.portlet.name=MyVaadinPortlet",                    // Unique portlet name in Liferay
-        "javax.portlet.display-name=OSGi Portlet",               // Portlet display name
+        "javax.portlet.name={{ cookiecutter.main_class_prefix }}Portlet",                    // Unique portlet name in Liferay
+        "javax.portlet.display-name={{ cookiecutter.main_class_prefix }} Portlet",               // Portlet display name
         "javax.portlet.security-role-ref=power-user,user",       // Default user roles
         "com.vaadin.osgi.liferay.portlet-ui=true",
         "service.ranking:Integer=1000"},              // Is Vaadin UI?
