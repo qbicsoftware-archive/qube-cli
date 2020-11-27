@@ -175,7 +175,8 @@
 	</dependencies>
 
     <build>
-        <sourceDirectory>src/main/groovy</sourceDirectory>
+        <scriptSourceDirectory>src/main/groovy</scriptSourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/groovy</testSourceDirectory>
 
         <plugins>
