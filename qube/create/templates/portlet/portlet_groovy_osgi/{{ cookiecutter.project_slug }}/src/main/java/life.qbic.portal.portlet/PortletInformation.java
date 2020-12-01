@@ -19,7 +19,7 @@ public class PortletInformation {
     private String portletRepoURL;
 
     public PortletInformation(){
-        Bundle bundle = FrameworkUtil.getBundle(MyPortletUI.class);
+        Bundle bundle = FrameworkUtil.getBundle({{ cookiecutter.main_class_prefix }}PortletUI.class);
         if (bundle == null) {
             tryToLoadProperties();
         } else {
