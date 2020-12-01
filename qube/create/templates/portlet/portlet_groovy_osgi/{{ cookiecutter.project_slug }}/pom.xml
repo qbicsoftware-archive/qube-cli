@@ -27,6 +27,22 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.liferay.portal</groupId>
+                <artifactId>release.portal.bom</artifactId>
+                <version>${liferay.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-bom</artifactId>
                 <version>3.0.6</version>
@@ -37,12 +53,6 @@
     </dependencyManagement>
 
     <repositories>
-        <!-- Liferay Public Repo -->
-        <repository>
-            <id>liferay-public</id>
-            <url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
-        </repository>
-
         <!-- QBiC Nexus Repo -->
         <repository>
             <releases>
@@ -70,35 +80,12 @@
             <name>QBiC Releases</name>
             <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
         </repository>
+        <!-- Liferay Public Repo -->
+        <repository>
+            <id>liferay-public</id>
+            <url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
+        </repository>
     </repositories>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${vaadin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.liferay.portal</groupId>
-                <artifactId>release.portal.bom</artifactId>
-                <version>${liferay.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-bom</artifactId>
-                <version>3.0.6</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 	<dependencies>
         <!-- Example OSGi bundle dependency -->
@@ -185,6 +172,21 @@
             </exclusions>
         </dependency>
 	</dependencies>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>nexus-releases</id>
+            <name>QBiC Releases</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>nexus-snapshots</id>
+            <name>QBiC Snapshots</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <scriptSourceDirectory>src/main/groovy</scriptSourceDirectory>
