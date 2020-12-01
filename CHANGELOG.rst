@@ -12,6 +12,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* Add ProjectInformation.java to groovy portlets
+
 **Fixed**
 
 **Dependencies**
