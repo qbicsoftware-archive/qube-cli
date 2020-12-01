@@ -53,6 +53,19 @@
     </dependencyManagement>
 
     <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>maven-central</id>
+            <name>Maven central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
         <!-- QBiC Nexus Repo -->
         <repository>
             <releases>
