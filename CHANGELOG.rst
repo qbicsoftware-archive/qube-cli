@@ -12,6 +12,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Added**
 
+* speedup runtime of groovy osgi portlets
+
 **Fixed**
 
 **Dependencies**

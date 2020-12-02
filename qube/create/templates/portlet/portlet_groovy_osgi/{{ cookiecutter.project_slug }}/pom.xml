@@ -24,42 +24,6 @@
         <biz.aQute.bndlib.version>5.1.2</biz.aQute.bndlib.version>
     </properties>
 
-    <repositories>
-        <!-- Liferay Public Repo -->
-        <repository>
-            <id>liferay-public</id>
-            <url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
-        </repository>
-
-        <!-- QBiC Nexus Repo -->
-        <repository>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-            </snapshots>
-            <id>nexus-snapshots</id>
-            <name>QBiC Snapshots</name>
-            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>nexus-releases</id>
-            <name>QBiC Releases</name>
-            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
-        </repository>
-    </repositories>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -87,6 +51,54 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>maven-central</id>
+            <name>Maven central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <!-- QBiC Nexus Repo -->
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <id>nexus-snapshots</id>
+            <name>QBiC Snapshots</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>nexus-releases</id>
+            <name>QBiC Releases</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
+        </repository>
+        <!-- Liferay Public Repo -->
+        <repository>
+            <id>liferay-public</id>
+            <url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
 
 	<dependencies>
         <!-- Example OSGi bundle dependency -->
@@ -173,6 +185,21 @@
             </exclusions>
         </dependency>
 	</dependencies>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>nexus-releases</id>
+            <name>QBiC Releases</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>nexus-snapshots</id>
+            <name>QBiC Snapshots</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <scriptSourceDirectory>src/main/groovy</scriptSourceDirectory>
