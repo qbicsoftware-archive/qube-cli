@@ -20,6 +20,8 @@ This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 **Dependencies**
 
+* Bumped Groovy version from 3.0.6 to 3.0.7
+
 **Deprecated**
 
 
