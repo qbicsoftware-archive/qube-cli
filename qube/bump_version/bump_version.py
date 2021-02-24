@@ -153,9 +153,8 @@ class VersionBumper:
         :return: True if bump version can be run, false otherwise.
         """
         # ensure that the entered version number matches correct format like 1.1.0 or 1.1.0-SNAPSHOT but not 1.2 or 1.2.3.4
-        if not re.match(r'(?<!\.)\d+(?:\.\d+){2}((?!.)|-SNAPSHOT)(?!.)', new_version):
-            print('[bold red]Invalid version specified!\nEnsure your version number has the form '
-                  'of 0.0.0 or 15.100.239-SNAPSHOT')
+        if not re.match(r'^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$', new_version):
+            print('[bold red]Invalid version schema!\nEnsure your follow the semantic versioning convention (https://semver.org/).')
             return False
 
         # equal versions won't be accepted for bump-version
