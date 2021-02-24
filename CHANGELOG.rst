@@ -7,6 +7,21 @@ Changelog
 This project adheres to `Semantic Versioning <https://semver.org/>`_.
 
 
+2.6.2 (2021-02-24)
+------------------
+
+**Added**
+
+**Fixed**
+
+* Qube now allows Semantic Versioning 2.0 version tags
+
+**Dependencies**
+
+**Deprecated**
+
+
+
 2.6.1 (2020-11-06)
 ------------------
 
