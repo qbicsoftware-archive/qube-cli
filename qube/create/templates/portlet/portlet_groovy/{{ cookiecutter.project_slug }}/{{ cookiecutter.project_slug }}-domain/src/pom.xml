@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>{{ cookiecutter.project_slug }}-domain</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>{{ cookiecutter.project_slug }}</artifactId>
+        <groupId>life.qbic</groupId>
+        <version>{{ cookiecutter.version }}</version> <!-- <<QUBE_FORCE_BUMP>> -->
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>life.qbic</groupId>
+            <artifactId>data-model-lib</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <configuration>
+                    <groovyDocOutputDirectory>${project.build.directory}/site/gapidocs</groovyDocOutputDirectory>
+                    <testGroovyDocOutputDirectory>${project.build.directory}/site/testgapidocs</testGroovyDocOutputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>life.qbic</groupId>
+                <artifactId>groovydoc-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

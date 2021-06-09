@@ -4,12 +4,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>life.qbic</groupId>
-		<artifactId>portlet-parent-pom</artifactId>
-		<version>3.1.3</version>
-	</parent>
+    <modules>
+        <module>{{ cookiecutter.project_slug }}-domain</module>
+        <module>{{ cookiecutter.project_slug }}-app</module>
+    </modules>
 	<artifactId>{{ cookiecutter.project_slug }}</artifactId>
+    <groupId>life.qbic</groupId>
 	<version>{{ cookiecutter.version }}</version> <!-- <<QUBE_FORCE_BUMP>> -->
 	<name>{{ cookiecutter.project_name }}</name>
 	<url>http://github.com/qbicsoftware/{{ cookiecutter.project_slug }}</url>
@@ -41,7 +41,7 @@
 			</snapshots>
 			<id>nexus-snapshots</id>
 			<name>QBiC Snapshots</name>
-			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-snapshots</url>
+			<url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
 		</repository>
 		<repository>
 			<releases>
@@ -54,7 +54,7 @@
 			</snapshots>
 			<id>nexus-releases</id>
 			<name>QBiC Releases</name>
-			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-releases</url>
+			<url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -73,37 +73,6 @@
             <artifactId>spock-core</artifactId>
             <scope>test</scope>
         </dependency>
-		{% if cookiecutter.use_openbis_client == "yes" %}
-		<!-- openBIS client -->
-		<dependency>
-			<groupId>life.qbic</groupId>
-			<artifactId>openbis-client-lib</artifactId>
-			<version>1.4.0</version>
-		</dependency>
-		{% endif %}
-		{% if cookiecutter.use_openbis_raw_api == "yes" %}
-		<!-- openBIS API -->
-		<dependency>
-        	<groupId>life.qbic</groupId>
-            <artifactId>openbis-api</artifactId>
-			<version>18.06.2</version>
-        </dependency>
-		{% endif %}
-		{% if cookiecutter.use_qbic_databases == "yes" %}
-		<!-- Access to our custom databases (portlets use direct JDBC to access data for now),
-			 but we will create a client library that portlets will use
-			 (version  is defined in the parent POM hierarchy (/portal/pom.xml)) -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-		</dependency>
-		{% endif %}
-		{% if cookiecutter.use_vaadin_charts == "yes" %}
-		<!-- Vaadin charts (version defined in parent pom) -->
-		<dependency>
-  			<groupId>com.vaadin.addon</groupId>
-  			<artifactId>vaadin-charts</artifactId>
-		</dependency>
-		{% endif %}
+
 	</dependencies>
 </project>
