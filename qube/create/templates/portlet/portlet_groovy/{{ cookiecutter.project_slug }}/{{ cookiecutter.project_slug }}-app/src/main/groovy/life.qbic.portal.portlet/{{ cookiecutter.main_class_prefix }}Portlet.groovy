@@ -18,7 +18,6 @@ import groovy.util.logging.Log4j2
  */
 @Theme("mytheme")
 @SuppressWarnings("serial")
-@Widgetset("life.qbic.portal.portlet.AppWidgetSet")
 @Log4j2
 @CompileStatic
 class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
