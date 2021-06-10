@@ -1,4 +1,4 @@
-package life.qbic.portal.sampletracking
+package life.qbic.portal.portlet
 
 import com.vaadin.annotations.Theme
 import com.vaadin.server.VaadinRequest
