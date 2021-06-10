@@ -20,16 +20,11 @@ import groovy.util.logging.Log4j2
 @SuppressWarnings("serial")
 @Log4j2
 @CompileStatic
-class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
+class ExampleApp extends QBiCPortletUI {
 
     @Override
     protected Layout getPortletContent(final VaadinRequest request) {
         log.info"Generating content for {}"
-
-        // Verify that Groovy Code works
-        def sampleClass = new SampleClass()
-
-        log.info sampleClass.getHiddenProperty()
 
         // TODO: generate content for your portlet
         //       this method returns any non-null layout to avoid a NullPointerException later on
@@ -40,22 +35,9 @@ class {{ cookiecutter.main_class_prefix }}Portlet extends QBiCPortletUI {
 
         Button button = new Button("Click Me please Sven!")
         button.addClickListener({ e ->
-        layout.addComponent(new Label("Thanks " + name.getValue()
-        + ", it works!"))
+        layout.addComponent(new Label("Thanks " + name.getValue() + ", it works!"))
         })
         layout.addComponents(name, button)
         return layout
-    }
-}
-
-@CompileStatic
-@Log4j2
-class SampleClass {
-
-    def hiddenProperty
-
-    SampleClass() {
-        log.info "SampleClass object created."
-        hiddenProperty = "Ha, You cannot see me"
     }
 }
