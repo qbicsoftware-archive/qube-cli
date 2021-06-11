@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger
  */
 @Theme("mytheme")
 @SuppressWarnings("serial")
-public abstract class QBiCPortletUI extends UI {
+public abstract class PortletUI extends UI {
 
     /**
      * Location of the properties file where maven stores version/repository url.
@@ -35,7 +35,7 @@ public abstract class QBiCPortletUI extends UI {
     static final String DEFAULT_VERSION = "0.0.1-alpha";
 
 
-    private static final Logger LOG = LogManager.getLogger(QBiCPortletUI.class);
+    private static final Logger LOG = LogManager.getLogger(PortletUI.class);
 
     private final String portletVersion;
     private final String portletRepoURL;
@@ -43,12 +43,12 @@ public abstract class QBiCPortletUI extends UI {
     /**
      * Default constructor.
      */
-    public QBiCPortletUI() {
+    public PortletUI() {
         // load url/version from portlet.properties
         LOG.info("Initializing QBiCPortletUI");
         final Properties portletProperties = new Properties();
         try (final InputStream propertiesFileStream =
-            QBiCPortletUI.class.getClassLoader().getResourceAsStream(PORTLET_PROPERTIES_FILE_PATH)) {
+            PortletUI.class.getClassLoader().getResourceAsStream(PORTLET_PROPERTIES_FILE_PATH)) {
             portletProperties.load(propertiesFileStream);
             if (!portletProperties.containsKey("version")
                 || !portletProperties.containsKey("repository.url")) {

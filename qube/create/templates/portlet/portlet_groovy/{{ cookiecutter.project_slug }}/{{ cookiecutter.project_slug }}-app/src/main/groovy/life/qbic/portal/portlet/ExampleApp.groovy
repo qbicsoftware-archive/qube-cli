@@ -20,7 +20,7 @@ import groovy.util.logging.Log4j2
 @SuppressWarnings("serial")
 @Log4j2
 @CompileStatic
-class ExampleApp extends QBiCPortletUI {
+class ExampleApp extends PortletUI {
 
     @Override
     protected Layout getPortletContent(final VaadinRequest request) {
