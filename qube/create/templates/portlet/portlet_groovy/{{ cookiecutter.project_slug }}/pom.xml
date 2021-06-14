@@ -4,106 +4,329 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>life.qbic</groupId>
-		<artifactId>portlet-parent-pom</artifactId>
-		<version>3.1.3</version>
-	</parent>
+    <modules>
+        <module>{{ cookiecutter.project_slug }}-domain</module>
+        <module>{{ cookiecutter.project_slug }}-app</module>
+    </modules>
 	<artifactId>{{ cookiecutter.project_slug }}</artifactId>
+    <groupId>life.qbic</groupId>
 	<version>{{ cookiecutter.version }}</version> <!-- <<QUBE_FORCE_BUMP>> -->
 	<name>{{ cookiecutter.project_name }}</name>
 	<url>http://github.com/qbicsoftware/{{ cookiecutter.project_slug }}</url>
 	<description>{{ cookiecutter.project_short_description }}</description>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<!-- we only need to tell maven where to find our parent pom and other QBiC dependencies -->
-	<repositories>
-		<repository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>maven-central</id>
-			<name>Maven central</name>
-			<url>https://repo.maven.apache.org/maven2</url>
-		</repository>
-		<repository>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<id>nexus-snapshots</id>
-			<name>QBiC Snapshots</name>
-			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-snapshots</url>
-		</repository>
-		<repository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>nexus-releases</id>
-			<name>QBiC Releases</name>
-			<url>http://qbic-repo.qbic.uni-tuebingen.de:8081/repository/maven-releases</url>
-		</repository>
-	</repositories>
-	<dependencies>
-		<dependency>
-			<groupId>life.qbic</groupId>
-			<artifactId>portal-utils-lib</artifactId>
-			<version>2.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>life.qbic</groupId>
-			<artifactId>core-utils-lib</artifactId>
-			<version>1.6.0</version>
-		</dependency>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <groovy.version>3.0.8</groovy.version>
+        <vaadin.version>8.13.0</vaadin.version>
+        <vaadin.plugin.version>8.13.0</vaadin.plugin.version>
+    </properties>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven-central-plugins</id>
+            <url>
+                https://repo.maven.apache.org/maven2
+            </url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>liferay-releases-plugins</id>
+            <url>
+                https://repository.liferay.com/nexus/content/repositories/liferay-public-releases/com/liferay/portal/
+            </url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>qbic-plugins-2</id>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>nexus-releases</id>
+            <name>QBiC Releases</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>nexus-snapshots</id>
+            <name>QBiC Snapshots</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>dummytest</id>
+            <url>localhost:8080</url>
+        </site>
+    </distributionManagement>
+    <!-- we only need to tell maven where to find our parent pom and other QBiC
+        dependencies -->
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>maven-central</id>
+            <name>Maven central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <!-- QBiC Nexus Repo -->
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <id>nexus-snapshots</id>
+            <name>QBiC Snapshots</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>nexus-releases</id>
+            <name>QBiC Releases</name>
+            <url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>life.qbic</groupId>
+                <artifactId>openbis-client-lib</artifactId>
+                <version>1.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>life.qbic</groupId>
+                <artifactId>data-model-lib</artifactId>
+                <version>2.8.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-bom</artifactId>
+                <version>${groovy.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-bom</artifactId>
+                <version>2.0-groovy-3.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <!-- Groovy dependencies -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+            <type>pom</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-sql</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
             <scope>test</scope>
         </dependency>
-		{% if cookiecutter.use_openbis_client == "yes" %}
-		<!-- openBIS client -->
-		<dependency>
-			<groupId>life.qbic</groupId>
-			<artifactId>openbis-client-lib</artifactId>
-			<version>1.4.0</version>
-		</dependency>
-		{% endif %}
-		{% if cookiecutter.use_openbis_raw_api == "yes" %}
-		<!-- openBIS API -->
-		<dependency>
-        	<groupId>life.qbic</groupId>
-            <artifactId>openbis-api</artifactId>
-			<version>18.06.2</version>
-        </dependency>
-		{% endif %}
-		{% if cookiecutter.use_qbic_databases == "yes" %}
-		<!-- Access to our custom databases (portlets use direct JDBC to access data for now),
-			 but we will create a client library that portlets will use
-			 (version  is defined in the parent POM hierarchy (/portal/pom.xml)) -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-		</dependency>
-		{% endif %}
-		{% if cookiecutter.use_vaadin_charts == "yes" %}
-		<!-- Vaadin charts (version defined in parent pom) -->
-		<dependency>
-  			<groupId>com.vaadin.addon</groupId>
-  			<artifactId>vaadin-charts</artifactId>
-		</dependency>
-		{% endif %}
-	</dependencies>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.12.1</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>addSources</goal>
+                            <goal>addTestSources</goal>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>compileTests</goal>
+                            <goal>removeStubs</goal>
+                            <goal>removeTestStubs</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>site</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>generateStubs</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>groovydoc</goal>
+                            <goal>groovydocTests</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <groovyDocOutputDirectory>${project.build.directory}/site/gapidocs</groovyDocOutputDirectory>
+                    <testGroovyDocOutputDirectory>${project.build.directory}/site/testgapidocs</testGroovyDocOutputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Spec</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>life.qbic</groupId>
+                <artifactId>groovydoc-maven-plugin</artifactId>
+                <version>1.0.2</version>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>no-liferay</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>src/main/webapp</directory>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>9.4.32.v20200930</version>
+                        <configuration>
+                            <!-- Jetty's hot deploy enabled has been enabled by default! If you
+                                want to disable jetty's hot deploy feature, activate the 'jetty-cold-deploy'
+                                profile via the command line: mvn -P jetty-cold-deploy Or, alternatively,
+                                you can change your settings.xml to permanently activate this profile. For
+                                more information on how to permanently activate a property, see: https://maven.apache.org/settings.html#Profiles
+                                For more information about the origin of this long comment, see: https://github.com/qbicsoftware/parent-poms/issues/4 -->
+                            <scanIntervalSeconds>2</scanIntervalSeconds>
+                            <useProvidedScope>true</useProvidedScope>
+                            <stopPort>8005</stopPort>
+                            <stopKey>STOP</stopKey>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start-jetty</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                                <configuration>
+                                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>stop-jetty</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- For more information about the origin of this profile, see: https://github.com/qbicsoftware/parent-poms/issues/4 -->
+            <id>jetty-cold-deploy</id>
+            <properties>
+                <jetty.scanIntervalSeconds>0</jetty.scanIntervalSeconds>
+            </properties>
+        </profile>
+        <profile>
+            <!-- Vaadin pre-release repositories -->
+            <id>vaadin-prerelease</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <repositories>
+                <repository>
+                    <id>vaadin-prereleases</id>
+                    <url>https://maven.vaadin.com/vaadin-prereleases</url>
+                </repository>
+                <repository>
+                    <id>vaadin-snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>vaadin-prereleases</id>
+                    <url>https://maven.vaadin.com/vaadin-prereleases</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>vaadin-snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
 </project>
