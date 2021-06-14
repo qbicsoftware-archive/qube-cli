@@ -25,7 +25,7 @@ public abstract class PortletUI extends UI {
     public static final String PORTLET_PROPERTIES_FILE_PATH = "portlet.properties";
 
     /**
-     * Location of the local configuration. This is useful when testing portlets loocally using {@code mvn jetty:run}.
+     * Location of the local configuration. This is useful when testing portlets locally using {@code mvn jetty:run}.
      */
     public static final String DEVELOPER_PROPERTIES_FILE_PATH = "developer.properties";
 
