@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
     <artifactId>{{ cookiecutter.project_slug }}-app</artifactId>
+    <url>http://github.com/qbicsoftware/{{ cookiecutter.project_slug }}</url>
     <dependencies>
         <dependency>
             <groupId>life.qbic</groupId>
